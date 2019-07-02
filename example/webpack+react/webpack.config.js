@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const production = process.env.NODE_ENV === 'production' || false;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 //motor在源码库中的位置
-const motorSource = '../library';
+const motorSource = '../../library';
 //打包后motor静态资源存放的位置
 const motorDist = 'motor';
 
@@ -32,6 +32,7 @@ module.exports = {
         new CopyWebpackPlugin([{ from: path.join(motorSource, 'Widgets'), to: path.join(motorDist, 'Widgets')}]),
         new CopyWebpackPlugin([{ from: path.join(motorSource, 'ThirdParty'), to: path.join(motorDist, 'ThirdParty') }]),
         new CopyWebpackPlugin([{ from: path.join(motorSource, 'wasm'), to: path.join(motorDist, 'wasm') }]),
+        new CopyWebpackPlugin([{ from: path.join(motorSource, 'model'), to: path.join(motorDist, 'model') }]),
         new webpack.DefinePlugin({
             MOTOR_BASE_URL: JSON.stringify(motorDist)
         }),

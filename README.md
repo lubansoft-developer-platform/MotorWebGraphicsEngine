@@ -15,8 +15,8 @@
 
 ## example运行
 
-- 在根目录下，启动命令行工具，执行`serve`指令
-- 打开本地浏览器，在地址栏键入`eg. localhost:3000/example/bim_example`
+- 在根目录下，启动命令行工具，执行`serve -p 3000`指令
+- 打开本地浏览器，在地址栏键入`eg. localhost:3000/example/bim_example/`
 
 ## webpack + react环境搭建示例
 
