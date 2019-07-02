@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: ServiceConfig | MotorJS</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="custom.css">
+        
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 156px; height: 36px">
+        
+            <img src="./logo.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">MotorJS</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+        <ol class="lnb-tab">
+            <li id="api-tab">
+                <a href="#"><h4>API</h4></a>
+            </li>
+            <li id="examples-tab">
+                <a href="#"><h4>教程</h4></a>
+            </li>
+        </ol>
+    
+    <div class="lnb-examples hidden"><h3>教程</h3><ul><li><a href="tutorial-Webpack配置.html">Webpack配置</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Webpack配置_sub"></div></li><li><a href="tutorial-初始化.html">初始化</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="初始化_sub"></div></li><li><a href="tutorial-剖切.html">剖切</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="剖切_sub"></div></li><li><a href="tutorial-加载数据.html">加载数据</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="加载数据_sub"></div></li><li><a href="tutorial-地图服务.html">地图服务</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="地图服务_sub"></div></li><li><a href="tutorial-坐标转换.html">坐标转换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="坐标转换_sub"></div></li><li><a href="tutorial-基本操作.html">基本操作</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="基本操作_sub"></div></li><li><a href="tutorial-构件树.html">构件树</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="构件树_sub"></div></li><li><a href="tutorial-概要、静态模型切换.html">概要、静态模型切换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="概要、静态模型切换_sub"></div></li><li><a href="tutorial-模式切换.html">模式切换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="模式切换_sub"></div></li><li><a href="tutorial-测量.html">测量</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="测量_sub"></div></li><li><a href="tutorial-添加标注.html">添加标注</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="添加标注_sub"></div></li><li><a href="tutorial-点选操作.html">点选操作</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="点选操作_sub"></div></li><li><a href="tutorial-特效.html">特效</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="特效_sub"></div></li><li><a href="tutorial-视角控制.html">视角控制</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="视角控制_sub"></div></li><li><a href="tutorial-路径漫游.html">路径漫游</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="路径漫游_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="App.html">App</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="App_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="App.html#.Token">Token</a></li><li><a href="App.html#.ValidateToken">ValidateToken</a></li></ul></div></li><li><a href="ArcGISMap.html">ArcGISMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ArcGISMap_sub"></div></li><li><a href="AutoRoamManager.html">AutoRoamManager</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="AutoRoamManager_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="AutoRoamManager.html#cameraPoses">cameraPoses</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="AutoRoamManager.html#addPose">addPose</a></li><li><a href="AutoRoamManager.html#createRouteFromArray">createRouteFromArray</a></li><li><a href="AutoRoamManager.html#createRouteFromFile">createRouteFromFile</a></li><li><a href="AutoRoamManager.html#destroy">destroy</a></li><li><a href="AutoRoamManager.html#emptyRoutes">emptyRoutes</a></li><li><a href="AutoRoamManager.html#pauseRoam">pauseRoam</a></li><li><a href="AutoRoamManager.html#playRoam">playRoam</a></li><li><a href="AutoRoamManager.html#stopRoam">stopRoam</a></li></ul></div></li><li><a href="BaseMap.html">BaseMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BaseMap_sub"></div></li><li><a href="BingMap.html">BingMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BingMap_sub"></div></li><li><a href="Cartesian2.html">Cartesian2</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartesian2_sub"></div></li><li><a href="Cartesian3.html">Cartesian3</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartesian3_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Cartesian3.html#.fromDegrees">fromDegrees</a></li><li><a href="Cartesian3.html#.getProjectVectorLength">getProjectVectorLength</a></li></ul></div></li><li><a href="Cartographic.html">Cartographic</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartographic_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Cartographic.html#.fromCartesian">fromCartesian</a></li><li><a href="Cartographic.html#.toCartesian">toCartesian</a></li></ul></div></li><li><a href="ClippingPlaneEditor.html">ClippingPlaneEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ClippingPlaneEditor_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="ClippingPlaneEditor.html#addClippingPlane">addClippingPlane</a></li><li><a href="ClippingPlaneEditor.html#destroy">destroy</a></li></ul></div></li><li><a href="Color.html">Color</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Color_sub"></div></li><li><a href="ComponentView.html">ComponentView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ComponentView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ComponentView.html#guid">guid</a></li><li><a href="ComponentView.html#infos">infos</a></li><li><a href="ComponentView.html#project">project</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="ComponentView.html#getSubprojectId">getSubprojectId</a></li><li><a href="ComponentView.html#setColor">setColor</a></li><li><a href="ComponentView.html#setDefaultColor">setDefaultColor</a></li></ul></div></li><li><a href="DynamicCircle.html">DynamicCircle</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="DynamicCircle_sub"></div></li><li><a href="MarkerCollection.html">MarkerCollection</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarkerCollection_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarkerCollection.html#length">length</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="MarkerCollection.html#add">add</a></li><li><a href="MarkerCollection.html#removeAll">removeAll</a></li><li><a href="MarkerCollection.html#removeById">removeById</a></li></ul></div></li><li><a href="MarkerView.html">MarkerView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarkerView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarkerView.html#id">id</a></li><li><a href="MarkerView.html#properties">properties</a></li></ul></div></li><li><a href="MarqueeEditor.html">MarqueeEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarqueeEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarqueeEditor.html#marqueeStart">marqueeStart</a></li><li><a href="MarqueeEditor.html#marqueeStop">marqueeStop</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="MarqueeEditor.html#destroy">destroy</a></li><li><a href="MarqueeEditor.html#startMarquee">startMarquee</a></li></ul></div></li><li><a href="MeasureEditor.html">MeasureEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MeasureEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MeasureEditor.html#mode">mode</a></li></ul></div></li><li><a href="MouseEventHandler.html">MouseEventHandler</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MouseEventHandler_sub"></div></li><li><a href="OrbitControl.html">OrbitControl</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="OrbitControl_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="OrbitControl.html#enableInputs">enableInputs</a></li><li><a href="OrbitControl.html#model">model</a></li><li><a href="OrbitControl.html#origin">origin</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="OrbitControl.html#removeMotion">removeMotion</a></li><li><a href="OrbitControl.html#resetCamera">resetCamera</a></li><li><a href="OrbitControl.html#setMotion">setMotion</a></li></ul></div></li><li><a href="ProjectView.html">ProjectView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ProjectView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ProjectView.html#drawEdge">drawEdge</a></li><li><a href="ProjectView.html#isReady">isReady</a></li><li><a href="ProjectView.html#name">name</a></li><li><a href="ProjectView.html#projectId">projectId</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="ProjectView.html#setVisiblityFromTree">setVisiblityFromTree</a></li></ul></div></li><li><a href="RoamEditor.html">RoamEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="RoamEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="RoamEditor.html#enabled">enabled</a></li><li><a href="RoamEditor.html#isCollision">isCollision</a></li><li><a href="RoamEditor.html#isGravitative">isGravitative</a></li><li><a href="RoamEditor.html#movementSpeed">movementSpeed</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="RoamEditor.html#destroy">destroy</a></li></ul></div></li><li><a href="SceneView.html">SceneView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="SceneView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="SceneView.html#drawEdge">drawEdge</a></li><li><a href="SceneView.html#id">id</a></li><li><a href="SceneView.html#isReady">isReady</a></li><li><a href="SceneView.html#name">name</a></li><li><a href="SceneView.html#parentSceneId">parentSceneId</a></li><li><a href="SceneView.html#projectList">projectList</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="SceneView.html#addProject">addProject</a></li><li><a href="SceneView.html#getComponentFromTree">getComponentFromTree</a></li><li><a href="SceneView.html#setColorForAll">setColorForAll</a></li><li><a href="SceneView.html#setHighlightComponentsFromTree">setHighlightComponentsFromTree</a></li><li><a href="SceneView.html#setVisiblityFromTree">setVisiblityFromTree</a></li></ul></div></li><li><a href="ServiceConfig.html">ServiceConfig</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ServiceConfig_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ServiceConfig.html#.componentPropertiesTree">componentPropertiesTree</a></li><li><a href="ServiceConfig.html#.componentPropertiesTreeDetail">componentPropertiesTreeDetail</a></li><li><a href="ServiceConfig.html#.componentPropertiesTreeStructure">componentPropertiesTreeStructure</a></li><li><a href="ServiceConfig.html#.findProject">findProject</a></li><li><a href="ServiceConfig.html#.getStaticModByProjIdAndAssemblyId">getStaticModByProjIdAndAssemblyId</a></li><li><a href="ServiceConfig.html#.listAssembly">listAssembly</a></li><li><a href="ServiceConfig.html#.listStaticModByProjectId">listStaticModByProjectId</a></li><li><a href="ServiceConfig.html#.readResource">readResource</a></li><li><a href="ServiceConfig.html#.renderAssembly">renderAssembly</a></li><li><a href="ServiceConfig.html#.server">server</a></li><li><a href="ServiceConfig.html#.token">token</a></li><li><a href="ServiceConfig.html#.version">version</a></li></ul></div></li><li><a href="TiandituMap.html">TiandituMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TiandituMap_sub"></div></li><li><a href="Util.html">Util</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Util_sub"></div></li><li><a href="VideoProjection.html">VideoProjection</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="VideoProjection_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="VideoProjection.html#heading">heading</a></li><li><a href="VideoProjection.html#pitch">pitch</a></li><li><a href="VideoProjection.html#roll">roll</a></li><li><a href="VideoProjection.html#targetPosition">targetPosition</a></li><li><a href="VideoProjection.html#viewerPosition">viewerPosition</a></li></ul></div></li><li><a href="Viewer.html">Viewer</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Viewer_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Viewer.html#animatedSpeed">animatedSpeed</a></li><li><a href="Viewer.html#cimControlMode">cimControlMode</a></li><li><a href="Viewer.html#currentScene">currentScene</a></li><li><a href="Viewer.html#currentView">currentView</a></li><li><a href="Viewer.html#enableMarquee">enableMarquee</a></li><li><a href="Viewer.html#navigationMode">navigationMode</a></li><li><a href="Viewer.html#roamEditor">roamEditor</a></li><li><a href="Viewer.html#viewerMode">viewerMode</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Viewer.html#addMouseEventListener">addMouseEventListener</a></li><li><a href="Viewer.html#addVideoProject">addVideoProject</a></li><li><a href="Viewer.html#addWater">addWater</a></li><li><a href="Viewer.html#createVolumeRender">createVolumeRender</a></li><li><a href="Viewer.html#destroy">destroy</a></li><li><a href="Viewer.html#gotoDefaultProjectView">gotoDefaultProjectView</a></li><li><a href="Viewer.html#homeView">homeView</a></li><li><a href="Viewer.html#isDestroyed">isDestroyed</a></li><li><a href="Viewer.html#loadModel">loadModel</a></li><li><a href="Viewer.html#loadSubProject">loadSubProject</a></li><li><a href="Viewer.html#loadTileset">loadTileset</a></li><li><a href="Viewer.html#pick">pick</a></li><li><a href="Viewer.html#pickPosition">pickPosition</a></li><li><a href="Viewer.html#remove">remove</a></li><li><a href="Viewer.html#removeMouseEventListener">removeMouseEventListener</a></li><li><a href="Viewer.html#removeScene">removeScene</a></li><li><a href="Viewer.html#removeVideoProjection">removeVideoProjection</a></li><li><a href="Viewer.html#removeVolumeRender">removeVolumeRender</a></li><li><a href="Viewer.html#removeWater">removeWater</a></li><li><a href="Viewer.html#setLookAtCenter">setLookAtCenter</a></li><li><a href="Viewer.html#setMap">setMap</a></li><li><a href="Viewer.html#updateVolumeRender">updateVolumeRender</a></li><li><a href="Viewer.html#zoomToComponent">zoomToComponent</a></li></ul></div></li><li><a href="VolumeRender.html">VolumeRender</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="VolumeRender_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="VolumeRender.html#alphaCorrection">alphaCorrection</a></li></ul></div></li><li><a href="Water.html">Water</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Water_sub"></div></li><li><a href="WebMapTileService.html">WebMapTileService</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="WebMapTileService_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#BingMapStyle">BingMapStyle</a></li><li><a href="global.html#CameraMotionInputs">CameraMotionInputs</a></li><li class="hidden"><a href="global.html#CameraView">CameraView</a></li><li><a href="global.html#CIMControlMode">CIMControlMode</a></li><li class="hidden"><a href="global.html#eventHandler">eventHandler</a></li><li><a href="global.html#InfoField">InfoField</a></li><li><a href="global.html#MeasureMode">MeasureMode</a></li><li class="hidden"><a href="global.html#MeasureResult">MeasureResult</a></li><li class="hidden"><a href="global.html#MeasureResultCallback">MeasureResultCallback</a></li><li class="hidden"><a href="global.html#Mouse">Mouse</a></li><li><a href="global.html#MouseEventType">MouseEventType</a></li><li><a href="global.html#NavigationMode">NavigationMode</a></li><li><a href="global.html#TiandituMapStyle">TiandituMapStyle</a></li><li><a href="global.html#TilingScheme">TilingScheme</a></li><li class="hidden"><a href="global.html#ViewCubeConfig">ViewCubeConfig</a></li><li><a href="global.html#ViewerMode">ViewerMode</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>ServiceConfig<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>服务配置对象</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="ServiceConfig">
+            
+                new <span class="type-signature"></span>ServiceConfig<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+
+<dt>
+<h4 class="name" id=".componentPropertiesTree">
+    <span class="type-signature"><span class="icon green">static</span> </span>componentPropertiesTree<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>根据工程Id查询组件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".componentPropertiesTreeDetail">
+    <span class="type-signature"><span class="icon green">static</span> </span>componentPropertiesTreeDetail<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>根据工程大小类获取构件列表</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".componentPropertiesTreeStructure">
+    <span class="type-signature"><span class="icon green">static</span> </span>componentPropertiesTreeStructure<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>根据工程id获取构件树结构</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".findProject">
+    <span class="type-signature"><span class="icon green">static</span> </span>findProject<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>查询工程接口</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".getStaticModByProjIdAndAssemblyId">
+    <span class="type-signature"><span class="icon green">static</span> </span>getStaticModByProjIdAndAssemblyId<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>根据工程ID和模型Id查询构件的静态工程Id</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".listAssembly">
+    <span class="type-signature"><span class="icon green">static</span> </span>listAssembly<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>查询组件列表</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".listStaticModByProjectId">
+    <span class="type-signature"><span class="icon green">static</span> </span>listStaticModByProjectId<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>根据工程id,查询工程静态模型组件列表</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".readResource">
+    <span class="type-signature"><span class="icon green">static</span> </span>readResource<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>读取资源</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".renderAssembly">
+    <span class="type-signature"><span class="icon green">static</span> </span>renderAssembly<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>查询需要渲染的组件列表</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".server">
+    <span class="type-signature"><span class="icon green">static</span> </span>server<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>远程服务器</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".token">
+    <span class="type-signature"><span class="icon green">static</span> </span>token<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取token接口</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".version">
+    <span class="type-signature"><span class="icon green">static</span> </span>version<span class="type-signature"> :string</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Rest Api 版本号</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="./logo.png" style="width: 156px; height: 36px">
+    <div class="footer-text"> </div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'ServiceConfig_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

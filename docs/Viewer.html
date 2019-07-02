@@ -1,0 +1,6197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: Viewer | MotorJS</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+        
+            <link type="text/css" rel="stylesheet" href="custom.css">
+        
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 156px; height: 36px">
+        
+            <img src="./logo.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">MotorJS</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+        <ol class="lnb-tab">
+            <li id="api-tab">
+                <a href="#"><h4>API</h4></a>
+            </li>
+            <li id="examples-tab">
+                <a href="#"><h4>教程</h4></a>
+            </li>
+        </ol>
+    
+    <div class="lnb-examples hidden"><h3>教程</h3><ul><li><a href="tutorial-Webpack配置.html">Webpack配置</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Webpack配置_sub"></div></li><li><a href="tutorial-初始化.html">初始化</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="初始化_sub"></div></li><li><a href="tutorial-剖切.html">剖切</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="剖切_sub"></div></li><li><a href="tutorial-加载数据.html">加载数据</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="加载数据_sub"></div></li><li><a href="tutorial-地图服务.html">地图服务</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="地图服务_sub"></div></li><li><a href="tutorial-坐标转换.html">坐标转换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="坐标转换_sub"></div></li><li><a href="tutorial-基本操作.html">基本操作</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="基本操作_sub"></div></li><li><a href="tutorial-构件树.html">构件树</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="构件树_sub"></div></li><li><a href="tutorial-概要、静态模型切换.html">概要、静态模型切换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="概要、静态模型切换_sub"></div></li><li><a href="tutorial-模式切换.html">模式切换</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="模式切换_sub"></div></li><li><a href="tutorial-测量.html">测量</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="测量_sub"></div></li><li><a href="tutorial-添加标注.html">添加标注</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="添加标注_sub"></div></li><li><a href="tutorial-点选操作.html">点选操作</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="点选操作_sub"></div></li><li><a href="tutorial-特效.html">特效</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="特效_sub"></div></li><li><a href="tutorial-视角控制.html">视角控制</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="视角控制_sub"></div></li><li><a href="tutorial-路径漫游.html">路径漫游</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="路径漫游_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="App.html">App</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="App_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="App.html#.Token">Token</a></li><li><a href="App.html#.ValidateToken">ValidateToken</a></li></ul></div></li><li><a href="ArcGISMap.html">ArcGISMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ArcGISMap_sub"></div></li><li><a href="AutoRoamManager.html">AutoRoamManager</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="AutoRoamManager_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="AutoRoamManager.html#cameraPoses">cameraPoses</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="AutoRoamManager.html#addPose">addPose</a></li><li><a href="AutoRoamManager.html#createRouteFromArray">createRouteFromArray</a></li><li><a href="AutoRoamManager.html#createRouteFromFile">createRouteFromFile</a></li><li><a href="AutoRoamManager.html#destroy">destroy</a></li><li><a href="AutoRoamManager.html#emptyRoutes">emptyRoutes</a></li><li><a href="AutoRoamManager.html#pauseRoam">pauseRoam</a></li><li><a href="AutoRoamManager.html#playRoam">playRoam</a></li><li><a href="AutoRoamManager.html#stopRoam">stopRoam</a></li></ul></div></li><li><a href="BaseMap.html">BaseMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BaseMap_sub"></div></li><li><a href="BingMap.html">BingMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BingMap_sub"></div></li><li><a href="Cartesian2.html">Cartesian2</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartesian2_sub"></div></li><li><a href="Cartesian3.html">Cartesian3</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartesian3_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Cartesian3.html#.fromDegrees">fromDegrees</a></li><li><a href="Cartesian3.html#.getProjectVectorLength">getProjectVectorLength</a></li></ul></div></li><li><a href="Cartographic.html">Cartographic</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Cartographic_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Cartographic.html#.fromCartesian">fromCartesian</a></li><li><a href="Cartographic.html#.toCartesian">toCartesian</a></li></ul></div></li><li><a href="ClippingPlaneEditor.html">ClippingPlaneEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ClippingPlaneEditor_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="ClippingPlaneEditor.html#addClippingPlane">addClippingPlane</a></li><li><a href="ClippingPlaneEditor.html#destroy">destroy</a></li></ul></div></li><li><a href="Color.html">Color</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Color_sub"></div></li><li><a href="ComponentView.html">ComponentView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ComponentView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ComponentView.html#guid">guid</a></li><li><a href="ComponentView.html#infos">infos</a></li><li><a href="ComponentView.html#project">project</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="ComponentView.html#getSubprojectId">getSubprojectId</a></li><li><a href="ComponentView.html#setColor">setColor</a></li><li><a href="ComponentView.html#setDefaultColor">setDefaultColor</a></li></ul></div></li><li><a href="DynamicCircle.html">DynamicCircle</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="DynamicCircle_sub"></div></li><li><a href="MarkerCollection.html">MarkerCollection</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarkerCollection_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarkerCollection.html#length">length</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="MarkerCollection.html#add">add</a></li><li><a href="MarkerCollection.html#removeAll">removeAll</a></li><li><a href="MarkerCollection.html#removeById">removeById</a></li></ul></div></li><li><a href="MarkerView.html">MarkerView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarkerView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarkerView.html#id">id</a></li><li><a href="MarkerView.html#properties">properties</a></li></ul></div></li><li><a href="MarqueeEditor.html">MarqueeEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MarqueeEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MarqueeEditor.html#marqueeStart">marqueeStart</a></li><li><a href="MarqueeEditor.html#marqueeStop">marqueeStop</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="MarqueeEditor.html#destroy">destroy</a></li><li><a href="MarqueeEditor.html#startMarquee">startMarquee</a></li></ul></div></li><li><a href="MeasureEditor.html">MeasureEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MeasureEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="MeasureEditor.html#mode">mode</a></li></ul></div></li><li><a href="MouseEventHandler.html">MouseEventHandler</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="MouseEventHandler_sub"></div></li><li><a href="OrbitControl.html">OrbitControl</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="OrbitControl_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="OrbitControl.html#enableInputs">enableInputs</a></li><li><a href="OrbitControl.html#model">model</a></li><li><a href="OrbitControl.html#origin">origin</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="OrbitControl.html#removeMotion">removeMotion</a></li><li><a href="OrbitControl.html#resetCamera">resetCamera</a></li><li><a href="OrbitControl.html#setMotion">setMotion</a></li></ul></div></li><li><a href="ProjectView.html">ProjectView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ProjectView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ProjectView.html#drawEdge">drawEdge</a></li><li><a href="ProjectView.html#isReady">isReady</a></li><li><a href="ProjectView.html#name">name</a></li><li><a href="ProjectView.html#projectId">projectId</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="ProjectView.html#setVisiblityFromTree">setVisiblityFromTree</a></li></ul></div></li><li><a href="RoamEditor.html">RoamEditor</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="RoamEditor_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="RoamEditor.html#enabled">enabled</a></li><li><a href="RoamEditor.html#isCollision">isCollision</a></li><li><a href="RoamEditor.html#isGravitative">isGravitative</a></li><li><a href="RoamEditor.html#movementSpeed">movementSpeed</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="RoamEditor.html#destroy">destroy</a></li></ul></div></li><li><a href="SceneView.html">SceneView</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="SceneView_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="SceneView.html#drawEdge">drawEdge</a></li><li><a href="SceneView.html#id">id</a></li><li><a href="SceneView.html#isReady">isReady</a></li><li><a href="SceneView.html#name">name</a></li><li><a href="SceneView.html#parentSceneId">parentSceneId</a></li><li><a href="SceneView.html#projectList">projectList</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="SceneView.html#addProject">addProject</a></li><li><a href="SceneView.html#getComponentFromTree">getComponentFromTree</a></li><li><a href="SceneView.html#setColorForAll">setColorForAll</a></li><li><a href="SceneView.html#setHighlightComponentsFromTree">setHighlightComponentsFromTree</a></li><li><a href="SceneView.html#setVisiblityFromTree">setVisiblityFromTree</a></li></ul></div></li><li><a href="ServiceConfig.html">ServiceConfig</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="ServiceConfig_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="ServiceConfig.html#.componentPropertiesTree">componentPropertiesTree</a></li><li><a href="ServiceConfig.html#.componentPropertiesTreeDetail">componentPropertiesTreeDetail</a></li><li><a href="ServiceConfig.html#.componentPropertiesTreeStructure">componentPropertiesTreeStructure</a></li><li><a href="ServiceConfig.html#.findProject">findProject</a></li><li><a href="ServiceConfig.html#.getStaticModByProjIdAndAssemblyId">getStaticModByProjIdAndAssemblyId</a></li><li><a href="ServiceConfig.html#.listAssembly">listAssembly</a></li><li><a href="ServiceConfig.html#.listStaticModByProjectId">listStaticModByProjectId</a></li><li><a href="ServiceConfig.html#.readResource">readResource</a></li><li><a href="ServiceConfig.html#.renderAssembly">renderAssembly</a></li><li><a href="ServiceConfig.html#.server">server</a></li><li><a href="ServiceConfig.html#.token">token</a></li><li><a href="ServiceConfig.html#.version">version</a></li></ul></div></li><li><a href="TiandituMap.html">TiandituMap</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="TiandituMap_sub"></div></li><li><a href="Util.html">Util</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Util_sub"></div></li><li><a href="VideoProjection.html">VideoProjection</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="VideoProjection_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="VideoProjection.html#heading">heading</a></li><li><a href="VideoProjection.html#pitch">pitch</a></li><li><a href="VideoProjection.html#roll">roll</a></li><li><a href="VideoProjection.html#targetPosition">targetPosition</a></li><li><a href="VideoProjection.html#viewerPosition">viewerPosition</a></li></ul></div></li><li><a href="Viewer.html">Viewer</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Viewer_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="Viewer.html#animatedSpeed">animatedSpeed</a></li><li><a href="Viewer.html#cimControlMode">cimControlMode</a></li><li><a href="Viewer.html#currentScene">currentScene</a></li><li><a href="Viewer.html#currentView">currentView</a></li><li><a href="Viewer.html#enableMarquee">enableMarquee</a></li><li><a href="Viewer.html#navigationMode">navigationMode</a></li><li><a href="Viewer.html#roamEditor">roamEditor</a></li><li><a href="Viewer.html#viewerMode">viewerMode</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="Viewer.html#addMouseEventListener">addMouseEventListener</a></li><li><a href="Viewer.html#addVideoProject">addVideoProject</a></li><li><a href="Viewer.html#addWater">addWater</a></li><li><a href="Viewer.html#createVolumeRender">createVolumeRender</a></li><li><a href="Viewer.html#destroy">destroy</a></li><li><a href="Viewer.html#gotoDefaultProjectView">gotoDefaultProjectView</a></li><li><a href="Viewer.html#homeView">homeView</a></li><li><a href="Viewer.html#isDestroyed">isDestroyed</a></li><li><a href="Viewer.html#loadModel">loadModel</a></li><li><a href="Viewer.html#loadSubProject">loadSubProject</a></li><li><a href="Viewer.html#loadTileset">loadTileset</a></li><li><a href="Viewer.html#pick">pick</a></li><li><a href="Viewer.html#pickPosition">pickPosition</a></li><li><a href="Viewer.html#remove">remove</a></li><li><a href="Viewer.html#removeMouseEventListener">removeMouseEventListener</a></li><li><a href="Viewer.html#removeScene">removeScene</a></li><li><a href="Viewer.html#removeVideoProjection">removeVideoProjection</a></li><li><a href="Viewer.html#removeVolumeRender">removeVolumeRender</a></li><li><a href="Viewer.html#removeWater">removeWater</a></li><li><a href="Viewer.html#setLookAtCenter">setLookAtCenter</a></li><li><a href="Viewer.html#setMap">setMap</a></li><li><a href="Viewer.html#updateVolumeRender">updateVolumeRender</a></li><li><a href="Viewer.html#zoomToComponent">zoomToComponent</a></li></ul></div></li><li><a href="VolumeRender.html">VolumeRender</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="VolumeRender_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="VolumeRender.html#alphaCorrection">alphaCorrection</a></li></ul></div></li><li><a href="Water.html">Water</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Water_sub"></div></li><li><a href="WebMapTileService.html">WebMapTileService</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="WebMapTileService_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#BingMapStyle">BingMapStyle</a></li><li><a href="global.html#CameraMotionInputs">CameraMotionInputs</a></li><li class="hidden"><a href="global.html#CameraView">CameraView</a></li><li><a href="global.html#CIMControlMode">CIMControlMode</a></li><li class="hidden"><a href="global.html#eventHandler">eventHandler</a></li><li><a href="global.html#InfoField">InfoField</a></li><li><a href="global.html#MeasureMode">MeasureMode</a></li><li class="hidden"><a href="global.html#MeasureResult">MeasureResult</a></li><li class="hidden"><a href="global.html#MeasureResultCallback">MeasureResultCallback</a></li><li class="hidden"><a href="global.html#Mouse">Mouse</a></li><li><a href="global.html#MouseEventType">MouseEventType</a></li><li><a href="global.html#NavigationMode">NavigationMode</a></li><li><a href="global.html#TiandituMapStyle">TiandituMapStyle</a></li><li><a href="global.html#TilingScheme">TilingScheme</a></li><li class="hidden"><a href="global.html#ViewCubeConfig">ViewCubeConfig</a></li><li><a href="global.html#ViewerMode">ViewerMode</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>Viewer<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Motor视窗，参考<a href="tutorial-初始化.html">初始化</a></p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="Viewer">
+            
+                new <span class="type-signature"></span>Viewer<span class="signature">(options)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的Object对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Element</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>包含视窗的DOM元素或者ID</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>appid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>用户appid</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>用户secret</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewerMode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">viewerMode</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ViewerMode.CIM
+                
+                </td>
+            
+
+            <td class="description last"><p>默认视窗模式</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>navigationMode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#NavigationMode">NavigationMode</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    NavigationMode.DYNAMIC
+                
+                </td>
+            
+
+            <td class="description last"><p>默认导航模式</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>access_token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>默认的access_token</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>map</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BaseMap.html">BaseMap</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Motor.TiandituMap()
+                
+                </td>
+            
+
+            <td class="description last"><p>默认的地图底图</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enableBloom</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启辉光</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enableAO</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启环境光遮蔽</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enableShadow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启阴影</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enableFixedFrameRate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启固定帧率</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enableBIMViewCube</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启导航方块，默认开启，移动端不开启</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewCubeConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ViewCubeConfig">ViewCubeConfig</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>导航方块参数</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cimControlMode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#CIMControlMode">CIMControlMode</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Motor.CIMControlMode.MOTOR
+                
+                </td>
+            
+
+            <td class="description last"><p>CIM模式下的鼠标控制逻辑</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backgroundColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Color.html">Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Motor.Color(0.98, 0.98,, 0.95)
+                
+                </td>
+            
+
+            <td class="description last"><p>背景颜色，仅适用于BIM模式</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var viewer = new Motor.Viewer({  container: 'container',  viewerMode: Motor.ViewerMode.BIM,  server: server,  access_token: access_token});</code></pre>
+
+    
+
+</dd>
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+
+<dt>
+<h4 class="name" id="animatedSpeed">
+    <span class="type-signature"></span>animatedSpeed<span class="type-signature"></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取或设置3D-Tiles建筑物拔地而起的动画速率，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    <!--
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="cimControlMode">
+    <span class="type-signature"></span>cimControlMode<span class="type-signature"> :<a href="global.html#CIMControlMode">CIMControlMode</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取或设置CIM场景下的鼠标控制模式，参考<a href="tutorial-模式切换.html">模式切换</a></p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#CIMControlMode">CIMControlMode</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="currentScene">
+    <span class="type-signature"></span>currentScene<span class="type-signature"> :<a href="SceneView.html">SceneView</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>当前场景对象</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="SceneView.html">SceneView</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="currentView">
+    <span class="type-signature"></span>currentView<span class="type-signature"> :<a href="global.html#CameraView">CameraView</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取或设置当前相机视角参数</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#CameraView">CameraView</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//使用中心点viewer.currentView={ center:Motor.Cartesian3.fromDegrees(121,31,0), //相机观察中心 heading: 90, //90°朝向 pitch: -40, //向下40°俯角 range: 100 //相机距离中心点100米}//使用相机位置viewer.currentView={ position: Motor.Cartesian3.fromDegrees(121,31,100), //相机位置 heading: 90, //90°朝向 pitch: -40, //向下40°俯角 roll: 10 //顺时针方向绕相机朝向向量旋转10°}</code></pre>
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="enableMarquee">
+    <span class="type-signature"></span>enableMarquee<span class="type-signature"> :Boolean</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>是否开启框选放大，参考<a href="tutorial-视角控制.html">视角控制</a></p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="navigationMode">
+    <span class="type-signature"></span>navigationMode<span class="type-signature"> :<a href="global.html#NavigationMode">NavigationMode</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取或设置导航模式，参考<a href="tutorial-视角控制.html">视角控制</a></p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#NavigationMode">NavigationMode</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="roamEditor">
+    <span class="type-signature"></span>roamEditor<span class="type-signature"> :<a href="RoamEditor.html">RoamEditor</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>第一人称视角控制器</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="RoamEditor.html">RoamEditor</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="viewerMode">
+    <span class="type-signature"></span>viewerMode<span class="type-signature"> :<a href="global.html#ViewerMode">ViewerMode</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>获取或设置当前视窗模式（BIM/CIM），参考<a href="tutorial-模式切换.html">模式切换</a></p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#ViewerMode">ViewerMode</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id="addMouseEventListener">
+            
+                <span class="type-signature"></span>addMouseEventListener<span class="signature">(eventType, eventHandler)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>添加鼠标事件，参考<a href="tutorial-点选操作.html">点选操作</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MouseEventType">MouseEventType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>事件类型</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>eventHandler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#eventHandler">eventHandler</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>回调函数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="addVideoProject">
+            
+                <span class="type-signature"></span>addVideoProject<span class="signature">(options)</span><span class="type-signature"> &rarr; {<a href="VideoProjection.html">VideoProjection</a>}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>添加视频投影，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>videoUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>视频地址，必须是HTML5支持的视频格式</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>near</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last"><p>投影近截面</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>far</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    100
+                
+                </td>
+            
+
+            <td class="description last"><p>投影近截面</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewerPosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Motor.Cartesian3(0,0,0)
+                
+                </td>
+            
+
+            <td class="description last"><p>投影原点</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>targetPosition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Motor.Cartesian3(0,0,0)
+                
+                </td>
+            
+
+            <td class="description last"><p>投影目标点</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>heading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>投影方向</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pitch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>投影方向上的俯仰角</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>roll</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>绕投影方向的旋转角</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type"><a href="VideoProjection.html">VideoProjection</a></span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="addWater">
+            
+                <span class="type-signature"></span>addWater<span class="signature">(positions, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>添加水面，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>positions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Cartesian3.html">Cartesian3</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>水面多边形顶点数组</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>flowAngle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>水流方向</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reflectFactor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0.5
+                
+                </td>
+            
+
+            <td class="description last"><p>反射系数</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0.05
+                
+                </td>
+            
+
+            <td class="description last"><p>水流速度</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>waterColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Motor.Color(0, 0.5, 0.5)
+                
+                </td>
+            
+
+            <td class="description last"><p>颜色</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="createVolumeRender">
+            
+                <span class="type-signature"></span>createVolumeRender<span class="signature">(options)</span><span class="type-signature"> &rarr; {<a href="VolumeRender.html">VolumeRender</a>}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>添加体渲染，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Number></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>体渲染包围盒长宽高</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>center</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>包围盒中心三维坐标</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>体渲染数据图片</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isRGB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>是否按照图片颜色显示</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>colorScheme</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>自定义色表</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alphaCorrection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0.5
+                
+                </td>
+            
+
+            <td class="description last"><p>透明度修正指数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type"><a href="VolumeRender.html">VolumeRender</a></span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var volumeRender = viewer.createVolumeRender({
+    center: Motor.Cartesian3.fromDegrees(121,31,300),
+    dimensions: [15520.3208, 12046.920233, 600],
+    image: 'path/to/volume/image',
+    isRGB: false,
+    alphaCorrection: 0.1,
+    colorScheme: [
+        {stop: 0.1, color: 'rgba(0, 0, 255, 0.6)'},
+        {stop: 0.2, color: 'rgba(162, 180, 189, 1)'},
+        {stop: 0.4, color: 'rgba(255, 255, 0, 1)'},
+        {stop: 0.6, color: 'rgba(245, 152, 105, 1)'},
+        {stop: 0.8, color: 'rgba(255, 10, 10, 1)'},
+        {stop: 1.0, color: 'rgba(255, 0, 0, 1)'},
+    ]
+});</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="destroy">
+            
+                <span class="type-signature"></span>destroy<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>销毁Viewer</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Object</span>
+
+
+
+
+
+- <p>销毁后的对象</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="gotoDefaultProjectView">
+            
+                <span class="type-signature"></span>gotoDefaultProjectView<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>返回当前工程的默认视角，参考<a href="tutorial-视角控制.html">视角控制</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="homeView">
+            
+                <span class="type-signature"></span>homeView<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>CIM模式下，视角定位到全球</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="isDestroyed">
+            
+                <span class="type-signature"></span>isDestroyed<span class="signature">()</span><span class="type-signature"> &rarr; {Boolean}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Viewer是否销毁</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Boolean</span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="loadModel">
+            
+                <span class="type-signature"></span>loadModel<span class="signature">(options)</span><span class="type-signature"> &rarr; {Object}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>加载gltf模型，参考<a href="tutorial-加载数据.html">加载数据</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的Object对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>模型路径</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>放置模型的原点坐标</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>translation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Cartesian3(0,0,0)
+                
+                </td>
+            
+
+            <td class="description last"><p>XYZ轴的平移量</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rotationZ</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>Z轴旋转量</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>zoomTo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>镜头是否移动到模型</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Object</span>
+
+
+
+
+
+- <p>返回模型对象</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesian3.fromDegrees(121,31,0)})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="loadSubProject">
+            
+                <span class="type-signature"></span>loadSubProject<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>加载子工程，加载静态模型工程，参考<a href="tutorial-加载数据.html">加载数据</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>projectId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>工程id或工程id数组</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parentComponent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ComponentView.html">ComponentView</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>父工程中对应构件</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>drawEdge</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否绘制边线</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Promise</span>
+
+
+
+
+
+- <p>加载完成的Promise</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>viewer.loadSubProject({ projectId: projectId, drawEdge: true})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="loadTileset">
+            
+                <span class="type-signature"></span>loadTileset<span class="signature">(options)</span><span class="type-signature"> &rarr; {Object}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>添加3d-tiles数据，参考<a href="tutorial-加载数据.html">加载数据</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>数据地址</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>useGradual</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启渐变特效</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>planView</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启俯视压平特效</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>shouldAnimate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否开启建筑上升动画特效</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gradualOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>渐变特效参数</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>渐变起始颜色</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>渐变结束颜色</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gradualOffset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>渐变结束高度</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Object</span>
+
+
+
+
+
+- <p>tileset对象</p>
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="pick">
+            
+                <span class="type-signature"></span>pick<span class="signature">(cartesian2)</span><span class="type-signature"> &rarr; {<a href="ComponentView.html">ComponentView</a>|<a href="MarkerView.html">MarkerView</a>}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>根据屏幕坐标获取场景对象，参考<a href="tutorial-点选操作.html">点选操作</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cartesian2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian2.html">Cartesian2</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>屏幕坐标</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type"><a href="ComponentView.html">ComponentView</a></span>
+|
+
+<span class="param-type"><a href="MarkerView.html">MarkerView</a></span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="pickPosition">
+            
+                <span class="type-signature"></span>pickPosition<span class="signature">(cartesian2)</span><span class="type-signature"> &rarr; {<a href="Cartesian3.html">Cartesian3</a>}</span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>根据屏幕坐标获取三维空间坐标，参考<a href="tutorial-点选操作.html">点选操作</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cartesian2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian2.html">Cartesian2</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>屏幕坐标</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="remove">
+            
+                <span class="type-signature"></span>remove<span class="signature">(primitive)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>删除模型或者3d-tiles数据</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>primitive</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>模型或者3d-tiles对象</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="removeMouseEventListener">
+            
+                <span class="type-signature"></span>removeMouseEventListener<span class="signature">(eventType)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>移除鼠标事件，参考<a href="tutorial-点选操作.html">点选操作</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MouseEventType">MouseEventType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>事件类型</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="removeScene">
+            
+                <span class="type-signature"></span>removeScene<span class="signature">(sceneView, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>移除场景</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sceneView</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SceneView.html">SceneView</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>场景对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parentComponent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ComponentView.html">ComponentView</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>删除子工程时需要的父构件</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="removeVideoProjection">
+            
+                <span class="type-signature"></span>removeVideoProjection<span class="signature">(videoProjection)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>删除视频投影，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>videoProjection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="VideoProjection.html">VideoProjection</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>视频投影特效实例化对象</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="removeVolumeRender">
+            
+                <span class="type-signature"></span>removeVolumeRender<span class="signature">()</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>删除体渲染，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="removeWater">
+            
+                <span class="type-signature"></span>removeWater<span class="signature">(水面特效类的实例化对象)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>删除水面，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>水面特效类的实例化对象</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Water.html">Water</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="setLookAtCenter">
+            
+                <span class="type-signature"></span>setLookAtCenter<span class="signature">(cartesian2<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>设置相机旋转中心，只在viewerMode为DYNAMIC时有效</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cartesian2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian2.html">Cartesian2</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>屏幕坐标, 不提供则直接使用当前屏幕中心坐标</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="setMap">
+            
+                <span class="type-signature"></span>setMap<span class="signature">(map)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>设置地图服务，参考<a href="tutorial-地图服务.html">地图服务</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>map</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BaseMap.html">BaseMap</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>地图服务类</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="updateVolumeRender">
+            
+                <span class="type-signature"></span>updateVolumeRender<span class="signature">(image)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>更新体渲染数据，参考<a href="tutorial-特效.html">特效</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>图片url</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="zoomToComponent">
+            
+                <span class="type-signature"></span>zoomToComponent<span class="signature">(componentView, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>镜头移动到构件，参考<a href="tutorial-视角控制.html">视角控制</a></p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>componentView</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ComponentView.html">ComponentView</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>构件视图对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>飞行结束的回调函数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>//传入ComponentView对象viewer.zoomToComponent(componentView);</code></pre>
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="./logo.png" style="width: 156px; height: 36px">
+    <div class="footer-text"> </div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'Viewer_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
