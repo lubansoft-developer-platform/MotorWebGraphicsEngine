@@ -61,8 +61,13 @@
 
     
         <article class="readme">
-            <h3>1. 初始化Viewer</h3><h3>创建一个div容器</h3><pre class="prettyprint source lang-html"><code>&lt;!--用于放置三维场景-->
-&lt;div id=&quot;container&quot;>&lt;/div></code></pre><h3>ES6语法</h3><p><strong>Webpack配置</strong>参考另一篇教程和<code>motor-js-api</code>中的<code>webpack-example</code>;</p>
+            <h3>1. 初始化Viewer</h3>
+<h3>创建一个div容器</h3>
+<pre class="prettyprint source lang-html"><code>&lt;!--用于放置三维场景-->
+&lt;div id=&quot;container&quot;>&lt;/div>
+</code></pre>
+<h3>ES6语法</h3>
+<p><strong>Webpack配置</strong>参考另一篇教程和<code>motor-js-api</code>中的<code>webpack-example</code>;</p>
 <pre class="prettyprint source lang-javascript"><code>import Motor from 'motor';
 
 const appid = &quot;a56958db79c64abfa62b2a7c03c747a6&quot;;
@@ -73,11 +78,18 @@ let viewer = new Motor.Viewer({
   viewerMode: Motor.ViewerMode.BIM,//viewer的模式
   appid:appid,
   secret:secret
-});</code></pre><h3>Javascript语法</h3><p>将motor.js和静态资源放在同一个文件夹下，如<code>library</code>文件夹:</p>
+});
+</code></pre>
+<h3>Javascript语法</h3>
+<p>将motor.js和静态资源放在同一个文件夹下，如<code>library</code>文件夹:</p>
 <p>引入<code>motor.js</code></p>
-<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;./library/motor.js&quot;>&lt;/script></code></pre><p><strong>最重要的一步</strong>，设置静态资源路径</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;./library/motor.js&quot;>&lt;/script>
+</code></pre>
+<p><strong>最重要的一步</strong>，设置静态资源路径</p>
 <pre class="prettyprint source lang-javascript"><code>//设置motor静态资源的路径
-Motor.Util.setBaseUrl(&quot;./library&quot;);</code></pre><p>初始化Viewer</p>
+Motor.Util.setBaseUrl(&quot;./library&quot;);
+</code></pre>
+<p>初始化Viewer</p>
 <pre class="prettyprint source lang-javascript"><code>var appid = &quot;a56958db79c64abfa62b2a7c03c747a6&quot;;
 var secret = &quot;98d4c5db9942fb13fbb8e545cb464aa47d2015fe&quot;;
 //初始化Viewer
@@ -86,7 +98,8 @@ var viewer = new Motor.Viewer({
   viewerMode: Motor.ViewerMode.BIM,//viewer的模式
   appid:appid,
   secret:secret
-});</code></pre>
+});
+</code></pre>
         </article>
     
 </section>

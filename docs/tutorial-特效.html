@@ -61,16 +61,24 @@
 
     
         <article class="readme">
-            <h3>1. 水面</h3><p>根据坐标点绘制水面</p>
+            <h3>1. 水面</h3>
+<p>根据坐标点绘制水面</p>
 <pre class="prettyprint source lang-javascript"><code>var waterPositions = [Motor.Cartesian3.fromDegrees(121,31),Motor.Cartesian3.fromDegrees(121,32),Motor.Cartesian3.fromDegrees(122,31)];
 //绘制水面
 var water = viewer.addWater(waterPositions,options);
 //删除水面
-viewer.removeWater(water);</code></pre><h3>2. 体渲染</h3><h3>创建体渲染对象</h3><pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
+viewer.removeWater(water);
+</code></pre>
+<h3>2. 体渲染</h3>
+<h3>创建体渲染对象</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
     center: Motor.Cartesia3.fromDegrees(121,31,2.5),
     dimensions: [10, 10, 5],
     image: require('./assets/images/fires/room_fire_60s_3d.png')
-});</code></pre><h3>自定义颜色表</h3><pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
+});
+</code></pre>
+<h3>自定义颜色表</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
     center: Motor.Cartesia3.fromDegrees(121,31,2.5),
     dimensions: [10, 10, 5],
     image: require('./assets/images/fires/room_fire_60s_3d.png'),
@@ -84,8 +92,12 @@ viewer.removeWater(water);</code></pre><h3>2. 体渲染</h3><h3>创建体渲染�
         {stop: 0.8, color: 'rgba(255, 10, 10, 1)'},//给分布在60%-80%的值设置颜色
         {stop: 1.0, color: 'rgba(255, 0, 0, 1)'},//给分布在80%-100%的值设置颜色
     ]
-});</code></pre><h3>3. 建筑物3d-tiles特效</h3><p>针对3d-tiles数据，MotorJS为其添加了特殊的显示效果</p>
-<h3>渐变</h3><p>通过设置渐变的起始色和终止色，以及渐变的最大高度，给原本纯色的建筑物模型添加渐变效果</p>
+});
+</code></pre>
+<h3>3. 建筑物3d-tiles特效</h3>
+<p>针对3d-tiles数据，MotorJS为其添加了特殊的显示效果</p>
+<h3>渐变</h3>
+<p>通过设置渐变的起始色和终止色，以及渐变的最大高度，给原本纯色的建筑物模型添加渐变效果</p>
 <pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
   url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
   gradualOptions:{
@@ -96,19 +108,28 @@ viewer.removeWater(water);</code></pre><h3>2. 体渲染</h3><h3>创建体渲染�
   useGradual:true
 });
 //渐变可以在运行时开关
-tileset.useGradual = false;</code></pre><h3>俯视压平特效</h3><p>当相机处于俯视建筑物的角度时，三维建筑会自动压平成二维图形</p>
+tileset.useGradual = false;
+</code></pre>
+<h3>俯视压平特效</h3>
+<p>当相机处于俯视建筑物的角度时，三维建筑会自动压平成二维图形</p>
 <pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
   url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
   planView:true
 });
 //俯视压平可以在运行时开关
-tileset.planView = false;</code></pre><h3>俯仰动画</h3><p>当相机从俯视变为仰视，建筑物从低到高升起的特效</p>
+tileset.planView = false;
+</code></pre>
+<h3>俯仰动画</h3>
+<p>当相机从俯视变为仰视，建筑物从低到高升起的特效</p>
 <pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
   url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
   shouldAnimate:true
 });
 //俯俯仰动画可以在运行时开关
-tileset.shouldAnimate = false;</code></pre><h3>建筑物上的扩散圈效果</h3><p>在建筑物上添加由中心向外扩散的圆形效果</p>
+tileset.shouldAnimate = false;
+</code></pre>
+<h3>建筑物上的扩散圈效果</h3>
+<p>在建筑物上添加由中心向外扩散的圆形效果</p>
 <pre class="prettyprint source lang-javascript"><code>var dc = new Motor.DynamicCircle({
     position: Motor.Cartesian3.fromDegrees(121,31),
     color:new Motor.Color(1,0,0,1),
@@ -119,11 +140,15 @@ tileset.dynamicCircleCollection.add(dc);
 //删除动态圈
 tileset.dynamicCircleCollection.remove(dc);
 tileset.dynamicCircleCollection.removeByIndex(0);
-tileset.dynamicCircleCollection.removeAll();</code></pre><h3>4. 视频投影</h3><pre class="prettyprint source lang-javascript"><code>let video = viewer.addVideoProject({
+tileset.dynamicCircleCollection.removeAll();
+</code></pre>
+<h3>4. 视频投影</h3>
+<pre class="prettyprint source lang-javascript"><code>let video = viewer.addVideoProject({
     videoUrl:'./assets/video/big-buck-bunny_trailer.mp4',//视频地址
     viewerPosition: Motor.Cartesian3.fromDegrees(121-0.00014,31.00028,35),//投影原点坐标
     targetPosition: Motor.Cartesian3.fromDegrees(121-0.00014,31.00028,0)//投影目标点坐标
-});</code></pre>
+});
+</code></pre>
         </article>
     
 </section>

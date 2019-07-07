@@ -61,22 +61,26 @@
 
     
         <article class="readme">
-            <h3>1. 使用剖切控件</h3><p>初始化剖切编辑器, 最好写在<code>loadSubProject</code>返回的<code>promise.then</code>方法中，也就是在工程加载完毕后再声明<code>ClippingPlaneEditor</code></p>
+            <h3>1. 使用剖切控件</h3>
+<p>初始化剖切编辑器, 最好写在<code>loadSubProject</code>返回的<code>promise.then</code>方法中，也就是在工程加载完毕后再声明<code>ClippingPlaneEditor</code></p>
 <pre class="prettyprint source lang-javascript"><code>var promise = viewer.loadSubProject({
   projectId: 'projectId',//工程id
 })
 promise.then(function(){
   var clippingPlaneEditor = new Motor.ClippingPlaneEditor({
       viewer: viewer, //Motor.Viewer对象
-      entity: viewer.currentScene.projectList[0].tileset//场景中需要剖切的工程模型
+      scene: viewer.currentScene//当前场景
   });
 })
-</code></pre><p>使用方法:</p>
+
+</code></pre>
+<p>使用方法:</p>
 <pre class="prettyprint source lang-javascript"><code>//添加X，Y，Z方向的剖切面，XYZ代表一个剖切盒
 clippingPlaneEditor.addClippingPlane(&quot;X&quot;);
 clippingPlaneEditor.addClippingPlane(&quot;Y&quot;);
 clippingPlaneEditor.addClippingPlane(&quot;Z&quot;);
-clippingPlaneEditor.addClippingPlane(&quot;XYZ&quot;);</code></pre>
+clippingPlaneEditor.addClippingPlane(&quot;XYZ&quot;);
+</code></pre>
         </article>
     
 </section>

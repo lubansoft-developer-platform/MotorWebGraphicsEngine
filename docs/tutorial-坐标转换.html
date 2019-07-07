@@ -61,20 +61,28 @@
 
     
         <article class="readme">
-            <h3>1. 坐标类型</h3><ul>
+            <h3>1. 坐标类型</h3>
+<ul>
 <li>三维坐标</li>
 <li>二维坐标</li>
 <li>经纬度坐标</li>
 </ul>
-<h4>三维坐标</h4><p>Motor默认使用的三维坐标是ECEF坐标系（<a href="https://baike.baidu.com/item/%E5%9C%B0%E5%BF%83%E5%9C%B0%E5%9B%BA%E5%9D%90%E6%A0%87%E7%B3%BB/22657523">地心地固坐标系</a>），原点 O (0,0,0)为地球质心，z 轴与地轴平行指向北极点，x 轴指向本初子午线与赤道的交点，y 轴垂直于xOz平面(即东经90度与赤道的交点)构成右手坐标系。</p>
+<h4>三维坐标</h4>
+<p>Motor默认使用的三维坐标是ECEF坐标系（<a href="https://baike.baidu.com/item/%E5%9C%B0%E5%BF%83%E5%9C%B0%E5%9B%BA%E5%9D%90%E6%A0%87%E7%B3%BB/22657523">地心地固坐标系</a>），原点 O (0,0,0)为地球质心，z 轴与地轴平行指向北极点，x 轴指向本初子午线与赤道的交点，y 轴垂直于xOz平面(即东经90度与赤道的交点)构成右手坐标系。</p>
 <p>类：Cartesian3</p>
-<h4>二维坐标系</h4><p>鼠标在屏幕空间点击或者移动时，会记录屏幕空间的二维坐标，一般是以界面左上角为原点(0,0)。</p>
+<h4>二维坐标系</h4>
+<p>鼠标在屏幕空间点击或者移动时，会记录屏幕空间的二维坐标，一般是以界面左上角为原点(0,0)。</p>
 <p>类：Cartesian2</p>
-<h4>经纬度坐标</h4><p>Motor默认使用弧度制(<code>rad</code>)的经度，纬度，高度表达地球上的经纬度坐标点。<code>1 rad= PI / 180°</code>。</p>
+<h4>经纬度坐标</h4>
+<p>Motor默认使用弧度制(<code>rad</code>)的经度，纬度，高度表达地球上的经纬度坐标点。<code>1 rad= PI / 180°</code>。</p>
 <p>类：Cartographic</p>
-<h3>2. 坐标转换</h3><p>二维屏幕坐标转三维世界坐标</p>
-<pre class="prettyprint source lang-javascript"><code>var cartesian3 = viewer.pickPosition(cartesian2);</code></pre><p>三维世界坐标转经纬度坐标</p>
-<pre class="prettyprint source lang-javascript"><code>var cartographic = Motor.Cartographic.fromCartesian(cartesian3);</code></pre>
+<h3>2. 坐标转换</h3>
+<p>二维屏幕坐标转三维世界坐标</p>
+<pre class="prettyprint source lang-javascript"><code>var cartesian3 = viewer.pickPosition(cartesian2);
+</code></pre>
+<p>三维世界坐标转经纬度坐标</p>
+<pre class="prettyprint source lang-javascript"><code>var cartographic = Motor.Cartographic.fromCartesian(cartesian3);
+</code></pre>
         </article>
     
 </section>

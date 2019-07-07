@@ -61,13 +61,21 @@
 
     
         <article class="readme">
-            <h3>1. 切换CIM/BIM模式</h3><pre class="prettyprint source lang-javascript"><code>//切换到CIM
+            <h3>1. 切换CIM/BIM模式</h3>
+<pre class="prettyprint source lang-javascript"><code>//切换到CIM
 viewer.viewerMode = Motor.ViewerMode.CIM;
 //切换到BIM
-viewer.viewerMode = Motor.ViewerMode.BIM;</code></pre><h3>2. 隐藏边线</h3><p>绘制边线以后，如果需要隐藏边线，可以调用如下接口</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.currentScene.drawEdge = false;</code></pre><h3>2. CIM模式下鼠标控制</h3><p>MotorJS预设了两种控制模式：经典模式（CLASSIC）下，鼠标左键拖拽实现平移，鼠标中键拖拽实现旋转；MOTOR模式下，鼠标中键拖拽实现平移，鼠标右键拖拽实现旋转。</p>
+viewer.viewerMode = Motor.ViewerMode.BIM;
+</code></pre>
+<h3>2. 隐藏边线</h3>
+<p>绘制边线以后，如果需要隐藏边线，可以调用如下接口</p>
+<pre class="prettyprint source lang-javascript"><code>viewer.currentScene.drawEdge = false;
+</code></pre>
+<h3>2. CIM模式下鼠标控制</h3>
+<p>MotorJS预设了两种控制模式：经典模式（CLASSIC）下，鼠标左键拖拽实现平移，鼠标中键拖拽实现旋转；MOTOR模式下，鼠标中键拖拽实现平移，鼠标右键拖拽实现旋转。</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.cimControlMode = Motor.CIMControlMode.MOTOR;
-viewer.cimControlMode = Motor.CIMControlMode.CLASSIC;</code></pre>
+viewer.cimControlMode = Motor.CIMControlMode.CLASSIC;
+</code></pre>
         </article>
     
 </section>

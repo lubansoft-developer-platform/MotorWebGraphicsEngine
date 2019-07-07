@@ -61,11 +61,18 @@
 
     
         <article class="readme">
-            <h3>1. 安装<code>copy-webpack-plugin</code>插件</h3><p>安装完插件后在webpack配置文件中引用</p>
-<pre class="prettyprint source lang-javascript"><code>const CopyWebpackPlugin = require('copy-webpack-plugin');</code></pre><h3>2. 设置motor静态资源在源码库中的路径和打包后的路径</h3><pre class="prettyprint source lang-javascript"><code>//motor在源码库中的位置
+            <h3>1. 安装<code>copy-webpack-plugin</code>插件</h3>
+<p>安装完插件后在webpack配置文件中引用</p>
+<pre class="prettyprint source lang-javascript"><code>const CopyWebpackPlugin = require('copy-webpack-plugin');
+</code></pre>
+<h3>2. 设置motor静态资源在源码库中的路径和打包后的路径</h3>
+<pre class="prettyprint source lang-javascript"><code>//motor在源码库中的位置
 const motorSource = '../library';
 //打包后motor静态资源存放的位置
-const motorDist = 'motor';</code></pre><h3>3. 复制静态资源、设置静态资源路径的全局变量</h3><pre class="prettyprint source lang-javascript"><code>plugins: [
+const motorDist = 'motor';
+</code></pre>
+<h3>3. 复制静态资源、设置静态资源路径的全局变量</h3>
+<pre class="prettyprint source lang-javascript"><code>plugins: [
     /**复制motorSource中的静态资源到打包后根目录的motor文件夹下**/
     new CopyWebpackPlugin([{ from: path.join(motorSource, 'Workers'), to: path.join(motorDist, 'Workers') }]),
     new CopyWebpackPlugin([{ from: path.join(motorSource, 'images'), to: path.join(motorDist, 'images') }]),
@@ -78,7 +85,8 @@ const motorDist = 'motor';</code></pre><h3>3. 复制静态资源、设置静态�
     new webpack.DefinePlugin({
         MOTOR_BASE_URL: JSON.stringify(motorDist)
     }),
-]</code></pre>
+]
+</code></pre>
         </article>
     
 </section>

@@ -61,8 +61,10 @@
 
     
         <article class="readme">
-            <h3>1. 概念介绍</h3><p>概要模型是简化后的模型，相当于简模；静态模型是体量较大的BIM模型，具备复杂的结构和属性信息。</p>
-<h3>2. 加载概要模型对应的静态模型</h3><p>下面代码实现了通过点击概要模型，将其替换成对应的静态模型的操作：</p>
+            <h3>1. 概念介绍</h3>
+<p>概要模型是简化后的模型，相当于简模；静态模型是体量较大的BIM模型，具备复杂的结构和属性信息。</p>
+<h3>2. 加载概要模型对应的静态模型</h3>
+<p>下面代码实现了通过点击概要模型，将其替换成对应的静态模型的操作：</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK, function (mouse) {
     //根据屏幕坐标coords，获取点选的对象
     let obj = viewer.pick(mouse.position);
@@ -79,13 +81,17 @@
                     console.log('静态模型加载完成');
                 });
             }
-
+            
         })
     }
-});</code></pre><h3>3. 回到概要模型</h3><pre class="prettyprint source lang-javascript"><code>//删除当前场景内的工程
+});
+</code></pre>
+<h3>3. 回到概要模型</h3>
+<pre class="prettyprint source lang-javascript"><code>//删除当前场景内的工程
 viewer.removeScene(viewer.currentScene,{
     parentComponent:parentComponent//传入父构件，回到概要模型
-});</code></pre>
+});
+</code></pre>
         </article>
     
 </section>

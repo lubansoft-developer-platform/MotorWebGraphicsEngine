@@ -62,9 +62,13 @@
     
         <article class="readme">
             <p>添加自定义的文字、图片和点到场景中</p>
-<h3>1. 创建标注集</h3><pre class="prettyprint source lang-javascript"><code>var markers = new Motor.MarkerCollection({
+<h3>1. 创建标注集</h3>
+<pre class="prettyprint source lang-javascript"><code>var markers = new Motor.MarkerCollection({
   viewer:viewer,//Motor.Viewer实例
-});</code></pre><h3>2. 添加点标注</h3><pre class="prettyprint source lang-javascript"><code>markers.add({
+});
+</code></pre>
+<h3>2. 添加点标注</h3>
+<pre class="prettyprint source lang-javascript"><code>markers.add({
     id:&quot;point1&quot;,
     position:{
         cartographicDegrees:[121,31,5]
@@ -79,7 +83,9 @@
             rgba:[255,255,0,255]
         }
     }
-});</code></pre><p>坐标的写法有多种：</p>
+});
+</code></pre>
+<p>坐标的写法有多种：</p>
 <pre class="prettyprint source lang-javascript"><code>//可以是经纬度
 position:{
     cartographicDegrees:[121,31,5]
@@ -91,7 +97,10 @@ position:{
 //可以是笛卡尔三维世界坐标（ECEF地心地固坐标系）
 position:{
     cartesian:[4650397.56551457, -3390535.52275848, -4087729.48877329]
-}</code></pre><h3>2. 添加文字标注</h3><pre class="prettyprint source lang-javascript"><code>markers.add({
+}
+</code></pre>
+<h3>2. 添加文字标注</h3>
+<pre class="prettyprint source lang-javascript"><code>markers.add({
     id:&quot;label1&quot;,
     position:{
         cartographicDegrees:[121,31,5]
@@ -119,7 +128,10 @@ position:{
         },
         disableDepthTestDistance: Number.POSITIVE_INFINITY //始终在前，不被遮挡
     }
-});</code></pre><h3>3. 添加图片标注</h3><pre class="prettyprint source lang-javascript"><code>markers.add({
+});
+</code></pre>
+<h3>3. 添加图片标注</h3>
+<pre class="prettyprint source lang-javascript"><code>markers.add({
     id:&quot;image1&quot;,
     position:{
         cartographicDegrees:[121,31,5]
@@ -136,7 +148,10 @@ position:{
         rotation: 0.1,//逆时针旋转角度(弧度制)
         disableDepthTestDistance: Number.POSITIVE_INFINITY //始终在前，不被遮挡
     }
-});</code></pre><h3>3. 添加自定义属性</h3><p>给标注添加自定义属性，如关联构件的guid等；可在点击标注的回调函数中返回</p>
+});
+</code></pre>
+<h3>3. 添加自定义属性</h3>
+<p>给标注添加自定义属性，如关联构件的guid等；可在点击标注的回调函数中返回</p>
 <pre class="prettyprint source lang-javascript"><code>markers.add({
     id:&quot;component1&quot;,
     position:{
@@ -151,7 +166,10 @@ position:{
         &quot;纬度&quot;:31,
         &quot;高度&quot;:5,
     }
-});</code></pre><h3>4. 组合标注</h3><p>一个标注可以将图片、文字、点要素组合在一起展示</p>
+});
+</code></pre>
+<h3>4. 组合标注</h3>
+<p>一个标注可以将图片、文字、点要素组合在一起展示</p>
 <pre class="prettyprint source lang-javascript"><code>markers.add({
     id:&quot;point&quot;,
     position:{
@@ -179,13 +197,18 @@ position:{
         &quot;纬度&quot;:31,
         &quot;高度&quot;:5,
     }
-});</code></pre><h3>5. 创建浮动图标集合</h3><p>首先需要创建一个带有动画效果的标注集合</p>
+});
+</code></pre>
+<h3>5. 创建浮动图标集合</h3>
+<p>首先需要创建一个带有动画效果的标注集合</p>
 <pre class="prettyprint source lang-javascript"><code>var markers = new Motor.MarkerCollection({
   viewer:viewer,//Motor.Viewer实例
   animated:true,//是否开启动画
   interval:&quot;2019-08-04T12:00:00Z/2019-08-04T12:00:02Z&quot;,//动画时间
   loop:true//循环播放
-})</code></pre><p>浮动图标的原理是在一段时间内不停的变化图标的位置(<code>position</code>属性)，因此以上初始化过程中需要给定一个时间段(<code>interval</code>)。</p>
+})
+</code></pre>
+<p>浮动图标的原理是在一段时间内不停的变化图标的位置(<code>position</code>属性)，因此以上初始化过程中需要给定一个时间段(<code>interval</code>)。</p>
 <p>若要标注一直处于浮动状态，就需要循环播放这段动画(<code>loop</code>属性设置为<code>true</code>)。</p>
 <p>然后添加标注：</p>
 <pre class="prettyprint source lang-javascript"><code>markers.add({
@@ -225,14 +248,20 @@ position:{
         &quot;纬度&quot;:31,
         &quot;高度&quot;:5,
     }
-});</code></pre><p>上述代码中<code>position</code>的值不再是单一的一个经纬度坐标，而是多个<strong>时间+坐标</strong>的组合。MotorJS会对两个时间点的坐标进行插值，创建平滑的动画效果。<code>epoch</code>属性代表动画的起始时间，该时间一定是在<code>interval</code>时间段之间的。</p>
-<h3><strong>时间+坐标</strong>的格式有多种写法</h3><p>时间的写法可以是从起始时间(<code>epoch</code>)开始的第几秒（此时一定要写明<code>epoch</code>）:</p>
+});
+</code></pre>
+<p>上述代码中<code>position</code>的值不再是单一的一个经纬度坐标，而是多个<strong>时间+坐标</strong>的组合。MotorJS会对两个时间点的坐标进行插值，创建平滑的动画效果。<code>epoch</code>属性代表动画的起始时间，该时间一定是在<code>interval</code>时间段之间的。</p>
+<h3><strong>时间+坐标</strong>的格式有多种写法</h3>
+<p>时间的写法可以是从起始时间(<code>epoch</code>)开始的第几秒（此时一定要写明<code>epoch</code>）:</p>
 <pre class="prettyprint source lang-javascript"><code>[0, 121, 31, 0,
 1, 121,31, 5,
-2, 121, 31, 0]</code></pre><p>也可以是遵循ISO 8601时间格式标准的字符串（此时可以不写<code>epoch</code>）：</p>
+2, 121, 31, 0]
+</code></pre>
+<p>也可以是遵循ISO 8601时间格式标准的字符串（此时可以不写<code>epoch</code>）：</p>
 <pre class="prettyprint source lang-javascript"><code>[&quot;2019-08-04T16:00:00Z&quot;, 121, 31, 0,
 &quot;2019-08-04T16:00:01Z&quot;, 121,31, 5,
-&quot;2019-08-04T16:00:02Z&quot;, 121, 31, 0]</code></pre>
+&quot;2019-08-04T16:00:02Z&quot;, 121, 31, 0]
+</code></pre>
         </article>
     
 </section>

@@ -61,14 +61,20 @@
 
     
         <article class="readme">
-            <h3>1. 鼠标事件</h3><p><code>Motor.MouseEventType</code>封装了大多数常用鼠标和触摸事件，使用如下</p>
+            <h3>1. 鼠标事件</h3>
+<p><code>Motor.MouseEventType</code>封装了大多数常用鼠标和触摸事件，使用如下</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
     //mouse={position: Cartesian2}
-});</code></pre><p>上面代码定义了鼠标左键点击事件，回调函数的传入参数是一个<code>mouse</code>对象，返回当前鼠标点击的屏幕二维坐标(<code>Cartesian2</code>)</p>
+});
+</code></pre>
+<p>上面代码定义了鼠标左键点击事件，回调函数的传入参数是一个<code>mouse</code>对象，返回当前鼠标点击的屏幕二维坐标(<code>Cartesian2</code>)</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.MOUSE_MOVE,function(mouse){
     //mouse={endPosition: Cartesian2}
-})</code></pre><p>上面代码定义了鼠标移动事件，回调函数的传入参数是一个<code>mouse</code>对象，但是<code>mouse</code>中的<code>position</code>变成了<code>endPosition</code>，返回当前鼠标所在的屏幕二维坐标(<code>Cartesian2</code>)</p>
-<h3>2. 点选显示信息</h3><pre class="prettyprint source lang-javascript"><code>//设置点选后的显示构件信息
+})
+</code></pre>
+<p>上面代码定义了鼠标移动事件，回调函数的传入参数是一个<code>mouse</code>对象，但是<code>mouse</code>中的<code>position</code>变成了<code>endPosition</code>，返回当前鼠标所在的屏幕二维坐标(<code>Cartesian2</code>)</p>
+<h3>2. 点选显示信息</h3>
+<pre class="prettyprint source lang-javascript"><code>//设置点选后的显示构件信息
 viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
   //根据屏幕坐标coords，获取点选的对象
   let obj = viewer.pick(mouse.position);
@@ -79,7 +85,10 @@ viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
     }
     document.getElementById(&quot;infobox&quot;).innerHTML = `&lt;div>${obj.guid}&lt;/div>`+innerHTML;
   }
-});</code></pre><h3>3. 点选改变颜色</h3><pre class="prettyprint source lang-javascript"><code>let currentSelectedComponent = undefined;
+});
+</code></pre>
+<h3>3. 点选改变颜色</h3>
+<pre class="prettyprint source lang-javascript"><code>let currentSelectedComponent = undefined;
 let selectedColor = new Motor.Color(1, 1, 1, 0.5);//或者Motor.Color.fromBytes(255,255,255,125)，或者Motor.Color.WHITE.withAlpha(0.5)，或者Motor.Color.fromCssColorString(&quot;#fff&quot;);
 viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
   //根据屏幕坐标coords，获取点选的对象
@@ -93,18 +102,25 @@ viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
     }
     currentSelectedComponent = obj;
   }
-});</code></pre><h3>4. 点选获取坐标</h3><pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
+});
+</code></pre>
+<h3>4. 点选获取坐标</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
   //根据屏幕坐标coords，获取点选处的三维坐标
   let position = viewer.pickPosition(mouse.position);
   console.log(position);
-})</code></pre><h3>5. 双击构件，镜头飞向构件</h3><pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
+})
+</code></pre>
+<h3>5. 双击构件，镜头飞向构件</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
   //根据屏幕坐标coords，获取点选的对象
   let obj = viewer.pick(mouse.position);
   if (obj instanceof Motor.ComponentView) {
     viewer.zoomToComponent(obj);//飞向构件
     viewer.setLookAtCenter(coords);//设置点击处为镜头旋转中心
   }
-})</code></pre>
+})
+</code></pre>
         </article>
     
 </section>

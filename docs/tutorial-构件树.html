@@ -61,7 +61,8 @@
 
     
         <article class="readme">
-            <h3>创建构件树</h3><p>根据构件树对象控制显示隐藏，该构件树方法依赖于<a href="http://www.treejs.cn/v3/main.php#_zTreeInfo">zTree</a>. 构件树对象，规范格式如下：</p>
+            <h3>创建构件树</h3>
+<p>根据构件树对象控制显示隐藏，该构件树方法依赖于<a href="http://www.treejs.cn/v3/main.php#_zTreeInfo">zTree</a>. 构件树对象，规范格式如下：</p>
 <pre class="prettyprint source lang-javascript"><code>var treeObj = [
   {
     name:&quot;一层&quot;,
@@ -94,11 +95,17 @@
       ...
     ]
   },
-];</code></pre><p><strong>注意：</strong> 如果子节点中有一个或以上的节点被选中(isChecked=true), 那么父节点一定是被选中的(isChecked一定为true)；推荐使用zTree的构件树代码库，该代码库已经实现了上述的逻辑。</p>
-<h3>引入相关库</h3><pre class="prettyprint source lang-html"><code>&lt;!-- 引入jQuery和zTree -->
+];
+</code></pre>
+<p><strong>注意：</strong> 如果子节点中有一个或以上的节点被选中(isChecked=true), 那么父节点一定是被选中的(isChecked一定为true)；推荐使用zTree的构件树代码库，该代码库已经实现了上述的逻辑。</p>
+<h3>引入相关库</h3>
+<pre class="prettyprint source lang-html"><code>&lt;!-- 引入jQuery和zTree -->
 &lt;link rel=&quot;stylesheet&quot; href=&quot;./node_modules/@ztree/ztree_v3/css/zTreeStyle/zTreeStyle.css&quot; type=&quot;text/css&quot;>
 &lt;script src=&quot;./node_modules/jquery/dist/jquery.min.js&quot;>&lt;/script>
-&lt;script src=&quot;./node_modules/@ztree/ztree_v3/js/jquery.ztree.all.min.js&quot;>&lt;/script></code></pre><h3>构件树控制显示隐藏、点选高亮</h3><pre class="prettyprint source lang-javascript"><code>//获取构件树
+&lt;script src=&quot;./node_modules/@ztree/ztree_v3/js/jquery.ztree.all.min.js&quot;>&lt;/script>
+</code></pre>
+<h3>构件树控制显示隐藏、点选高亮</h3>
+<pre class="prettyprint source lang-javascript"><code>//获取构件树
 Motor.Component.PropertiesTree(projectId).then((pTree)=>{
   var zTreeObj;
   var setting = {
@@ -147,7 +154,7 @@ Motor.Component.PropertiesTree(projectId).then((pTree)=>{
         onDblClick:function(e,id,treeNode){
             if(!treeNode.children && treeNode.level === 4){
                 var component = viewer.currentScene.getComponentFromTree(treeNode.projectId, treeNode);
-
+                
                 viewer.zoomToComponent(component,function(){
                     viewer.setLookAtCenter();//设置点击处为镜头旋转中心
                 });
@@ -172,12 +179,13 @@ Motor.Component.PropertiesTree(projectId).then((pTree)=>{
       for (var i = 0; i &lt; nodes.length; i++) {
           if (!nodes[i].children) {         //判断需要显示复选框的条件
               // console.log(nodes[i])
-              nodes[i].nocheck = true;                //nocheck为true表示没有选择框
+              nodes[i].nocheck = true;				//nocheck为true表示没有选择框
               zTreeObj.updateNode(nodes[i]);         //刷新
           }
       }
   }
-});</code></pre>
+});
+</code></pre>
         </article>
     
 </section>

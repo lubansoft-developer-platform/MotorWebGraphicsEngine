@@ -828,6 +828,7 @@ var viewer = new Motor.Viewer({  container: 'container',  viewerMode: Motor.Vi
 | [options.translation] | [<code>Cartesian3</code>](#Cartesian3) | <code>new Cartesian3(0,0,0)</code> | <p>XYZ轴的平移量</p> |
 | [options.rotationZ] | <code>Number</code> | <code>0</code> | <p>Z轴旋转量</p> |
 | [options.zoomTo] | <code>Boolean</code> | <code>true</code> | <p>镜头是否移动到模型</p> |
+| [options.luminanceAtZenith] | <code>Number</code> | <code>0.5</code> | <p>模型亮度,[0-1]</p> |
 
 **Example**  
 ```js
@@ -852,6 +853,7 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 | [options.gradualOptions.startColor] | <code>Object</code> |  | <p>渐变起始颜色</p> |
 | [options.gradualOptions.endColor] | <code>Object</code> |  | <p>渐变结束颜色</p> |
 | [options.gradualOptions.gradualOffset] | <code>Object</code> |  | <p>渐变结束高度</p> |
+| [options.luminanceAtZenith] | <code>Number</code> | <code>0.5</code> | <p>模型亮度,[0-1]</p> |
 
 <a name="Viewer+remove"></a>
 
@@ -878,6 +880,7 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 | [options.projectId] | <code>String</code> \| <code>Array.&lt;String&gt;</code> |  | <p>工程id或工程id数组</p> |
 | [options.parentComponent] | [<code>ComponentView</code>](#ComponentView) |  | <p>父工程中对应构件</p> |
 | [options.drawEdge] | <code>Boolean</code> | <code>false</code> | <p>是否绘制边线</p> |
+| [options.luminanceAtZenith] | <code>Number</code> | <code>0.5</code> | <p>模型亮度, [0-1]</p> |
 
 **Example**  
 ```js
@@ -1444,7 +1447,6 @@ var volumeRender = viewer.createVolumeRender({
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
 | options.viewer | [<code>Viewer</code>](#Viewer) |  | <p>Motor.Viewer实例化对象</p> |
-| options.entity | <code>entity</code> |  | <p>被拾取的工程模型对象</p> |
 | [options.isLookAtCenter] | <code>Boolean</code> | <code>true</code> | <p>放大后是否将旋转中心锁定到屏幕中心的模型上</p> |
 
 <a name="MarqueeEditor+marqueeStart"></a>
@@ -1760,7 +1762,7 @@ viewer.marqueeEditor.marqueeStop.addEventListener(()=>{  console.log('marquee s
 | --- | --- | --- |
 | options | <code>Object</code> | <p>包含以下参数的对象</p> |
 | options.viewer | [<code>Viewer</code>](#Viewer) | <p>Motor.Viewer实例化对象</p> |
-| options.entity | <code>Object</code> | <p>需要剖切的工程模型</p> |
+| options.scene | [<code>SceneView</code>](#SceneView) | <p>需要剖切的场景</p> |
 
 <a name="ClippingPlaneEditor+addClippingPlane"></a>
 

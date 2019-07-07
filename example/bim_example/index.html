@@ -14,24 +14,29 @@
 </head>
 
 <body>
+    <div id="loading">
+        <div class="loading-image" style="background-image:url('./img/ezgif.com-crop.gif');">
+            <div style="text-align: center;vertical-align: middle;display: table-cell;color: white;height: 100px;padding-top: 80px;margin-top: 80px;">正在努力加载中...</div>
+        </div>
+    </div>
     <div id='container'></div>
-    <div id='infoBox'></div>
-    <div class="tree_container">
+    <div id='infoBox' style="display: none;"></div>
+    <div class="tree_container" style="display: none;">
         <ul id="treeDemo" class="ztree"></ul>
     </div>
     <ul class='btns'>
-        <li class='camera_reset' style='background: url("./static/images/ic_fuwei.png") no-repeat center' title="相机复位">
+        <li class='camera_reset' style='background: url("./static/images/ic_xiangji.png") no-repeat center' title="相机复位">
         </li>
-        <li class="cim_bim" style='background: url("./static/images/ic_qiehuan.png") no-repeat center'
-            title="BIM-CIM切换"></li>
-        <li class="section" style='background: url("./static/images/ic_pouqie.png") no-repeat center' title="剖切"></li>
+        <li class="cim_bim" style='background: url("./static/images/ic_map.png") no-repeat center'
+            title="地图显隐"></li>
+        <li class="section" style='background: url("./static/images/ic_pouqie.png") no-repeat center;' title="剖切"></li>
         <li class="selectd" style='background: url("./static/images/ic_kuangxuanfangda.png") no-repeat center'
             title="框选放大"></li>
         <!-- let autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象 -->
         <li class="roam" style='background: url("./static/images/ic_manyou.png") no-repeat center' title="漫游"></li>
         <li class="map_serve" style='background: url("./static/images/ic_map_serve.png") no-repeat center'
             title="切换地图服务"></li>
-        <li class="edge" style='background: url("./static/images/cube.png") no-repeat center;background-size: 50px 36px'
+        <li class="edge" style='background: url("./static/images/ic_hide.png") no-repeat center;background-size: 50px 36px;'
             title="边线开关"></li>
     </ul>
     <ul class="section_box">
@@ -76,14 +81,25 @@
         <li style="background:url('./static/images/ImageryProviders/WMTS.png')" title="WMTS"></li>
     </ul>
     <script>
-        $('#infoBox').hide();
+        // $('#infoBox').hide();
+        // $('.tree_container').hide();
+        // $('.btns').hide();
+        var isInSubScene = false,parentComponent;
+        const parameters = window.location.search.substring(1).split('&');
+        const paramObj = {};
+        var currentSelectedComponent,currentNameStr;
+        parameters.forEach(function(ele){
+            let keyvalue = ele.split("=");
+            paramObj[keyvalue[0]] = keyvalue[1];
+        })
 
         const appid = "d0b3c61c6639434e84900b1fd8d391cb";
         const secret = "459dc8b77a63a0c009aec27f818febf6";
-        Motor.ServiceConfig.server = "http://open.lubansoft.com/api";
-        const projectId = "180fc74c-e639-4b70-a0b0-dfb0a7d4c1b3"
-        drawProject(projectId);
+        Motor.ServiceConfig.server = "https://open.lubansoft.com/api";
 
+        const projectId = "180fc74c-e639-4b70-a0b0-dfb0a7d4c1b3";
+        
+        var selectedColor = Motor.Color.fromCssColorString('#03f3f7').withAlpha(0.5);
         // 动态加载数据
         function dynamicloadNodes(treeNode) {
             var projectIdParam = treeNode.getParentNode().getParentNode().getParentNode().projectId;
@@ -92,9 +108,9 @@
             var subType = treeNode.name;
             return Motor.Component.PropertiesTreeDetail({
                 projectId: projectIdParam,
-                floor,
-                mainType,
-                subType
+                floor:floor,
+                mainType:mainType,
+                subType:subType
             })
         }
 
@@ -115,172 +131,84 @@
                 }
             }
         }
-        
-        /**
-         * 绘制工程
-         */
-        function drawProject(projectId) {
-            //初始化Viewer
-            var viewer = new Motor.Viewer({
-                container: 'container',//viewer所在的div元素id
-                viewerMode: Motor.ViewerMode.BIM,//viewer的模式
-                appid:appid,
-                secret:secret
+
+        //初始化Viewer
+        var viewer = new Motor.Viewer({
+            container: 'container',//viewer所在的div元素id
+            viewerMode: Motor.ViewerMode.BIM,//viewer的模式
+            appid:appid,
+            secret:secret
+        });
+        viewer.readyPromise.then(function(){
+            drawProject(projectId,true);
+            //开启框选放大
+            viewer.enableMarquee = true;
+            //框选放大
+            $('.selectd').on('click', function () {
+                //开始一次框选放大
+                viewer.marqueeEditor.startMarquee();
+                $('body').css('cursor', 'crosshair');
+                $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda_hover.png") no-repeat center', 'pointerEvents': 'none' })
+            })
+            //鼠标结束框选
+            viewer.marqueeEditor.marqueeStop.addEventListener(function() {
+                $('body').css('cursor', 'default');
+                $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda.png") no-repeat center', 'pointerEvents': 'auto' })
             });
-            viewer.readyPromise.then(function(){
-                viewer.loadSubProject({
-                    projectId: projectId,//工程id
-                    drawEdge: true //绘制边线
-                }).then(function () {
-                    
-                    //树结构 PropertiesTree PropertiesTreeStructur
-                    Motor.Component.PropertiesTreeStructur(projectId).then(function (data) {
-                        var pTree = data;
-                        if(pTree){
-                            var zTreeObj;
-                            var setting = {
-                                data: {
-                                    key: {
-                                        checked: "isChecked"
-                                    }
-                                },
-                                check: {
-                                    enable: true,       //设置是否显示checkbox复选框
-                                },
-                                callback: {
-                                    // onClick: onClick,             //定义节点单击事件回调函数
-                                    // onRightClick: OnRightClick,   //定义节点右键单击事件回调函数
-                                    // beforeRename: beforeRename,   //定义节点重新编辑成功前回调函数，一般用于节点编辑时判断输入的节点名称是否合法
-                                    // onDblClick: onDblClick,       //定义节点双击事件回调函数
-                                    onCheck: function (e,id,treeNode) {
-                                        console.log(treeNode);
-                                        if(viewer.currentScene.drawEdge){
-                                            viewer.currentScene.drawEdge=false;
-                                        }
-                                        
-                                        viewer.currentScene.setVisiblityFromTree(treeNode);
-                                        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");  //获取树对象
-                                        var nodes = treeObj.getCheckedNodes();       //获取勾选状态改变的节点
-                                        // console.log(treeNode.getParentNode());
-                                        var designIds = [];
-                                        $.each(nodes, function (i, item) {
 
-                                            designIds.push(item.id);                       //将状态改变的节点id输出到数组
-                                            item.checkedOld = item.checked;                //这句话很关键，将节点的初始状态置为当前状态。否则每次勾选操作获取状态改变节点时只会跟树初始化的状态相比较。
-                                        })
-                                    },//定义节点复选框选中或取消选中事件的回调函数
-                                    onClick: function (e,id,treeNode){
-                                        let tmp = treeNode;
-                                        const strArr = [];
-                                        let str = '@@'
-                                        for(let i = treeNode.level;i>0;i--){
-                                            strArr.push(tmp.name)
-                                            tmp = tmp.getParentNode();
-                                        }
-                                        str += strArr.reverse().join('@@') + '@@';
-                                        const projectId = tmp.projectId;
-                                        const nameStr = treeNode.level === 0 ? '' : str;
-                                        const guid = treeNode.level === 4 ? treeNode.id : '';
-                                        // console.log(projectId, nameStr, guid)
-                                        viewer.currentScene.setHighlightComponentsFromTree(projectId, nameStr, guid, selectedColor);
-                                    },
-                                    onDblClick:function(e,id,treeNode){
-                                        if(!treeNode.children && treeNode.level === 4){
-                                            var component = viewer.currentScene.getComponentFromTree(treeNode.projectId, treeNode);
-                                            
-                                            viewer.zoomToComponent(component,function(){
-                                                viewer.setLookAtCenter();//设置点击处为镜头旋转中心
-                                            });
-                                        }
-                                    },
-                                    onExpand: function(event, treeId, treeNode) {
-                                        if(treeNode.level ===3 && !treeNode.children) {
-                                            dynamicloadNodes(treeNode).then(function(data) {
-                                                treeNode.children = [];
-                                                zTreeObj.addNodes(treeNode, data)
-                                                reSetNodes(zTreeObj)
-                                            })
-                                        }
-                                    }
-                                },
-                            };        // zTree 的参数配置
-                            var zNodes = pTree;        // zTree 的数据属性，此处使用标准json格式
+            //高亮构件并显示信息框
+            function highlightComponent(component){
+                //改变构件透明度
+                component.setColor(selectedColor);
+                //判断当前点选构件是否已经选中
+                if (currentSelectedComponent && currentSelectedComponent.guid !== component.guid) {
+                    //将之前选中的构件的颜色还原
+                    currentSelectedComponent.setDefaultColor();
+                }
+                currentSelectedComponent = component;
+                /**
+                * 回调传入的参数d为一个Component对象，其中包括guid和infos等成员变量
+                */
+                var innerHTML = '';
+                for (var key in component.infos) {
+                    innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                }
+                $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
+                $('#infoBox').show();
+            }       
+            var currentSelectedComponent = undefined;
+            //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
 
-                            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源
-                            zTreeObj.checkAllNodes(true);
-                            reSetNodes(zTreeObj)
-                        }
-                    });
-                });
-                //开启框选放大
-                viewer.enableMarquee = true;
-                //框选放大
-                $('.selectd').on('click', function () {
-                    //开始一次框选放大
-                    viewer.marqueeEditor.startMarquee();
-                    $('body').css('cursor', 'crosshair');
-                    $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda_hover.png") no-repeat center', 'pointerEvents': 'none' })
-                })
-                //鼠标结束框选
-                viewer.marqueeEditor.marqueeStop.addEventListener(() => {
-                    $('body').css('cursor', 'default');
-                    $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda.png") no-repeat center', 'pointerEvents': 'auto' })
-                });
-
-                //高亮构件并显示信息框
-                function highlightComponent(component){
-                    //改变构件透明度
-                    component.setColor(selectedColor);
-                    //判断当前点选构件是否已经选中
-                    if (currentSelectedComponent && currentSelectedComponent.guid !== component.guid) {
+            //设置点选后的回调函数
+            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
+                var obj = viewer.pick(mouse.position);
+                if (obj instanceof Motor.ComponentView) {
+                    var component = obj;
+                    highlightComponent(component);
+                }
+                else{
+                    viewer.currentScene.clearHighlightComponents();
+                    $('#infoBox').hide();
+                    if (currentSelectedComponent) {
                         //将之前选中的构件的颜色还原
                         currentSelectedComponent.setDefaultColor();
+                        currentSelectedComponent = undefined;
                     }
-                    currentSelectedComponent = component;
-                    /**
-                    * 回调传入的参数d为一个Component对象，其中包括guid和infos等成员变量
-                    */
-                    var innerHTML = '';
-                    for (var key in component.infos) {
-                        innerHTML += `<div title=${component.infos[key]}>${key}: ${component.infos[key]}</div>`;
-                    }
-                    $('#infoBox').html(`<div title=${component.guid}>${component.guid}</div>` + innerHTML);
-                    $('#infoBox').show();
-                }       
-                var currentSelectedComponent = undefined;
-                //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
-                var selectedColor = new Motor.Color.fromBytes(255, 0, 255, 125)
-
-                //设置点选后的回调函数
-                viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,(mouse)=>{
-                    var obj = viewer.pick(mouse.position);
-                    if (obj instanceof Motor.ComponentView) {
-                        var component = obj;
-                        highlightComponent(component);
-                    }
-                    else{
-                        viewer.currentScene.clearHighlightComponents();
-                        $('#infoBox').hide();
-                        if (currentSelectedComponent) {
-                            //将之前选中的构件的颜色还原
-                            currentSelectedComponent.setDefaultColor();
-                            currentSelectedComponent = undefined;
-                        }
-                    }
-                });
-                //双击飞向构件
-                viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,(mouse)=>{
-                    var obj = viewer.pick(mouse.position);
-                    if (obj instanceof Motor.ComponentView) {
-                        //飞向构件
-                        viewer.zoomToComponent(obj,function(){
-                            viewer.setLookAtCenter(mouse.position);//设置点击处为镜头旋转中心
-                        });
-                        
-                    }
-                })
-                
+                }
+            });
+            //双击飞向构件
+            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
+                var obj = viewer.pick(mouse.position);
+                if (obj instanceof Motor.ComponentView) {
+                    //飞向构件
+                    viewer.zoomToComponent(obj,function(){
+                        viewer.setLookAtCenter(mouse.position);//设置点击处为镜头旋转中心
+                    });
+                    
+                }
             })
+                
+            
 
             
 
@@ -295,7 +223,7 @@
             $('.cim_bim').on('click', function () {
                 //切换到CIM-BIM
                 viewer.viewerMode = viewer.viewerMode == Motor.ViewerMode.CIM ? Motor.ViewerMode.BIM : Motor.ViewerMode.CIM;
-                viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_qiehuan.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_qiehuan_hover.png") no-repeat center' })
+                viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
                 if (viewer.viewerMode == Motor.ViewerMode.CIM) {
                     if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
                         $('.section_box').css('display', 'none');
@@ -318,17 +246,28 @@
                     $('.section_box>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
                     clippingPlaneEditor = new Motor.ClippingPlaneEditor({
                         viewer: viewer, //Motor.Viewer对象
-                        entity: viewer.currentScene.projectList[0].tileset///Viewer中的工程模型
+                        scene: viewer.currentScene
                     });
-                } else {
+                } else{
                     var str_1 = [];
                     if (viewer.viewerMode == Motor.ViewerMode.CIM) {
-                        str_1.push('请切换至BIM模式操作');
+                        // str_1.push('请切换至BIM模式操作');
+                        viewer.viewerMode = Motor.ViewerMode.BIM;
                     }
                     if (viewer.navigationMode == Motor.NavigationMode.ROAM) {
-                        str_1.push('请关闭全景漫游');
+                        $('.roam_box').hide();
+                        viewer.navigationMode = Motor.NavigationMode.DYNAMIC;
+                        // str_1.push('请关闭全景漫游');
                     }
-                    alert(str_1.join(','));
+                    $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
+                    $('.section_box').css('display', 'block');
+                    $('.section_box>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
+                    clippingPlaneEditor = new Motor.ClippingPlaneEditor({
+                        viewer: viewer, //Motor.Viewer对象
+                        scene: viewer.currentScene
+                    });
+                    viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
+                    // alert(str_1.join(','));
                 }
             });
             $('.section_box').on('click', 'li', function () {
@@ -341,14 +280,22 @@
             //漫游
             var autoRoamManger
             $('.roam').on('click', function () {
-                $('.roam').css({ 'background': 'url("./static/images/ic_manyou_hover.png") no-repeat center' });
-                $('.roam_box').css('display', 'block');
-                //初始化路径漫游管理器
-                autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象
+                if(autoRoamManger && !autoRoamManger.isDestroyed()){
+                    autoRoamManger.destroy();
+                    $('.roam').css({ 'background': 'url("./static/images/ic_manyou.png") no-repeat center' });
+                    $('.roam_box').hide();
+                }
+                else{
+                    $('.roam').css({ 'background': 'url("./static/images/ic_manyou_hover.png") no-repeat center' });
+                    $('.roam_box').show();
+                    //初始化路径漫游管理器
+                    autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象
+                }
+                
             });
             $('.router_file').on('click', function () {
                 //从文件中加载路径关键点
-                autoRoamManger.createRouteFromFile('./assets/data/routes2.json');
+                autoRoamManger.createRouteFromFile('./static/data/routes.json');
                 //从数组对象中读取路径关键点
                 // autoRoamManger.createRouteFromArray(array);
             })
@@ -358,7 +305,7 @@
             $('.Record').on('click', function () {
                 $('.Record>span').css('display', 'inline');
                 clearInterval(timer);
-                timer = setInterval(() => {
+                timer = setInterval(function(){
                     autoRoamManger.addPose();
                 }, 1000);
             })
@@ -456,11 +403,134 @@
             $('.edge').on('click', function () {
                 viewer.currentScene.drawEdge = !viewer.currentScene.drawEdge;
             })
+        })
+        /**
+         * 绘制工程
+         */
+        function drawProject(projectId,isInSubScene) {   
+            viewer.loadSubProject({
+                projectId: projectId,//工程id
+                drawEdge: isInSubScene //绘制边线
+            }).then(function () {
+                $('#loading').hide();
+                if(isInSubScene){
+                    Motor.Component.PropertiesTreeStructur(projectId).then(function (data) {
+                        var pTree = data;
+                        pTree.forEach(function(p){
+                            sortOnKey(p.children,"name");
+                        });
+                        pTree[0].children.splice(1, 0, pTree[0].children[pTree[0].children.length-1]); 
+                        pTree[0].children.pop();
+                        if(pTree){
+                            var zTreeObj;
+                            var setting = {
+                                data: {
+                                    key: {
+                                        checked: "isChecked"
+                                    }
+                                },
+                                view: {
+                                    fontCss : {color:"white"}
+                                },
+                                check: {
+                                    enable: true,       //设置是否显示checkbox复选框
+                                },
+                                callback: {
+                                    // onClick: onClick,             //定义节点单击事件回调函数
+                                    // onRightClick: OnRightClick,   //定义节点右键单击事件回调函数
+                                    // beforeRename: beforeRename,   //定义节点重新编辑成功前回调函数，一般用于节点编辑时判断输入的节点名称是否合法
+                                    // onDblClick: onDblClick,       //定义节点双击事件回调函数
+                                    onCheck: function (e,id,treeNode) {
+                                        console.log(treeNode);
+                                        if(viewer.currentScene.drawEdge){
+                                            viewer.currentScene.drawEdge=false;
+                                        }
+                                        
+                                        viewer.currentScene.setVisiblityFromTree(treeNode);
+                                        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");  //获取树对象
+                                        var nodes = treeObj.getCheckedNodes();       //获取勾选状态改变的节点
+                                        // console.log(treeNode.getParentNode());
+                                        var designIds = [];
+                                        $.each(nodes, function (i, item) {
+
+                                            designIds.push(item.id);                       //将状态改变的节点id输出到数组
+                                            item.checkedOld = item.checked;                //这句话很关键，将节点的初始状态置为当前状态。否则每次勾选操作获取状态改变节点时只会跟树初始化的状态相比较。
+                                        })
+                                    },//定义节点复选框选中或取消选中事件的回调函数
+                                    onClick: function (e,id,treeNode){
+                                        let tmp = treeNode;
+                                        const strArr = [];
+                                        let str = '@@'
+                                        for(let i = treeNode.level;i>0;i--){
+                                            strArr.push(tmp.name)
+                                            tmp = tmp.getParentNode();
+                                        }
+                                        str += strArr.reverse().join('@@') + '@@';
+                                        const projectId = tmp.projectId;
+                                        const nameStr = treeNode.level === 0 ? '' : str;
+                                        const guid = treeNode.level === 4 ? treeNode.id : '';
+                                        $('#infoBox').hide();
+                                        if(currentNameStr===nameStr){
+                                            viewer.currentScene.clearHighlightComponentsFromTree();
+                                            currentNameStr = undefined;
+                                        }
+                                        else{
+                                            viewer.currentScene.setHighlightComponentsFromTree(projectId, nameStr, guid, selectedColor,Motor.Color.WHITE.withAlpha(0.5));
+                                            currentNameStr = nameStr;
+                                        }
+                                        
+                                    },
+                                    onDblClick:function(e,id,treeNode){
+                                        if(!treeNode.children && treeNode.level === 4){
+                                            var component = viewer.currentScene.getComponentFromTree(treeNode.projectId, treeNode);
+                                            var innerHTML = '';
+                                            for (var key in component.infos) {
+                                                innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                                            }
+                                            $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
+                                            $('#infoBox').show();
+                                            viewer.zoomToComponent(component,function(){
+                                                viewer.setLookAtCenter();//设置点击处为镜头旋转中心
+                                            });
+                                        }
+                                        else{
+                                            $('#infoBox').hide();
+                                        }
+                                    },
+                                    onExpand: function(event, treeId, treeNode) {
+                                        if(treeNode.level ===3 && !treeNode.children) {
+                                            dynamicloadNodes(treeNode).then(function(data) {
+                                                treeNode.children = [];
+                                                zTreeObj.addNodes(treeNode, data)
+                                                reSetNodes(zTreeObj)
+                                            })
+                                        }
+                                    }
+                                },
+                            };        // zTree 的参数配置
+                            var zNodes = pTree;        // zTree 的数据属性，此处使用标准json格式
+
+                            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源
+                            zTreeObj.checkAllNodes(true);
+                            reSetNodes(zTreeObj);
+                            $('.tree_container').show();
+                        }
+                    });
+                    
+                }                    
+            });
+            
         }
 
-
-
-
+        function sortOnKey(arr,key){
+            arr.sort(function(a,b){
+                var left = parseFloat(a[key]);
+                var right = parseFloat(b[key]);
+                if(left<right){return -1;}
+                else if(left>right){return 1;}
+                else return 0;
+            });
+        }
     </script>
 </body>
 

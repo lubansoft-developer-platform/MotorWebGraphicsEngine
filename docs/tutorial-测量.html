@@ -61,7 +61,8 @@
 
     
         <article class="readme">
-            <h3>1. 初始化测量工具</h3><pre class="prettyprint source lang-javascript"><code>var measure = new Motor.MeasureEditor({
+            <h3>1. 初始化测量工具</h3>
+<pre class="prettyprint source lang-javascript"><code>var measure = new Motor.MeasureEditor({
     viewer: viewer,//Motor.Viewer实例化对象
     mode: Motor.MeasureMode.POINTDISTANCE,//测量角度或者长度，默认为角度
     callback: (obj) => {
@@ -69,10 +70,14 @@
             result.innerHTML = `${key === &quot;angle&quot; ? &quot;角度&quot; : &quot;长度&quot;}: ${obj[key].toFixed(2)} ${key === &quot;angle&quot; ? &quot;°&quot; : &quot;米&quot;}`
         }
     }
-});</code></pre><h3>2. 测量模式切换</h3><pre class="prettyprint source lang-javascript"><code>//测量角度
+});
+</code></pre>
+<h3>2. 测量模式切换</h3>
+<pre class="prettyprint source lang-javascript"><code>//测量角度
 measure.mode = Motor.MeasureMode.ANGLE;
 //测量两点之间长度
-measure.mode = Motor.MeasureMode.POINTDISTANCE;</code></pre>
+measure.mode = Motor.MeasureMode.POINTDISTANCE;
+</code></pre>
         </article>
     
 </section>

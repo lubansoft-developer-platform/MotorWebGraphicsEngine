@@ -61,29 +61,49 @@
 
     
         <article class="readme">
-            <h3>1. 相机复位</h3><pre class="prettyprint source lang-javascript"><code>viewer.gotoDefaultProjectView();</code></pre><h3>2. 代码控制相机旋转</h3><pre class="prettyprint source lang-javascript"><code>//开启相机运动
+            <h3>1. 相机复位</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.gotoDefaultProjectView();
+</code></pre>
+<h3>2. 代码控制相机旋转</h3>
+<pre class="prettyprint source lang-javascript"><code>//开启相机运动
 viewer.controller.setMotion(key);//key为CameraMotionInputs或者String，可以是: rotateLeft, rotateRight, rotateUp,rotateDown
 //移除相机运动
-viewer.controller.removeMotion(key);</code></pre><h3>3. 关闭鼠标操作视角</h3><pre class="prettyprint source lang-javascript"><code>//关闭鼠标操作
-viewer.controller.enableInputs = false;</code></pre><h3>4. 框选放大</h3><h3>开启框选</h3><pre class="prettyprint source lang-javascript"><code>//开启框选放大功能
+viewer.controller.removeMotion(key);
+</code></pre>
+<h3>3. 关闭鼠标操作视角</h3>
+<pre class="prettyprint source lang-javascript"><code>//关闭鼠标操作
+viewer.controller.enableInputs = false;
+</code></pre>
+<h3>4. 框选放大</h3>
+<h3>开启框选</h3>
+<pre class="prettyprint source lang-javascript"><code>//开启框选放大功能
 viewer.enableMarquee = true;
 //开始一次框选放大
-viewer.marqueeEditor.startMarquee();</code></pre><p>触发<code>startMarquee()</code>之后，使用鼠标画出框选范围；下一次框选需要再次调用<code>startMarquee</code></p>
-<h3>框选放大鼠标事件捕获</h3><pre class="prettyprint source lang-javascript"><code>//鼠标开始框选
+viewer.marqueeEditor.startMarquee();
+</code></pre>
+<p>触发<code>startMarquee()</code>之后，使用鼠标画出框选范围；下一次框选需要再次调用<code>startMarquee</code></p>
+<h3>框选放大鼠标事件捕获</h3>
+<pre class="prettyprint source lang-javascript"><code>//鼠标开始框选
 viewer.marqueeEditor.marqueeStart.addEventListener(function(){
   console.log('marquee start');
 });
 //鼠标结束框选
 viewer.marqueeEditor.marqueeStop.addEventListener(function(){
   console.log('marquee stop');
-});</code></pre><h3>5. 使用第一人称漫游</h3><pre class="prettyprint source lang-javascript"><code>//开启第一人称漫游
+});
+</code></pre>
+<h3>5. 使用第一人称漫游</h3>
+<pre class="prettyprint source lang-javascript"><code>//开启第一人称漫游
 viewer.navigationMode = Motor.NavigationMode.ROAM;
 //修改漫游速度
 viewer.roamEditor.movementSpeed = 10;
 //开启/关闭重力
 viewer.roamEditor.isGravitative = false;
 //开启/关闭碰撞检测
-viewer.roamEditor.isCollision = false;</code></pre><h3>6. 镜头锁定构件</h3><p>下面的代码实现了双击构件时，让镜头锁定构件</p>
+viewer.roamEditor.isCollision = false;
+</code></pre>
+<h3>6. 镜头锁定构件</h3>
+<p>下面的代码实现了双击构件时，让镜头锁定构件</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
   //根据屏幕坐标coords，获取点选的对象
   let obj = viewer.pick(mouse.position);
@@ -91,19 +111,25 @@ viewer.roamEditor.isCollision = false;</code></pre><h3>6. 镜头锁定构件</h3
     //镜头飞向构件
     viewer.zoomToComponent(componentView);
   }
-});</code></pre><h3>7. 镜头飞向目标</h3><p>相机位置移动到目标位置(<code>position</code>)，以下代码将相机位移到上海陆家嘴上空，俯视陆家嘴</p>
+});
+</code></pre>
+<h3>7. 镜头飞向目标</h3>
+<p>相机位置移动到目标位置(<code>position</code>)，以下代码将相机位移到上海陆家嘴上空，俯视陆家嘴</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
     position: new Motor.Cartesian3(-2852522.696043213, 4656705.0549966, 3288343.7270516744),
     heading:14.252768365538435,
     pitch: -50.06079591133133,
     roll: 0.06555448028932681
-}</code></pre><p>相机观察中心移动到目标位置(<code>center</code>)，以下代码将观察中心移动到北京天安门位置，观察距离200米</p>
+}
+</code></pre>
+<p>相机观察中心移动到目标位置(<code>center</code>)，以下代码将观察中心移动到北京天安门位置，观察距离200米</p>
 <pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
     center: Motor.Cartesian3.fromDegrees(116.39122,39.90706, 0),
     heading:14.252768365538435,
     pitch: -50.06079591133133,
     range: 200
-}</code></pre>
+}
+</code></pre>
         </article>
     
 </section>

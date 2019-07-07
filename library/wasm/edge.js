@@ -2498,4 +2498,4 @@ run();
 
 
 
-module.exports = Module;
+export default Module;

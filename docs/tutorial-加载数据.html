@@ -61,7 +61,8 @@
 
     
         <article class="readme">
-            <h3>1. 加载工程</h3><p>初始化Viewer后，调用<code>loadSubProject</code>方法:</p>
+            <h3>1. 加载工程</h3>
+<p>初始化Viewer后，调用<code>loadSubProject</code>方法:</p>
 <pre class="prettyprint source lang-javascript"><code>//viewer初始化完成的Promise
 viewer.readyPromise.then(function(){
   var promise = viewer.loadSubProject({
@@ -72,17 +73,24 @@ viewer.readyPromise.then(function(){
   promise.then(function(){
     console.log('工程加载完成');
   });
-});</code></pre><h3>2. 加载glTF模型</h3><pre class="prettyprint source lang-javascript"><code>viewer.readyPromise.then(function(){
+});
+</code></pre>
+<h3>2. 加载glTF模型</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.readyPromise.then(function(){
     var model = viewer.loadModel({
         url:'path/to/model.gltf',
         origin:Motor.Cartesian3.fromDegrees(121,31,0)
     })
 });
-</code></pre><h3>3. 加载3d-tiles模型</h3><pre class="prettyprint source lang-javascript"><code>viewer.readyPromise.then(function(){
+
+</code></pre>
+<h3>3. 加载3d-tiles模型</h3>
+<pre class="prettyprint source lang-javascript"><code>viewer.readyPromise.then(function(){
     let tileset = viewer.loadTileset({
         url: './path/to/tileset.json'
     });
-});</code></pre>
+});
+</code></pre>
         </article>
     
 </section>

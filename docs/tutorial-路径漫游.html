@@ -62,7 +62,8 @@
     
         <article class="readme">
             <p>让视角沿着一定路径移动，可以制作漫游动画</p>
-<h3>1. 基本操作</h3><pre class="prettyprint source lang-javascript"><code>//初始化路径漫游管理器
+<h3>1. 基本操作</h3>
+<pre class="prettyprint source lang-javascript"><code>//初始化路径漫游管理器
 let autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象
 //从文件中加载路径关键点
 autoRoamManger.createRouteFromFile('./assets/data/routes2.json');
@@ -77,7 +78,10 @@ autoRoamManger.stopRoam();
 //清空路径
 autoRoamManger.emptyRoutes();
 //获取路径点，输出的文本就可以直接保存成路径文件
-console.log(JSON.stringify(autoRoamManger.cameraPoses));</code></pre><h3>2. 录制动画</h3><pre class="prettyprint source lang-javascript"><code>//initAutoRoam和closeRecord是两个Button DOM元素
+console.log(JSON.stringify(autoRoamManger.cameraPoses));
+</code></pre>
+<h3>2. 录制动画</h3>
+<pre class="prettyprint source lang-javascript"><code>//initAutoRoam和closeRecord是两个Button DOM元素
 //开启录制, 每隔一秒添加一次相机姿态
 initAutoRoam.onclick = function(){
   timer = setInterval(function(){
@@ -89,7 +93,8 @@ closeRecord.onclick = function(){
   clearInterval(timer);
 }
 //播放录制下来的路径动画
-autoRoamManger.playRoam();</code></pre>
+autoRoamManger.playRoam();
+</code></pre>
         </article>
     
 </section>
