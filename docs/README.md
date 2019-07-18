@@ -18,6 +18,9 @@
 <dd><p>颜色类</p></dd>
 <dt><a href="#MouseEventHandler">MouseEventHandler</a></dt>
 <dd></dd>
+<dt><a href="#GeometryCollection">GeometryCollection</a></dt>
+<dd><p><p>几何体集合类，参考{@tutorial 自定义盒子绘制}</p></p>
+</dd>
 <dt><a href="#MarkerCollection">MarkerCollection</a></dt>
 <dd><p><p>标注集合类，参考{@tutorial 添加标注}</p></p>
 </dd>
@@ -30,8 +33,6 @@
 <dt><a href="#Water">Water</a></dt>
 <dd><p><p>水面特效类，参考{@tutorial 特效}</p></p>
 </dd>
-<dt><a href="#Util">Util</a></dt>
-<dd><p>工具类</p></dd>
 <dt><a href="#ComponentView">ComponentView</a></dt>
 <dd><p>构件视图类</p></dd>
 <dt><a href="#MarkerView">MarkerView</a></dt>
@@ -111,6 +112,8 @@
     * [.componentPropertiesTreeStructure](#ServiceConfig.componentPropertiesTreeStructure) : <code>string</code>
     * [.componentPropertiesTreeDetail](#ServiceConfig.componentPropertiesTreeDetail) : <code>string</code>
     * [.getStaticModByProjIdAndAssemblyId](#ServiceConfig.getStaticModByProjIdAndAssemblyId) : <code>string</code>
+    * [.getComponentBimPropByIdAndProjId](#ServiceConfig.getComponentBimPropByIdAndProjId) : <code>string</code>
+    * [.getComponentConfigByProjId](#ServiceConfig.getComponentConfigByProjId) : <code>string</code>
     * [.readResource](#ServiceConfig.readResource) : <code>string</code>
 
 <a name="ServiceConfig.server"></a>
@@ -177,6 +180,18 @@
 
 ### ServiceConfig.getStaticModByProjIdAndAssemblyId : <code>string</code>
 <p>根据工程ID和模型Id查询构件的静态工程Id</p>
+
+**Kind**: static property of [<code>ServiceConfig</code>](#ServiceConfig)  
+<a name="ServiceConfig.getComponentBimPropByIdAndProjId"></a>
+
+### ServiceConfig.getComponentBimPropByIdAndProjId : <code>string</code>
+<p>根据工程ID和模型Id查询构件的静态工程Id</p>
+
+**Kind**: static property of [<code>ServiceConfig</code>](#ServiceConfig)  
+<a name="ServiceConfig.getComponentConfigByProjId"></a>
+
+### ServiceConfig.getComponentConfigByProjId : <code>string</code>
+<p>根据工程ID查询构件的配置信息</p>
 
 **Kind**: static property of [<code>ServiceConfig</code>](#ServiceConfig)  
 <a name="ServiceConfig.readResource"></a>
@@ -326,6 +341,11 @@ var cartesian = Motor.Cartesian3.fromDegrees(121,31,5);
 <p>颜色类</p>
 
 **Kind**: global class  
+
+* [Color](#Color)
+    * [new Color(red, green, blue, alpha)](#new_Color_new)
+    * [.fromCssColorString(color)](#Color+fromCssColorString) ⇒ [<code>Color</code>](#Color)
+
 <a name="new_Color_new"></a>
 
 ### new Color(red, green, blue, alpha)
@@ -337,6 +357,21 @@ var cartesian = Motor.Cartesian3.fromDegrees(121,31,5);
 | blue | <code>Number</code> | <p>0-1</p> |
 | alpha | <code>Number</code> | <p>0-1</p> |
 
+<a name="Color+fromCssColorString"></a>
+
+### color.fromCssColorString(color) ⇒ [<code>Color</code>](#Color)
+<p>根据CSS颜色字符串生成颜色</p>
+
+**Kind**: instance method of [<code>Color</code>](#Color)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| color | <code>String</code> | <p>CSS颜色字符串 #rgb, #rrggbb, rgb(), rgba(), hsl(), 或者 hsla() 格式.</p> |
+
+**Example**  
+```js
+var color1 = Motor.Color.fromCssColorString('#67ADDF');var green = Motor.Color.fromCssColorString('green');
+```
 <a name="MouseEventHandler"></a>
 
 ## MouseEventHandler
@@ -349,6 +384,68 @@ var cartesian = Motor.Cartesian3.fromDegrees(121,31,5);
 | --- | --- | --- |
 | options | <code>Object</code> | <p>包含以下参数的对象</p> |
 | options.projectId | <code>String</code> | <p>工程Id</p> |
+
+<a name="GeometryCollection"></a>
+
+## GeometryCollection
+<p>几何体集合类，参考{@tutorial 自定义盒子绘制}</p>
+
+**Kind**: global class  
+
+* [GeometryCollection](#GeometryCollection)
+    * [new GeometryCollection(options)](#new_GeometryCollection_new)
+    * [.addBox(options)](#GeometryCollection+addBox)
+    * [.removeById(id)](#GeometryCollection+removeById)
+    * [.getPropertiesById(id)](#GeometryCollection+getPropertiesById)
+
+<a name="new_GeometryCollection_new"></a>
+
+### new GeometryCollection(options)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | <p>包含以下参数的对象</p> |
+| options.viewer | [<code>Viewer</code>](#Viewer) | <p>Motor.Viewer实例化对象</p> |
+
+<a name="GeometryCollection+addBox"></a>
+
+### geometryCollection.addBox(options)
+<p>添加盒子几何体</p>
+
+**Kind**: instance method of [<code>GeometryCollection</code>](#GeometryCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | <p>包含以下参数的对象</p> |
+| options.dimensions | [<code>Cartesian3</code>](#Cartesian3) | <p>盒子的长宽高</p> |
+| options.center | [<code>Cartesian3</code>](#Cartesian3) | <p>盒子的中心点坐标</p> |
+| [options.id] | <code>String</code> | <p>几何体的id</p> |
+| [options.fillColor] | [<code>Color</code>](#Color) | <p>几何体的填充色</p> |
+| [options.outline] | <code>Boolean</code> | <p>几何体的是否绘制边框线</p> |
+| [options.outlineColor] | [<code>Color</code>](#Color) | <p>几何体边框线颜色</p> |
+| [options.depthTest] | <code>Boolean</code> | <p>几何体是否进行深度检测</p> |
+
+<a name="GeometryCollection+removeById"></a>
+
+### geometryCollection.removeById(id)
+<p>根据id删除几何体</p>
+
+**Kind**: instance method of [<code>GeometryCollection</code>](#GeometryCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>String</code> | <p>几何体id</p> |
+
+<a name="GeometryCollection+getPropertiesById"></a>
+
+### geometryCollection.getPropertiesById(id)
+<p>根据id获取几何体的属性</p>
+
+**Kind**: instance method of [<code>GeometryCollection</code>](#GeometryCollection)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>Sring</code> | <p>几何体id</p> |
 
 <a name="MarkerCollection"></a>
 
@@ -579,12 +676,6 @@ markers.add({
 | [options.speed] | <code>Number</code> | <code>0.05</code> | <p>水流速度</p> |
 | [options.waterColor] | <code>Number</code> | <code>new Motor.Color(0, 0.5, 0.5)</code> | <p>颜色</p> |
 
-<a name="Util"></a>
-
-## Util
-<p>工具类</p>
-
-**Kind**: global class  
 <a name="ComponentView"></a>
 
 ## ComponentView
@@ -595,11 +686,13 @@ markers.add({
 * [ComponentView](#ComponentView)
     * [new ComponentView(options)](#new_ComponentView_new)
     * [.guid](#ComponentView+guid) : <code>String</code>
+    * [.subProjectIds](#ComponentView+subProjectIds) : <code>String</code>
     * [.infos](#ComponentView+infos) : <code>Array.&lt;String&gt;</code>
     * [.project](#ComponentView+project) : [<code>ProjectView</code>](#ProjectView)
     * [.setColor(color)](#ComponentView+setColor)
     * [.setDefaultColor()](#ComponentView+setDefaultColor)
     * [.getSubprojectId()](#ComponentView+getSubprojectId) ⇒ <code>Promise</code>
+    * [.getBIMProperties()](#ComponentView+getBIMProperties) ⇒ <code>Promise</code>
 
 <a name="new_ComponentView_new"></a>
 
@@ -615,6 +708,13 @@ markers.add({
 <a name="ComponentView+guid"></a>
 
 ### componentView.guid : <code>String</code>
+<p>获取构件GUID</p>
+
+**Kind**: instance property of [<code>ComponentView</code>](#ComponentView)  
+**Read only**: true  
+<a name="ComponentView+subProjectIds"></a>
+
+### componentView.subProjectIds : <code>String</code>
 <p>获取构件GUID</p>
 
 **Kind**: instance property of [<code>ComponentView</code>](#ComponentView)  
@@ -654,6 +754,13 @@ markers.add({
 
 ### componentView.getSubprojectId() ⇒ <code>Promise</code>
 <p>获取构件的子工程id</p>
+
+**Kind**: instance method of [<code>ComponentView</code>](#ComponentView)  
+**Returns**: <code>Promise</code> - <p>返回子工程id数组</p>  
+<a name="ComponentView+getBIMProperties"></a>
+
+### componentView.getBIMProperties() ⇒ <code>Promise</code>
+<p>获取构件的BIM属性</p>
 
 **Kind**: instance method of [<code>ComponentView</code>](#ComponentView)  
 **Returns**: <code>Promise</code> - <p>返回子工程id数组</p>  
@@ -703,6 +810,8 @@ markers.add({
     * [new Viewer(options)](#new_Viewer_new)
     * [.currentScene](#Viewer+currentScene) : [<code>SceneView</code>](#SceneView)
     * [.roamEditor](#Viewer+roamEditor) : [<code>RoamEditor</code>](#RoamEditor)
+    * [.cameraMoveStart](#Viewer+cameraMoveStart) : <code>Event</code>
+    * [.cameraMoveEnd](#Viewer+cameraMoveEnd) : <code>Event</code>
     * [.animatedSpeed](#Viewer+animatedSpeed)
     * [.navigationMode](#Viewer+navigationMode) : [<code>NavigationMode</code>](#NavigationMode)
     * [.enableMarquee](#Viewer+enableMarquee) : <code>Boolean</code>
@@ -732,6 +841,7 @@ markers.add({
     * [.destroy()](#Viewer+destroy) ⇒ <code>Object</code>
     * [.addVideoProject(options)](#Viewer+addVideoProject) ⇒ [<code>VideoProjection</code>](#VideoProjection)
     * [.removeVideoProjection(videoProjection)](#Viewer+removeVideoProjection)
+    * [.setCurrentTime(date)](#Viewer+setCurrentTime)
 
 <a name="new_Viewer_new"></a>
 
@@ -770,6 +880,18 @@ var viewer = new Motor.Viewer({  container: 'container',  viewerMode: Motor.Vi
 
 ### viewer.roamEditor : [<code>RoamEditor</code>](#RoamEditor)
 <p>第一人称视角控制器</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+cameraMoveStart"></a>
+
+### viewer.cameraMoveStart : <code>Event</code>
+<p>相机开始移动的事件</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+cameraMoveEnd"></a>
+
+### viewer.cameraMoveEnd : <code>Event</code>
+<p>相机结束移动的事件</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+animatedSpeed"></a>
@@ -1116,6 +1238,17 @@ var volumeRender = viewer.createVolumeRender({
 | --- | --- | --- |
 | videoProjection | [<code>VideoProjection</code>](#VideoProjection) | <p>视频投影特效实例化对象</p> |
 
+<a name="Viewer+setCurrentTime"></a>
+
+### viewer.setCurrentTime(date)
+<p>设置场景时间</p>
+
+**Kind**: instance method of [<code>Viewer</code>](#Viewer)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| date | <code>Date</code> | <p>javascript的Date对象</p> |
+
 <a name="ProjectView"></a>
 
 ## ProjectView
@@ -1128,6 +1261,7 @@ var volumeRender = viewer.createVolumeRender({
     * [.isReady](#ProjectView+isReady) : <code>Boolean</code>
     * [.projectId](#ProjectView+projectId) : <code>String</code>
     * [.name](#ProjectView+name) : <code>String</code>
+    * [.components](#ProjectView+components) : [<code>Array.&lt;ComponentView&gt;</code>](#ComponentView)
     * [.drawEdge](#ProjectView+drawEdge) : <code>Boolean</code>
     * [.setVisiblityFromTree(treeObjects)](#ProjectView+setVisiblityFromTree)
 
@@ -1165,6 +1299,12 @@ var volumeRender = viewer.createVolumeRender({
 <p>获取工程名称</p>
 
 **Kind**: instance property of [<code>ProjectView</code>](#ProjectView)  
+<a name="ProjectView+components"></a>
+
+### projectView.components : [<code>Array.&lt;ComponentView&gt;</code>](#ComponentView)
+<p>获取工程中的构件列表，只适用于场景工程</p>
+
+**Kind**: instance property of [<code>ProjectView</code>](#ProjectView)  
 <a name="ProjectView+drawEdge"></a>
 
 ### projectView.drawEdge : <code>Boolean</code>
@@ -1196,11 +1336,21 @@ var volumeRender = viewer.createVolumeRender({
     * [.parentSceneId](#SceneView+parentSceneId)
     * [.name](#SceneView+name) : <code>String</code>
     * [.drawEdge](#SceneView+drawEdge) : <code>Boolean</code>
+    * [.edgeColor](#SceneView+edgeColor) : <code>Boolean</code>
     * [.projectList](#SceneView+projectList) : [<code>Array.&lt;ProjectView&gt;</code>](#ProjectView)
     * [.addProject(projectView)](#SceneView+addProject)
     * [.setVisiblityFromTree(treeNode)](#SceneView+setVisiblityFromTree)
-    * [.setHighlightComponentsFromTree(treeNode, color)](#SceneView+setHighlightComponentsFromTree)
-    * [.getComponentFromTree(treeNode)](#SceneView+getComponentFromTree) ⇒ [<code>ComponentView</code>](#ComponentView)
+    * [.hideFromGuids([projectId], guids)](#SceneView+hideFromGuids)
+    * [.showFromGuids([projectId], guids)](#SceneView+showFromGuids)
+    * ~~[.setHighlightComponentsFromTree([projectId], [ruleString], [guid], color)](#SceneView+setHighlightComponentsFromTree)~~
+    * [.setHighlightComponentsFromTypes(projectId, [ruleString], [guid], color)](#SceneView+setHighlightComponentsFromTypes)
+    * [.hideComponentsFromTypes([projectId], [ruleString], [guid])](#SceneView+hideComponentsFromTypes)
+    * [.showComponentsFromTypes([projectId], [ruleString], [guid])](#SceneView+showComponentsFromTypes)
+    * [.setHighlightComponentsFromGuids(guids, color, [projectId])](#SceneView+setHighlightComponentsFromGuids)
+    * [.setBlinkComponentsFromGuids(guids, color, [interval], [projectId])](#SceneView+setBlinkComponentsFromGuids)
+    * [.clearBlinkComponentsFromGuids(guids, [projectId])](#SceneView+clearBlinkComponentsFromGuids)
+    * [.clearHighlightComponents()](#SceneView+clearHighlightComponents)
+    * [.getComponentFromTree(projectId, treeNode)](#SceneView+getComponentFromTree) ⇒ [<code>ComponentView</code>](#ComponentView)
     * [.setColorForAll(color)](#SceneView+setColorForAll)
 
 <a name="new_SceneView_new"></a>
@@ -1246,6 +1396,12 @@ var volumeRender = viewer.createVolumeRender({
 <p>是否绘制边线</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+<a name="SceneView+edgeColor"></a>
+
+### sceneView.edgeColor : <code>Boolean</code>
+<p>获取或设置边线颜色</p>
+
+**Kind**: instance property of [<code>SceneView</code>](#SceneView)  
 <a name="SceneView+projectList"></a>
 
 ### sceneView.projectList : [<code>Array.&lt;ProjectView&gt;</code>](#ProjectView)
@@ -1267,36 +1423,150 @@ var volumeRender = viewer.createVolumeRender({
 <a name="SceneView+setVisiblityFromTree"></a>
 
 ### sceneView.setVisiblityFromTree(treeNode)
-<p>根据构件树控制显示隐藏，参考{@tutorial 构件树}</p>
+<p>根据构件树控制显示隐藏，仅用于BIM工程，参考{@tutorial 构件树}</p>
 
 **Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | treeNode | <code>Object</code> | <p>构件树节点</p> |
+
+<a name="SceneView+hideFromGuids"></a>
+
+### sceneView.hideFromGuids([projectId], guids)
+<p>根据构件id控制隐藏</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [projectId] | <code>String</code> | <p>工程id</p> |
+| guids | <code>Array.&lt;String&gt;</code> | <p>构件id数组</p> |
+
+<a name="SceneView+showFromGuids"></a>
+
+### sceneView.showFromGuids([projectId], guids)
+<p>根据构件id控制显示</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [projectId] | <code>String</code> | <p>工程id</p> |
+| guids | <code>Array.&lt;String&gt;</code> | <p>构件id数组</p> |
 
 <a name="SceneView+setHighlightComponentsFromTree"></a>
 
-### sceneView.setHighlightComponentsFromTree(treeNode, color)
-<p>根据构件树控制某种类型的构件高亮，参考{@tutorial 构件树}</p>
+### ~~sceneView.setHighlightComponentsFromTree([projectId], [ruleString], [guid], color)~~
+***Deprecated***
+
+<p>根据构件树控制某种类型的构件高亮，只适用于BIM工程，参考{@tutorial 构件树}</p>
 
 **Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| treeNode | <code>Object</code> | <p>构件树节点</p> |
+| [projectId] | <code>String</code> | <p>工程id</p> |
+| [ruleString] | <code>String</code> | <p>规则字符串，构件id为空时必填</p> |
+| [guid] | <code>String</code> | <p>构件id，规则字符串为空时必填</p> |
 | color | [<code>Color</code>](#Color) | <p>高亮颜色</p> |
 
+<a name="SceneView+setHighlightComponentsFromTypes"></a>
+
+### sceneView.setHighlightComponentsFromTypes(projectId, [ruleString], [guid], color)
+<p>根据属性控制某种类型的构件高亮，只适用于BIM工程</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| projectId | <code>String</code> | <p>工程id</p> |
+| [ruleString] | <code>String</code> | <p>规则字符串，构件id为空时必填</p> |
+| [guid] | <code>String</code> | <p>构件id，规则字符串为空时必填</p> |
+| color | [<code>Color</code>](#Color) | <p>高亮颜色</p> |
+
+<a name="SceneView+hideComponentsFromTypes"></a>
+
+### sceneView.hideComponentsFromTypes([projectId], [ruleString], [guid])
+<p>根据属性控制某种类型的构件隐藏，只适用于BIM工程</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [projectId] | <code>String</code> | <p>工程id</p> |
+| [ruleString] | <code>String</code> | <p>规则字符串，构件id为空时必填</p> |
+| [guid] | <code>String</code> | <p>构件id，规则字符串为空时必填</p> |
+
+<a name="SceneView+showComponentsFromTypes"></a>
+
+### sceneView.showComponentsFromTypes([projectId], [ruleString], [guid])
+<p>根据属性控制某种类型的构件显示，只适用于BIM工程</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [projectId] | <code>String</code> | <p>工程id</p> |
+| [ruleString] | <code>String</code> | <p>规则字符串，构件id为空时必填</p> |
+| [guid] | <code>String</code> | <p>构件id，规则字符串为空时必填</p> |
+
+<a name="SceneView+setHighlightComponentsFromGuids"></a>
+
+### sceneView.setHighlightComponentsFromGuids(guids, color, [projectId])
+<p>根据guid控制构件高亮</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| guids | <code>String</code> | <p>构件id数组</p> |
+| color | [<code>Color</code>](#Color) | <p>高亮颜色</p> |
+| [projectId] | <code>String</code> | <p>子工程id</p> |
+
+<a name="SceneView+setBlinkComponentsFromGuids"></a>
+
+### sceneView.setBlinkComponentsFromGuids(guids, color, [interval], [projectId])
+<p>根据guid控制构件闪烁</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| guids | <code>String</code> |  | <p>构件id数组</p> |
+| color | [<code>Color</code>](#Color) |  | <p>闪烁颜色</p> |
+| [interval] | <code>Number</code> | <code>1000</code> | <p>闪烁间隔时长，毫秒</p> |
+| [projectId] | <code>String</code> |  | <p>子工程id</p> |
+
+<a name="SceneView+clearBlinkComponentsFromGuids"></a>
+
+### sceneView.clearBlinkComponentsFromGuids(guids, [projectId])
+<p>根据guid清除构件闪烁</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| guids | <code>String</code> | <p>构件id数组</p> |
+| [projectId] | <code>String</code> | <p>子工程id</p> |
+
+<a name="SceneView+clearHighlightComponents"></a>
+
+### sceneView.clearHighlightComponents()
+<p>清除构件高亮</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 <a name="SceneView+getComponentFromTree"></a>
 
-### sceneView.getComponentFromTree(treeNode) ⇒ [<code>ComponentView</code>](#ComponentView)
-<p>根据构件树节点返回构件，参考{@tutorial 构件树}</p>
+### sceneView.getComponentFromTree(projectId, treeNode) ⇒ [<code>ComponentView</code>](#ComponentView)
+<p>根据构件树节点返回构件，只适用于BIM工程，参考{@tutorial 构件树}</p>
 
 **Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 **Returns**: [<code>ComponentView</code>](#ComponentView) - <p>该节点对应的构件视图</p>  
 
 | Param | Type | Description |
 | --- | --- | --- |
+| projectId | <code>String</code> | <p>工程id</p> |
 | treeNode | <code>Object</code> | <p>构件树节点</p> |
 
 <a name="SceneView+setColorForAll"></a>
@@ -1622,6 +1892,7 @@ viewer.marqueeEditor.marqueeStop.addEventListener(()=>{  console.log('marquee s
     * [.resetCamera()](#OrbitControl+resetCamera)
     * [.setMotion(motion)](#OrbitControl+setMotion)
     * [.removeMotion(motion)](#OrbitControl+removeMotion)
+    * [.invertZoom()](#OrbitControl+invertZoom)
 
 <a name="new_OrbitControl_new"></a>
 
@@ -1688,6 +1959,12 @@ viewer.marqueeEditor.marqueeStop.addEventListener(()=>{  console.log('marquee s
 | --- | --- | --- |
 | motion | [<code>CameraMotionInputs</code>](#CameraMotionInputs) | <p>相机运动事件</p> |
 
+<a name="OrbitControl+invertZoom"></a>
+
+### orbitControl.invertZoom()
+<p>反转缩放方向</p>
+
+**Kind**: instance method of [<code>OrbitControl</code>](#OrbitControl)  
 <a name="RoamEditor"></a>
 
 ## RoamEditor
@@ -1897,7 +2174,8 @@ viewer.marqueeEditor.marqueeStop.addEventListener(()=>{  console.log('marquee s
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | POINTDISTANCE | <code>number</code> | <code>0</code> | <p>两点之间长度</p> |
-| ANGLE | <code>number</code> | <code>1</code> | <p>角度</p> |
+| POINTSDISTANCE | <code>number</code> | <code>1</code> | <p>多点之间长度</p> |
+| ANGLE | <code>number</code> | <code>2</code> | <p>角度</p> |
 
 <a name="CIMControlMode"></a>
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="zTreeStyle.css" type="text/css">
     <script src="jquery.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
+    <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
     <script src="../../library/motor.js"></script>
 </head>
 
@@ -98,7 +99,7 @@
         const secret = "459dc8b77a63a0c009aec27f818febf6";
         Motor.ServiceConfig.server = "https://open.lubansoft.com/api";
 
-        const projectId = "75fab782-f71f-45ee-8841-edff020aec36";
+        const projectId = "8bf9b586-751f-4e80-8926-dc939e798f99";
         
         var selectedColor = Motor.Color.fromCssColorString('#03f3f7');
         var selectedColor2 = Motor.Color.fromCssColorString('#03f3f7').withAlpha(0.5);
@@ -189,26 +190,18 @@
                     highlightComponent(component);
                     if(!isInSubScene){
                         // console.log('show')
-                        $('#loading').show();
-                        let promise = component.getSubprojectId(projectId);
-                        promise.then(function(data){
-                            if(data){
-                                // console.log(data);
-                                viewer.currentScene.setColorForAll(Motor.Color.WHITE.withAlpha(0.01));
-                                parentComponent = component;
-                                // drawProject(data,)
-                                isInSubScene=true;
-                                drawProject(data,isInSubScene,parentComponent,function(){
-                                    console.log('子工程加载完成');
-                                    // removesub.removeAttribute('disabled');
-                                })
-                            }
-                            else{
+                        let subProjectIds = obj.subProjectIds;
+                        if(subProjectIds){
+                            $('#loading').show();
+                            viewer.currentScene.setColorForAll(Motor.Color.WHITE.withAlpha(0.01));
+                            parentComponent = component;
+                            isInSubScene=true;
+                            drawProject(subProjectIds,isInSubScene,parentComponent,function(){
                                 $('#loading').hide();
-                            }
-                        }).otherwise(function(){
-                            $('#loading').hide();
-                        })
+                                console.log('子工程加载完成');
+                                // removesub.removeAttribute('disabled');
+                            })
+                        }
                     }
                 }
                 else{
@@ -461,6 +454,7 @@
             viewer.loadSubProject({
                 projectId: projectId,//工程id
                 parentComponent:parentComponent,
+                useInitCameraPosition:parentComponent?false:true,
                 drawEdge: isInSubScene //绘制边线
             }).then(function () {
                 $('#loading').hide();

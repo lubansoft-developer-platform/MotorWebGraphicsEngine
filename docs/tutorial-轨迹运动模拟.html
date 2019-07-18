@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: 视角控制 | MotorJS</title>
+    <title>Tutorial: 轨迹运动模拟 | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -56,79 +56,64 @@
     <header>
         
 
-        <h2>视角控制</h2>
+        <h2>轨迹运动模拟</h2>
     </header>
 
     
         <article class="readme">
-            <h3>1. 相机复位</h3>
-<pre class="prettyprint source lang-javascript"><code>viewer.gotoDefaultProjectView();
+            <p>可以把轨迹运动理解成一个随时间运动的模型标注</p>
+<h3>1. 创建标注集</h3>
+<pre class="prettyprint source lang-javascript"><code>let markers = new Motor.MarkerCollection({
+    viewer: viewer,//Motor.Viewer实例
+    animated: true,//是否开启动画
+    interval: &quot;2019-08-04T04:00:00Z/2019-08-04T04:00:20Z&quot;,//动画时间
+    loop: true//循环播放
+})
 </code></pre>
-<h3>2. 代码控制相机旋转</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启相机运动
-viewer.controller.setMotion(key);//key为CameraMotionInputs或者String，可以是: rotateLeft, rotateRight, rotateUp,rotateDown
-//移除相机运动
-viewer.controller.removeMotion(key);
-</code></pre>
-<h3>3. 关闭鼠标操作视角</h3>
-<pre class="prettyprint source lang-javascript"><code>//关闭鼠标操作
-viewer.controller.enableInputs = false;
-</code></pre>
-<h3>4. 框选放大</h3>
-<h3>开启框选</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启框选放大功能
-viewer.enableMarquee = true;
-//开始一次框选放大
-viewer.marqueeEditor.startMarquee();
-</code></pre>
-<p>触发<code>startMarquee()</code>之后，使用鼠标画出框选范围；下一次框选需要再次调用<code>startMarquee</code></p>
-<h3>框选放大鼠标事件捕获</h3>
-<pre class="prettyprint source lang-javascript"><code>//鼠标开始框选
-viewer.marqueeEditor.marqueeStart.addEventListener(function(){
-  console.log('marquee start');
-});
-//鼠标结束框选
-viewer.marqueeEditor.marqueeStop.addEventListener(function(){
-  console.log('marquee stop');
-});
-</code></pre>
-<h3>5. 使用第一人称漫游</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启第一人称漫游
-viewer.navigationMode = Motor.NavigationMode.ROAM;
-//修改漫游速度
-viewer.roamEditor.movementSpeed = 10;
-//开启/关闭重力
-viewer.roamEditor.isGravitative = false;
-//开启/关闭碰撞检测
-viewer.roamEditor.isCollision = false;
-</code></pre>
-<h3>6. 镜头锁定构件</h3>
-<p>下面的代码实现了双击构件时，让镜头锁定构件</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
-  //根据屏幕坐标coords，获取点选的对象
-  let obj = viewer.pick(mouse.position);
-  if (obj instanceof Motor.ComponentView) {
-    //镜头飞向构件
-    viewer.zoomToComponent(componentView);
-  }
-});
-</code></pre>
-<h3>7. 镜头飞向目标</h3>
-<p>相机位置移动到目标位置(<code>position</code>)，以下代码将相机位移到上海陆家嘴上空，俯视陆家嘴</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
-    position: new Motor.Cartesian3(-2852522.696043213, 4656705.0549966, 3288343.7270516744),
-    heading:14.252768365538435,
-    pitch: -50.06079591133133,
-    roll: 0.06555448028932681
-}
-</code></pre>
-<p>相机观察中心移动到目标位置(<code>center</code>)，以下代码将观察中心移动到北京天安门位置，观察距离200米</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
-    center: Motor.Cartesian3.fromDegrees(116.39122,39.90706, 0),
-    heading:14.252768365538435,
-    pitch: -50.06079591133133,
-    range: 200
-}
+<h3>2. 添加模型标注</h3>
+<pre class="prettyprint source lang-javascript"><code>markers.add({
+    //标注id
+    id: &quot;bus1&quot;,
+    //标注位置
+    position: {
+        epoch: &quot;2019-08-04T04:00:00Z&quot;,//该标注动画的起始时间
+        //轨迹点：时间, 经度, 纬度, 高度...
+        cartographicDegrees: [
+            0,121.49148382491559,31.28774986949839,-0.28424984806776515,
+            1,121.49262290722703,31.287783226923647,-0.27129414132704177,
+            2,121.49331654003763,31.28805500024847,-0.26837196930409696,
+            3,121.4943079035422,31.288719542508808,-0.2697707060253312,
+            4,121.49557311505708,31.289339887459473,-0.2673121624351026,
+            5,121.49659217114248,31.289479730690086,-0.2570380171087626,
+            6,121.49836191258868,31.289450851001156,-0.2829703838166316,
+            7,121.50025747532432,31.289229684923043,-0.26262332573157393,
+            8,121.50205953359912,31.288647415896058,-0.29882307489934606,
+            9,121.50335254727025,31.288219455522082,-0.2724039340748176,
+            10,121.50507724921444,31.287647834660106,-0.23566673187871473,
+            11,121.50683781162864,31.286972844909478,-0.2762536064641528,
+            12,121.50800866904946,31.286735083124032,-0.2565031116645886,
+            13,121.50876947107183,31.286645767524753,-0.2432785522758558,
+            14,121.50974749205,31.286753667779532,-0.2340063180670456,
+            15,121.51101672544745,31.286994677962596,-0.24906716695172004,
+            16,121.51200459177991,31.287239745813153,-0.2423308274437946,
+            17,121.51268393692511,31.287399953986945,-0.24925298544630775,
+            18,121.51349574543232,31.287574612020506,-0.2412647431451428,
+            19,121.51427227444412,31.287810390582987,-0.23598464629859467]
+    },
+    //标注中的模型文件
+    model:{
+        gltf:'./assets/data/model/car1.glb',
+        scale:10
+    },
+    //模型的朝向
+    orientation:{
+        velocityReference:&quot;bus1#position&quot;,//设置模型朝向与标注的速度方向一致
+    },
+    properties:{
+        &quot;名称&quot;:&quot;黄色出租车&quot;,
+        &quot;车牌号&quot;:&quot;888888&quot;
+    }
+})
 </code></pre>
         </article>
     

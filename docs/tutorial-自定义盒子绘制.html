@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: 视角控制 | MotorJS</title>
+    <title>Tutorial: 自定义盒子绘制 | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -56,79 +56,31 @@
     <header>
         
 
-        <h2>视角控制</h2>
+        <h2>自定义盒子绘制</h2>
     </header>
 
     
         <article class="readme">
-            <h3>1. 相机复位</h3>
-<pre class="prettyprint source lang-javascript"><code>viewer.gotoDefaultProjectView();
-</code></pre>
-<h3>2. 代码控制相机旋转</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启相机运动
-viewer.controller.setMotion(key);//key为CameraMotionInputs或者String，可以是: rotateLeft, rotateRight, rotateUp,rotateDown
-//移除相机运动
-viewer.controller.removeMotion(key);
-</code></pre>
-<h3>3. 关闭鼠标操作视角</h3>
-<pre class="prettyprint source lang-javascript"><code>//关闭鼠标操作
-viewer.controller.enableInputs = false;
-</code></pre>
-<h3>4. 框选放大</h3>
-<h3>开启框选</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启框选放大功能
-viewer.enableMarquee = true;
-//开始一次框选放大
-viewer.marqueeEditor.startMarquee();
-</code></pre>
-<p>触发<code>startMarquee()</code>之后，使用鼠标画出框选范围；下一次框选需要再次调用<code>startMarquee</code></p>
-<h3>框选放大鼠标事件捕获</h3>
-<pre class="prettyprint source lang-javascript"><code>//鼠标开始框选
-viewer.marqueeEditor.marqueeStart.addEventListener(function(){
-  console.log('marquee start');
-});
-//鼠标结束框选
-viewer.marqueeEditor.marqueeStop.addEventListener(function(){
-  console.log('marquee stop');
+            <p>添加自定义的几何体</p>
+<h3>1. 创建几何体集</h3>
+<pre class="prettyprint source lang-javascript"><code>var geoms = new Motor.GeometryCollection({
+    viewer: viewer,//Motor.Viewer实例
 });
 </code></pre>
-<h3>5. 使用第一人称漫游</h3>
-<pre class="prettyprint source lang-javascript"><code>//开启第一人称漫游
-viewer.navigationMode = Motor.NavigationMode.ROAM;
-//修改漫游速度
-viewer.roamEditor.movementSpeed = 10;
-//开启/关闭重力
-viewer.roamEditor.isGravitative = false;
-//开启/关闭碰撞检测
-viewer.roamEditor.isCollision = false;
-</code></pre>
-<h3>6. 镜头锁定构件</h3>
-<p>下面的代码实现了双击构件时，让镜头锁定构件</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
-  //根据屏幕坐标coords，获取点选的对象
-  let obj = viewer.pick(mouse.position);
-  if (obj instanceof Motor.ComponentView) {
-    //镜头飞向构件
-    viewer.zoomToComponent(componentView);
-  }
+<h3>2. 添加盒子</h3>
+<pre class="prettyprint source lang-javascript"><code>geoms.addBox({
+    id: &quot;box1&quot;,
+    center: Motor.Cartesian3.fromDegrees(120.99993,31.00145,9.5),
+    dimensions: new Motor.Cartesian3(6,6,3),
+    fillColor: Motor.Color.RED.withAlpha(0.5),
+    outline:true,
+    outlineColor: Motor.Color.RED,
+    depthTest:false,
+    properties: {
+        &quot;名称&quot;: &quot;房间1&quot;,
+        &quot;状态&quot;: &quot;空闲&quot;,
+    }
 });
-</code></pre>
-<h3>7. 镜头飞向目标</h3>
-<p>相机位置移动到目标位置(<code>position</code>)，以下代码将相机位移到上海陆家嘴上空，俯视陆家嘴</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
-    position: new Motor.Cartesian3(-2852522.696043213, 4656705.0549966, 3288343.7270516744),
-    heading:14.252768365538435,
-    pitch: -50.06079591133133,
-    roll: 0.06555448028932681
-}
-</code></pre>
-<p>相机观察中心移动到目标位置(<code>center</code>)，以下代码将观察中心移动到北京天安门位置，观察距离200米</p>
-<pre class="prettyprint source lang-javascript"><code>viewer.currentView = {
-    center: Motor.Cartesian3.fromDegrees(116.39122,39.90706, 0),
-    heading:14.252768365538435,
-    pitch: -50.06079591133133,
-    range: 200
-}
 </code></pre>
         </article>
     
