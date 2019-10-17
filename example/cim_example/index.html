@@ -11,7 +11,8 @@
     <script src="jquery.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
     <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
-    <script src="../../library/motor.js"></script>
+    <!-- <script src="../../library/motor.js"></script> -->
+    <script src="../common/common.js"></script>
 </head>
 
 <body>
@@ -95,11 +96,11 @@
             paramObj[keyvalue[0]] = keyvalue[1];
         })
 
-        const appid = "d0b3c61c6639434e84900b1fd8d391cb";
-        const secret = "459dc8b77a63a0c009aec27f818febf6";
-        Motor.ServiceConfig.server = "https://open.lubansoft.com/api";
+        const appid = motorAppId;
+        const secret = motorSecret;
+        Motor.ServiceConfig.server = bimServer;
 
-        const projectId = "1993deb1-492e-41fd-b4d5-83b0d6683217";
+        const projectId = cimProjectId;
         
         var selectedColor = Motor.Color.fromCssColorString('#03f3f7');
         var selectedColor2 = Motor.Color.fromCssColorString('#03f3f7').withAlpha(0.5);
@@ -140,7 +141,8 @@
             container: 'container',//viewer所在的div元素id
             // viewerMode: Motor.ViewerMode.BIM,//viewer的模式
             appid:appid,
-            secret:secret
+            secret:secret,
+            taaEnabled:true
         });
         viewer.readyPromise.then(function(){
             drawProject(projectId,false);
@@ -169,16 +171,38 @@
                     currentSelectedComponent.setDefaultColor();
                 }
                 currentSelectedComponent = component;
-                /**
-                * 回调传入的参数d为一个Component对象，其中包括guid和infos等成员变量
-                */
-                var innerHTML = '';
-                for (var key in component.infos) {
-                    innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                
+                if(isInSubScene){
+                    component.getBIMProperties().then(data=>{
+                        var tableStr = '';
+                        for(var group in data){
+                            var temp = '';
+                            data[group].forEach(item=>{
+                                temp+=`
+                                    <div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${item.name}</span>
+                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${item.value?item.value:""} ${item.unit?item.unit:""}</span>
+                                    </div>
+                                `;
+                            })
+                            tableStr+=`<div>
+                                <div style="background-color:grey;">${group}</div>
+                                ${temp}
+                            </div>`;
+                        }
+                        $('#infoBox').html(tableStr);
+                        $('#infoBox').show();
+                    });
                 }
-                $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
-                $('#infoBox').show();
-            }       
+                else{
+                    var innerHTML = '';
+                    for (var key in component.infos) {
+                        innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                    }
+                    $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
+                    $('#infoBox').show();
+                }
+            }
             var currentSelectedComponent = undefined;
             //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
 
@@ -450,116 +474,123 @@
         /**
          * 绘制工程
          */
-        function drawProject(projectId,isInSubScene,parentComponent,callback) {   
+        function drawProject(projectId,isInSubScene,parentComponent,callback) { 
+            if(!(typeof projectId ==="string")){
+                if(projectId.length && projectId.length>0){
+                    projectId = projectId[1];
+                }
+            }  
             viewer.loadSubProject({
                 projectId: projectId,//工程id
                 parentComponent:parentComponent,
-                useInitCameraPosition:parentComponent?false:true,
-                drawEdge: isInSubScene //绘制边线
+                drawEdge: isInSubScene, //绘制边线
+                zoomToAtOnce:!isInSubScene,
+                zoomToAtOnceCallback: function(){
+                    $('#loading').hide();
+                    console.log('zoom done');
+                }
             }).then(function () {
                 $('#loading').hide();
-                callback();
+                if(callback){
+                    callback();
+                }
                 if(isInSubScene){
                     // $('.btns').show();
                     $('.section').show();
                     $('.exit').show();
                     $('.edge').show();
-                    projectId.forEach(function(projectId1){
-                        if(projectId1!==""){
-                            Motor.Component.PropertiesTreeStructur(projectId1).then(function (data) {
-                            var pTree = data;
-                            pTree.forEach(function(p){
-                                sortOnKey(p.children,"name");
-                            });
-                            if(pTree){
-                                var zTreeObj;
-                                var setting = {
-                                    data: {
-                                        key: {
-                                            checked: "isChecked"
-                                        }
-                                    },
-                                    view: {
-                                        fontCss : {color:"white"}
-                                    },
-                                    check: {
-                                        enable: true,       //设置是否显示checkbox复选框
-                                    },
-                                    callback: {
-                                        // onClick: onClick,             //定义节点单击事件回调函数
-                                        // onRightClick: OnRightClick,   //定义节点右键单击事件回调函数
-                                        // beforeRename: beforeRename,   //定义节点重新编辑成功前回调函数，一般用于节点编辑时判断输入的节点名称是否合法
-                                        // onDblClick: onDblClick,       //定义节点双击事件回调函数
-                                        onCheck: function (e,id,treeNode) {
-                                            console.log(treeNode);
-                                            if(viewer.currentScene.drawEdge){
-                                                viewer.currentScene.drawEdge=false;
-                                            }
-                                            
-                                            viewer.currentScene.setVisiblityFromTree(treeNode);
-                                            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");  //获取树对象
-                                            var nodes = treeObj.getCheckedNodes();       //获取勾选状态改变的节点
-                                            // console.log(treeNode.getParentNode());
-                                            var designIds = [];
-                                            $.each(nodes, function (i, item) {
+                    // Motor.Component.PropertiesTreeStructur(projectId).then(function (data) {
+                    //     var pTree = data;
+                    //     pTree.forEach(function(p){
+                    //         sortOnKey(p.children,"name");
+                    //     });
+                    //     if(pTree){
+                    //         var zTreeObj;
+                    //         var setting = {
+                    //             data: {
+                    //                 key: {
+                    //                     checked: "isChecked"
+                    //                 }
+                    //             },
+                    //             view: {
+                    //                 fontCss : {color:"white"}
+                    //             },
+                    //             check: {
+                    //                 enable: true,       //设置是否显示checkbox复选框
+                    //             },
+                    //             callback: {
+                    //                 // onClick: onClick,             //定义节点单击事件回调函数
+                    //                 // onRightClick: OnRightClick,   //定义节点右键单击事件回调函数
+                    //                 // beforeRename: beforeRename,   //定义节点重新编辑成功前回调函数，一般用于节点编辑时判断输入的节点名称是否合法
+                    //                 // onDblClick: onDblClick,       //定义节点双击事件回调函数
+                    //                 onCheck: function (e,id,treeNode) {
+                    //                     console.log(treeNode);
+                    //                     if(viewer.currentScene.drawEdge){
+                    //                         viewer.currentScene.drawEdge=false;
+                    //                     }
+                                        
+                    //                     viewer.currentScene.setVisiblityFromTree(treeNode);
+                    //                     var treeObj = $.fn.zTree.getZTreeObj("treeDemo");  //获取树对象
+                    //                     var nodes = treeObj.getCheckedNodes();       //获取勾选状态改变的节点
+                    //                     // console.log(treeNode.getParentNode());
+                    //                     var designIds = [];
+                    //                     $.each(nodes, function (i, item) {
 
-                                                designIds.push(item.id);                       //将状态改变的节点id输出到数组
-                                                item.checkedOld = item.checked;                //这句话很关键，将节点的初始状态置为当前状态。否则每次勾选操作获取状态改变节点时只会跟树初始化的状态相比较。
-                                            })
-                                        },//定义节点复选框选中或取消选中事件的回调函数
-                                        onClick: function (e,id,treeNode){
-                                            let tmp = treeNode;
-                                            const strArr = [];
-                                            let str = '@@'
-                                            for(let i = treeNode.level;i>0;i--){
-                                                strArr.push(tmp.name)
-                                                tmp = tmp.getParentNode();
-                                            }
-                                            str += strArr.reverse().join('@@') + '@@';
-                                            const projectId = tmp.projectId;
-                                            const nameStr = treeNode.level === 0 ? '' : str;
-                                            const guid = treeNode.level === 4 ? treeNode.id : '';
-                                            $('#infoBox').hide();
-                                            viewer.currentScene.setHighlightComponentsFromTree(projectId, nameStr, guid, selectedColor2);
-                                        },
-                                        onDblClick:function(e,id,treeNode){
-                                            if(!treeNode.children && treeNode.level === 4){
-                                                var component = viewer.currentScene.getComponentFromTree(treeNode.projectId, treeNode);
-                                                var innerHTML = '';
-                                                for (var key in component.infos) {
-                                                    innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
-                                                }
-                                                $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
-                                                $('#infoBox').show();
-                                                viewer.zoomToComponent(component,function(){
-                                                    viewer.setLookAtCenter();//设置点击处为镜头旋转中心
-                                                });
-                                            }
-                                            else{
-                                                $('#infoBox').hide();
-                                            }
-                                        },
-                                        onExpand: function(event, treeId, treeNode) {
-                                            if(treeNode.level ===3 && !treeNode.children) {
-                                                dynamicloadNodes(treeNode).then(function(data) {
-                                                    treeNode.children = [];
-                                                    zTreeObj.addNodes(treeNode, data)
-                                                    reSetNodes(zTreeObj)
-                                                })
-                                            }
-                                        }
-                                    },
-                                };        // zTree 的参数配置
-                                var zNodes = pTree;        // zTree 的数据属性，此处使用标准json格式
+                    //                         designIds.push(item.id);                       //将状态改变的节点id输出到数组
+                    //                         item.checkedOld = item.checked;                //这句话很关键，将节点的初始状态置为当前状态。否则每次勾选操作获取状态改变节点时只会跟树初始化的状态相比较。
+                    //                     })
+                    //                 },//定义节点复选框选中或取消选中事件的回调函数
+                    //                 onClick: function (e,id,treeNode){
+                    //                     let tmp = treeNode;
+                    //                     const strArr = [];
+                    //                     let str = '@@'
+                    //                     for(let i = treeNode.level;i>0;i--){
+                    //                         strArr.push(tmp.name)
+                    //                         tmp = tmp.getParentNode();
+                    //                     }
+                    //                     str += strArr.reverse().join('@@') + '@@';
+                    //                     const projectId = tmp.projectId;
+                    //                     const nameStr = treeNode.level === 0 ? '' : str;
+                    //                     const guid = treeNode.level === 4 ? treeNode.id : '';
+                    //                     $('#infoBox').hide();
+                    //                     viewer.currentScene.setHighlightComponentsFromTree(projectId, nameStr, guid, selectedColor2);
+                    //                 },
+                    //                 onDblClick:function(e,id,treeNode){
+                    //                     if(!treeNode.children && treeNode.level === 4){
+                    //                         var component = viewer.currentScene.getComponentFromTree(treeNode.projectId, treeNode);
+                    //                         var innerHTML = '';
+                    //                         for (var key in component.infos) {
+                    //                             innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                    //                         }
+                    //                         $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
+                    //                         $('#infoBox').show();
+                    //                         viewer.zoomToComponent(component,function(){
+                    //                             viewer.setLookAtCenter();//设置点击处为镜头旋转中心
+                    //                         });
+                    //                     }
+                    //                     else{
+                    //                         $('#infoBox').hide();
+                    //                     }
+                    //                 },
+                    //                 onExpand: function(event, treeId, treeNode) {
+                    //                     if(treeNode.level ===3 && !treeNode.children) {
+                    //                         dynamicloadNodes(treeNode).then(function(data) {
+                    //                             treeNode.children = [];
+                    //                             zTreeObj.addNodes(treeNode, data)
+                    //                             reSetNodes(zTreeObj)
+                    //                         })
+                    //                     }
+                    //                 }
+                    //             },
+                    //         };        // zTree 的参数配置
+                    //         var zNodes = pTree;        // zTree 的数据属性，此处使用标准json格式
 
-                                zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源
-                                zTreeObj.checkAllNodes(true);
-                                reSetNodes(zTreeObj);
-                                $('.tree_container').show();
-                            }
-                        });
-                        }
-                    })
+                    //         zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源
+                    //         zTreeObj.checkAllNodes(true);
+                    //         reSetNodes(zTreeObj);
+                    //         $('.tree_container').show();
+                    //     }
+                    // });
                     
                 }                    
             });

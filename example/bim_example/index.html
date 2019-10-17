@@ -11,7 +11,8 @@
     <script src="jquery.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
     <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
-    <script src="../../library/motor.js"></script>
+    <!-- <script src="../../library/motor.js"></script> -->
+    <script src="../common/common.js"></script>
 </head>
 
 <body>
@@ -88,17 +89,18 @@
         var isInSubScene = false,parentComponent;
         const parameters = window.location.search.substring(1).split('&');
         const paramObj = {};
-        var currentSelectedComponent,currentNameStr;
+        var currentSelectedComponent,currentNameStr,rootTreeNodes=[],initDrawEdge=true;
+
         parameters.forEach(function(ele){
             let keyvalue = ele.split("=");
             paramObj[keyvalue[0]] = keyvalue[1];
         })
 
-        const appid = "d0b3c61c6639434e84900b1fd8d391cb";
-        const secret = "459dc8b77a63a0c009aec27f818febf6";
-        Motor.ServiceConfig.server = "https://open.lubansoft.com/api";
+        const appid = motorAppId;
+        const secret = motorSecret;
+        Motor.ServiceConfig.server = bimServer;
 
-        const projectId = "bfdf508b-ae25-426a-ba6c-838f190eb4d6";
+        const projectId = bimProjectId;
         
         var selectedColor = Motor.Color.fromCssColorString('#03f3f7').withAlpha(0.5);
         // 动态加载数据
@@ -118,6 +120,9 @@
         // 重新设置数据
         function reSetNodes(zTreeObj) {
             node = zTreeObj.getNodes();      //获取根节点
+            node.forEach((rootnode)=>{
+                rootTreeNodes.push(rootnode);
+            })
             nodes = zTreeObj.transformToArray(node);    //遍历所有节点
             if (nodes.length > 0) {
                 for (var i = 0; i < nodes.length; i++) {
@@ -138,7 +143,8 @@
             container: 'container',//viewer所在的div元素id
             viewerMode: Motor.ViewerMode.BIM,//viewer的模式
             appid:appid,
-            secret:secret
+            secret:secret,
+            taaEnabled:true
         });
         viewer.readyPromise.then(function(){
             drawProject(projectId,true);
@@ -167,15 +173,34 @@
                     currentSelectedComponent.setDefaultColor();
                 }
                 currentSelectedComponent = component;
-                /**
-                * 回调传入的参数d为一个Component对象，其中包括guid和infos等成员变量
-                */
-                var innerHTML = '';
-                for (var key in component.infos) {
-                    innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
-                }
-                $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
-                $('#infoBox').show();
+                component.getBIMProperties().then(data=>{
+                    var tableStr = '';
+                    for(var group in data){
+                        var temp = '';
+                        data[group].forEach(item=>{
+                            temp+=`
+                                <div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                    <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${item.name}</span>
+                                    <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${item.value?item.value:""} ${item.unit?item.unit:""}</span>
+                                </div>
+                            `;
+                        })
+                        tableStr+=`<div>
+                            <div style="background-color:grey;">${group}</div>
+                            ${temp}
+                        </div>`;
+                    }
+                    $('#infoBox').html(tableStr);
+                    $('#infoBox').show();
+                });
+                // else{
+                //     var innerHTML = '';
+                //     for (var key in component.infos) {
+                //         innerHTML += '<div title='+component.infos[key]+'>'+key+': '+component.infos[key]+'</div>';
+                //     }
+                //     $('#infoBox').html('<div title='+component.guid+'>'+component.guid+'</div>' + innerHTML);
+                //     $('#infoBox').show();
+                // }
             }       
             var currentSelectedComponent = undefined;
             //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
@@ -411,7 +436,7 @@
         function drawProject(projectId,isInSubScene) {   
             viewer.loadSubProject({
                 projectId: projectId,//工程id
-                drawEdge: isInSubScene //绘制边线
+                drawEdge: isInSubScene && initDrawEdge //绘制边线
             }).then(function () {
                 $('#loading').hide();
                 if(isInSubScene){
@@ -443,8 +468,19 @@
                                     // onDblClick: onDblClick,       //定义节点双击事件回调函数
                                     onCheck: function (e,id,treeNode) {
                                         console.log(treeNode);
-                                        if(viewer.currentScene.drawEdge){
-                                            viewer.currentScene.drawEdge=false;
+                                        if(initDrawEdge){
+                                            let count=0;
+                                            rootTreeNodes.forEach(function(node){
+                                                if(node.check_Child_State===2){
+                                                    count++;
+                                                }
+                                            });
+                                            if(count===rootTreeNodes.length){
+                                                viewer.currentScene.drawEdge = true;
+                                            }
+                                            else{
+                                                viewer.currentScene.drawEdge = false;
+                                            }
                                         }
                                         
                                         viewer.currentScene.setVisiblityFromTree(treeNode);
