@@ -27,19 +27,19 @@ var config = {
 
 function getEnvironment(){
     var url = window.location.href;
-    if(url.indexOf("https://")!==-1){
-        if(url.slice(8,16)==="opentest"){
-            return "test";
-        }
-        else if(url.slice(8,13)==="open."){
-            return "out";
-        }
-    }
-    else if(url.indexOf("http://")!==-1){
-        if(url.slice(7,14)==="192.168"){
-            return "inner";
-        }
-    }
+    // if(url.indexOf("https://")!==-1){
+    //     if(url.slice(8,16)==="opentest"){
+    //         return "test";
+    //     }
+    //     else if(url.slice(8,13)==="open."){
+    //         return "out";
+    //     }
+    // }
+    // else if(url.indexOf("http://")!==-1){
+    //     if(url.slice(7,14)==="192.168"){
+    //         return "inner";
+    //     }
+    // }
     //console.warn('commonjs配置错误')
     return "out";
 }
