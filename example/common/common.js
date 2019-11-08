@@ -40,8 +40,8 @@ function getEnvironment(){
             return "inner";
         }
     }
-    console.warn('commonjs配置错误')
-    return undefined;
+    //console.warn('commonjs配置错误')
+    return "out";
 }
 
 var index = getEnvironment();
