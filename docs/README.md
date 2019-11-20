@@ -69,7 +69,7 @@
 <dd><p><p>路径漫游管理器，参考{@tutorial 路径漫游}</p></p>
 </dd>
 <dt><a href="#OrbitControl">OrbitControl</a></dt>
-<dd><p>围绕一个原点旋转的控制器</p></dd>
+<dd><p>围绕一个原点旋转的控制器，无需自行初始化</p></dd>
 <dt><a href="#RoamEditor">RoamEditor</a></dt>
 <dd><p><p>路径漫游控制器，参考{@tutorial 视角控制}</p></p>
 </dd>
@@ -101,9 +101,11 @@
 <p>构件类</p>
 
 **Kind**: global class  
-<a name="Component.PropertiesTreeStructur"></a>
+<a name="Component.PropertiesTreeStructure"></a>
 
-### Component.PropertiesTreeStructur(projectId)
+### ~~Component.PropertiesTreeStructure(projectId)~~
+***Deprecated***
+
 <p>根据工程id获取构件树结构</p>
 
 **Kind**: static method of [<code>Component</code>](#Component)  
@@ -515,7 +517,7 @@ markers.add({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [options] | <code>Object</code> |  | <p>包含以下参数的对象</p> |
-| [options.sources] | <code>Object</code> |  | <p>CubeMap六个面的图片url</p> |
+| [options.sources] | <code>Object</code> |  | <p>CubeMap六个面的图片url或者Image对象</p> |
 | [options.show] | <code>Boolean</code> | <code>true</code> | <p>是否显示</p> |
 | [options.isBIM] | <code>Boolean</code> | <code>false</code> | <p>是否是BIM场景下的天空盒，如果值为false则默认按照地球模式下的宇宙贴图坐标加载</p> |
 | [options.specularEnvironmentMaps] | <code>String</code> |  | <p>赋予场景模型的环境贴图url，只能是ktx格式的贴图</p> |
@@ -739,7 +741,7 @@ markers.add({
     * [.cameraMoveStart](#Viewer+cameraMoveStart) : <code>Event</code>
     * [.cameraMoveEnd](#Viewer+cameraMoveEnd) : <code>Event</code>
     * [.oneSceneInitialized](#Viewer+oneSceneInitialized) : <code>Event</code>
-    * [.animatedSpeed](#Viewer+animatedSpeed)
+    * [.animatedSpeed](#Viewer+animatedSpeed) : <code>Number</code>
     * [.navigationMode](#Viewer+navigationMode) : [<code>NavigationMode</code>](#NavigationMode)
     * [.enableMarquee](#Viewer+enableMarquee) : <code>Boolean</code>
     * [.cimControlMode](#Viewer+cimControlMode) : [<code>CIMControlMode</code>](#CIMControlMode)
@@ -794,6 +796,7 @@ markers.add({
 | [options.enableFixedFrameRate] | <code>Boolean</code> | <code>false</code> | <p>是否开启固定帧率</p> |
 | [options.enableBIMViewCube] | <code>Boolean</code> | <code>true</code> | <p>是否开启导航方块，默认开启，移动端不开启</p> |
 | [options.taaEnabled] | <code>Boolean</code> | <code>false</code> | <p>开启TAA抗锯齿，包含动画的场景建议关闭TAA</p> |
+| [options.enableTouchControl] | <code>Boolean</code> | <code>false</code> | <p>开启触屏控制</p> |
 | [options.viewCubeConfig] | [<code>ViewCubeConfig</code>](#ViewCubeConfig) |  | <p>导航方块参数</p> |
 | [options.cimControlMode] | [<code>CIMControlMode</code>](#CIMControlMode) | <code>Motor.CIMControlMode.MOTOR</code> | <p>CIM模式下的鼠标控制逻辑</p> |
 | [options.backgroundColor] | [<code>Color</code>](#Color) | <code>new Motor.Color(0.98, 0.98,, 0.95)</code> | <p>背景颜色，仅适用于BIM模式</p> |
@@ -839,7 +842,7 @@ var viewer = new Motor.Viewer({  container: 'container',  viewerMode: Motor.Vi
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+animatedSpeed"></a>
 
-### viewer.animatedSpeed
+### viewer.animatedSpeed : <code>Number</code>
 <p>获取或设置3D-Tiles建筑物拔地而起的动画速率，参考{@tutorial 特效}</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
@@ -852,7 +855,7 @@ var viewer = new Motor.Viewer({  container: 'container',  viewerMode: Motor.Vi
 <a name="Viewer+enableMarquee"></a>
 
 ### viewer.enableMarquee : <code>Boolean</code>
-<p>是否开启框选放大，参考{@tutorial 视角控制}</p>
+<p>开启/关闭框选放大，参考{@tutorial 视角控制}</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+cimControlMode"></a>
@@ -971,6 +974,7 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 | [options.projectId] | <code>String</code> \| <code>Array.&lt;String&gt;</code> |  | <p>工程id或工程id数组</p> |
 | [options.parentComponent] | [<code>ComponentView</code>](#ComponentView) |  | <p>父工程中对应构件</p> |
 | [options.drawEdge] | <code>Boolean</code> | <code>false</code> | <p>是否绘制边线</p> |
+| [options.lazyLoad] | <code>Boolean</code> | <code>false</code> | <p>是否开启懒加载</p> |
 | [options.luminanceAtZenith] | <code>Number</code> | <code>0.5</code> | <p>模型亮度, [0-1]</p> |
 | [options.zoomToAtOnce] | <code>Boolean</code> | <code>false</code> | <p>工程初始化后直接将镜头移到工程位置，否则会等模型加载完成后再移动镜头</p> |
 | [options.zoomToAtOnceCallback] | <code>function</code> |  | <p>镜头移动结束后回调函数</p> |
@@ -1312,14 +1316,15 @@ var volumeRender = viewer.createVolumeRender({
     * [new SceneView(options)](#new_SceneView_new)
     * [.isReady](#SceneView+isReady) : <code>Boolean</code>
     * [.id](#SceneView+id) : <code>String</code>
-    * [.parentSceneId](#SceneView+parentSceneId)
+    * [.parentSceneId](#SceneView+parentSceneId) : <code>String</code>
     * [.name](#SceneView+name) : <code>String</code>
     * [.drawEdge](#SceneView+drawEdge) : <code>Boolean</code>
     * [.edgeColor](#SceneView+edgeColor) : <code>Boolean</code>
     * [.projectList](#SceneView+projectList) : [<code>Array.&lt;ProjectView&gt;</code>](#ProjectView)
-    * [.defaultPresetView](#SceneView+defaultPresetView)
-    * [.config](#SceneView+config)
+    * [.defaultPresetView](#SceneView+defaultPresetView) : [<code>CameraView</code>](#CameraView)
+    * [.config](#SceneView+config) : <code>Object</code>
     * [.setLightIntensity(value)](#SceneView+setLightIntensity)
+    * [.getTreeStructure()](#SceneView+getTreeStructure) ⇒ <code>Object</code>
     * [.setVisiblityFromTree(treeNode)](#SceneView+setVisiblityFromTree)
     * [.hideComponentsFromGuids(guids, [projectId])](#SceneView+hideComponentsFromGuids)
     * [.fadeOutComponentsFromGuids(options)](#SceneView+fadeOutComponentsFromGuids)
@@ -1343,6 +1348,8 @@ var volumeRender = viewer.createVolumeRender({
     * [.setColorForAll(color)](#SceneView+setColorForAll)
     * [.setColorFromGuids(options)](#SceneView+setColorFromGuids)
     * [.findComponentsByBIMProperties(options)](#SceneView+findComponentsByBIMProperties) ⇒ <code>Promise</code>
+    * [.isDestroyed()](#SceneView+isDestroyed) ⇒ <code>Boolean</code>
+    * [.destroy()](#SceneView+destroy)
 
 <a name="new_SceneView_new"></a>
 
@@ -1369,18 +1376,21 @@ var volumeRender = viewer.createVolumeRender({
 <p>获取ID</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+**Read only**: true  
 <a name="SceneView+parentSceneId"></a>
 
-### sceneView.parentSceneId
+### sceneView.parentSceneId : <code>String</code>
 <p>获取父场景ID</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+**Read only**: true  
 <a name="SceneView+name"></a>
 
 ### sceneView.name : <code>String</code>
 <p>获取名称</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+**Read only**: true  
 <a name="SceneView+drawEdge"></a>
 
 ### sceneView.drawEdge : <code>Boolean</code>
@@ -1402,16 +1412,18 @@ var volumeRender = viewer.createVolumeRender({
 **Read only**: true  
 <a name="SceneView+defaultPresetView"></a>
 
-### sceneView.defaultPresetView
+### sceneView.defaultPresetView : [<code>CameraView</code>](#CameraView)
 <p>获取用户自定义初始视角</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+**Read only**: true  
 <a name="SceneView+config"></a>
 
-### sceneView.config
-<p>获取用户自定义的工程属性</p>
+### sceneView.config : <code>Object</code>
+<p>获取用户自定义的构件属性模板</p>
 
 **Kind**: instance property of [<code>SceneView</code>](#SceneView)  
+**Read only**: true  
 <a name="SceneView+setLightIntensity"></a>
 
 ### sceneView.setLightIntensity(value)
@@ -1423,6 +1435,12 @@ var volumeRender = viewer.createVolumeRender({
 | --- | --- | --- |
 | value | <code>Number</code> | <p>光照强度0-1</p> |
 
+<a name="SceneView+getTreeStructure"></a>
+
+### sceneView.getTreeStructure() ⇒ <code>Object</code>
+<p>获取场景构件树</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 <a name="SceneView+setVisiblityFromTree"></a>
 
 ### sceneView.setVisiblityFromTree(treeNode)
@@ -1598,8 +1616,8 @@ var volumeRender = viewer.createVolumeRender({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| options.guids | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.projectId] | <code>String</code> |  | <p>工程id</p> |
-| [options.guids] | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.color] | [<code>Color</code>](#Color) | <code>Motor.Color.fromCssColorString(&#x27;#03f3f7&#x27;)</code> | <p>高亮颜色</p> |
 
 <a name="SceneView+setBlinkComponentsFromGuids"></a>
@@ -1612,8 +1630,8 @@ var volumeRender = viewer.createVolumeRender({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| options.guids | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.projectId] | <code>String</code> |  | <p>工程id</p> |
-| [options.guids] | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.interval] | <code>String</code> | <code>1000</code> | <p>闪烁间隔时长，毫秒</p> |
 | [options.color] | [<code>Color</code>](#Color) | <code>Motor.Color.fromCssColorString(&#x27;#03f3f7&#x27;)</code> | <p>闪烁颜色</p> |
 
@@ -1627,8 +1645,8 @@ var volumeRender = viewer.createVolumeRender({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| options.guids | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.projectId] | <code>String</code> |  | <p>工程id</p> |
-| [options.guids] | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.inverse] | <code>Boolean</code> | <code>false</code> | <p>是否反转隔离(隔离传入guids之外的构件)</p> |
 | [options.color] | [<code>Color</code>](#Color) | <code>Motor.Color.WHITE.withAlpha(0.3)</code> | <p>高亮颜色</p> |
 | [options.otherColor] | [<code>Color</code>](#Color) | <code>Motor.Color.WHITE</code> | <p>高亮颜色</p> |
@@ -1699,9 +1717,9 @@ var volumeRender = viewer.createVolumeRender({
 
 **Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 
-| Param | Type |
-| --- | --- |
-| color | [<code>Color</code>](#Color) | 
+| Param | Type | Description |
+| --- | --- | --- |
+| color | [<code>Color</code>](#Color) | <p>高亮颜色</p> |
 
 <a name="SceneView+setColorFromGuids"></a>
 
@@ -1713,8 +1731,8 @@ var volumeRender = viewer.createVolumeRender({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| options.guids | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.projectId] | <code>String</code> |  | <p>工程id</p> |
-| [options.guids] | <code>Array.&lt;String&gt;</code> |  | <p>构件id</p> |
 | [options.color] | [<code>Color</code>](#Color) | <code>Motor.Color.fromCssColorString(&#x27;#03f3f7&#x27;)</code> | <p>高亮颜色</p> |
 
 <a name="SceneView+findComponentsByBIMProperties"></a>
@@ -1732,12 +1750,42 @@ var volumeRender = viewer.createVolumeRender({
 | [options.pageNo] | <code>Number</code> | <code>1</code> | <p>页数</p> |
 | [options.pageSize] | <code>Number</code> | <code>10</code> | <p>单页返回构件数</p> |
 
+<a name="SceneView+isDestroyed"></a>
+
+### sceneView.isDestroyed() ⇒ <code>Boolean</code>
+<p>实例是否销毁</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
+<a name="SceneView+destroy"></a>
+
+### sceneView.destroy()
+<p>销毁对象</p>
+
+**Kind**: instance method of [<code>SceneView</code>](#SceneView)  
 <a name="VolumeRender"></a>
 
 ## VolumeRender
 <p>体渲染类，参考{@tutorial 特效}</p>
 
 **Kind**: global class  
+
+* [VolumeRender](#VolumeRender)
+    * [new VolumeRender(center, dimensions, image, [isRGB], [alphaCorrection], [colorScheme])](#new_VolumeRender_new)
+    * [.alphaCorrection](#VolumeRender+alphaCorrection)
+
+<a name="new_VolumeRender_new"></a>
+
+### new VolumeRender(center, dimensions, image, [isRGB], [alphaCorrection], [colorScheme])
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| center | [<code>Cartesian3</code>](#Cartesian3) |  | <p>中心点</p> |
+| dimensions | <code>Array.&lt;Number&gt;</code> |  | <p>体数据长宽高，如[10, 10, 5],</p> |
+| image | <code>String</code> |  | <p>图片url</p> |
+| [isRGB] | <code>Boolean</code> | <code>true</code> | <p>使用图片原始RGB值</p> |
+| [alphaCorrection] | <code>Boolean</code> | <code>0.5</code> | <p>透明度矫正参数，0到1之间的数值</p> |
+| [colorScheme] | <code>Object</code> |  | <p>自定义色表</p> |
+
 <a name="VolumeRender+alphaCorrection"></a>
 
 ### volumeRender.alphaCorrection
@@ -1839,7 +1887,7 @@ var volumeRender = viewer.createVolumeRender({
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
 | options.viewer | [<code>Viewer</code>](#Viewer) |  | <p>Motor.Viewer实例化对象</p> |
 | [options.lineWidth] | <code>Number</code> | <code>6</code> | <p>线条粗细</p> |
-| [options.color] | [<code>Color</code>](#Color) | <code>DeviceMotionEventRotationRate.Color.RED</code> | <p>颜色</p> |
+| [options.color] | [<code>Color</code>](#Color) | <code>Motor.Color.RED</code> | <p>颜色</p> |
 | [options.font] | <code>String</code> | <code>&quot;20px Arial&quot;</code> | <p>字体，遵循CSS字体设置标准</p> |
 
 <a name="CommentEditor+commentType"></a>
@@ -2198,7 +2246,7 @@ autoRoamManager.onPosePlayed.addEventListener(function(id){    console.log("到
 <a name="OrbitControl"></a>
 
 ## OrbitControl
-<p>围绕一个原点旋转的控制器</p>
+<p>围绕一个原点旋转的控制器，无需自行初始化</p>
 
 **Kind**: global class  
 
@@ -2221,8 +2269,8 @@ autoRoamManager.onPosePlayed.addEventListener(function(id){    console.log("到
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
-| options.scene | <code>Scene</code> |  | <p>Cesium Viewer的Scene对象</p> |
-| options.clock | <code>Clock</code> |  | <p>Cesium Viewer的Clock对象</p> |
+| options.scene | <code>Scene</code> |  | <p>Scene对象</p> |
+| options.clock | <code>Clock</code> |  | <p>Clock对象</p> |
 | [options.origin] | [<code>Cartesian3</code>](#Cartesian3) |  | <p>原点的三维世界坐标</p> |
 | [options.globalMatrix] | <code>Matrix4</code> |  | <p>原点的三维世界坐标矩阵</p> |
 | [options.model] | <code>Object</code> |  | <p>围绕模型旋转，该模型可以是Model或者Tileset</p> |
@@ -2471,9 +2519,9 @@ autoRoamManager.onPosePlayed.addEventListener(function(id){    console.log("到
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | ARROWLINE | <code>number</code> | <code>0</code> | <p>箭头线</p> |
-| RECT | <code>number</code> | <code>1</code> |  |
-| ELLIPSE | <code>number</code> | <code>2</code> |  |
-| TEXT | <code>number</code> | <code>3</code> |  |
+| RECT | <code>number</code> | <code>1</code> | <p>方形</p> |
+| ELLIPSE | <code>number</code> | <code>2</code> | <p>椭圆形</p> |
+| TEXT | <code>number</code> | <code>3</code> | <p>文本</p> |
 
 <a name="BingMapStyle"></a>
 

@@ -1,5 +1,30 @@
 ## 更新日志
 
+### **Motor v2.1.0** 2019年11月19日
+
+#### 弃用
+
+* `Component`类将在近期版本中不可用，获取构件树的方法从`Component.PropertiesTreeStructur`静态方法改为`SceneView.getTreeStructure`方法
+
+#### 增加
+
+* `MotorViewer`
+  * 添加`enableTouchControl`传入参数，用于开启触屏模式
+* `SceneView`类
+  * 添加`getTreeStructure`，用于获取场景构件树
+
+#### 修改
+
+* 调整AO和阴影默认参数
+
+#### 修复
+
+* 优化lazyLoad逻辑，同时限制一次性请求的模型资源和贴图资源
+* 修复BIM工程最大缩放距离太短的问题
+* 修复移动端触屏操作无法平移的bug
+* 工程模型材质丢失的bug
+* 多个Viewer加载同一工程报错的bug
+
 ### **Motor v2.0** 2019年10月17日
 
 #### 增加
