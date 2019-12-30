@@ -1,6 +1,42 @@
-## 更新日志
+# 更新日志
+## **Motor v2.2.0** 2019年12月31日
 
-### **Motor v2.1.0** 2019年11月19日
+#### 增加
+* `MotorViewer`
+  * 添加`queryProject`查询工程
+  * 添加`mapCollection`变量，用于管理地图图层
+  * 添加`enableTouchControl`参数，用于开启触屏控制
+  * 添加`enableAO`变量，用于开关AO
+  * 添加`ambientOcclusion`变量，用于控制AO强度
+* `MapCollection`类，用于管理地图图层
+* `VideoProjection`
+  * 支持m3u8格式的视频，需要配合videojs使用
+* `ParticleSystem`
+  * 添加`sizeInMeters`参数，优化例子系统显示效果
+* 新增`Component`类，替换`ComponentView`
+  * 添加`flatten`属性，用于控制压平
+* 新增`Project`类，替换`SceneView`和`ProjectView`
+  * 使用`open`和`close`方法，打开或者关闭工程
+* 支持倾斜摄影模型的压平和掩膜
+* 支持金字塔工程加载
+
+#### 修改
+* 接口全部更新，与JS SDK统一
+* `MotorViewer`
+  * `taaEnabled`参数变为`antialias`
+
+#### 弃用
+* `SceneView`, `ProjectView`, `ComponentView`全部弃用
+`Component.PropertiesTreeStructur`静态方法改为`project.getTreeStructure`方法
+
+## **Motor v2.1.0** 2019年11月19日
+
+#### 修复
+
+* 工程模型材质丢失的bug
+* 多个Viewer加载同一工程报错的bug
+
+## **Motor v1.1.1** 2019年10月22日
 
 #### 弃用
 
@@ -22,10 +58,9 @@
 * 优化lazyLoad逻辑，同时限制一次性请求的模型资源和贴图资源
 * 修复BIM工程最大缩放距离太短的问题
 * 修复移动端触屏操作无法平移的bug
-* 工程模型材质丢失的bug
-* 多个Viewer加载同一工程报错的bug
 
-### **Motor v2.0** 2019年10月17日
+
+## **Motor v1.1.0** 2019年10月16日
 
 #### 增加
 
@@ -54,6 +89,7 @@
 * 添加`BloomState`类，用于控制场景泛光
 * 添加`ParticleSystem`类和多种`Emitter`类，用于粒子效果
 * 添加`CommentEditor`类和多种二维图形类用于模型批注
+* `Cartesian3`添加`fromRadians`方法，用于将弧度制经纬度转成笛卡尔三维坐标
 
 #### 修改
 * 简化工程加载逻辑，支持`SubCIM`关联静态模型的直接加载
@@ -64,7 +100,7 @@
   * BIM模式下支持使用预设视角
 
 
-### **Motor v1.0** 2019年07月18日
+## **Motor v1.0.0** 2019年7月18日
 
 #### 主要功能和接口
 

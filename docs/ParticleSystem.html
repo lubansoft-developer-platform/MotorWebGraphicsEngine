@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Class: WebMapTileService | MotorJS</title>
+    <title>Class: ParticleSystem | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -59,9 +59,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ParticleSystem<span class="signature">(options)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>WMTS地图服务类，参考<a href="tutorial-地图服务.html">地图服务</a></p></div>
+            <div class="class-description"><p>粒子系统类</p></div>
         
     
 </header>
@@ -74,9 +74,9 @@
 
 <dt>
     
-        <h4 class="name" id="WebMapTileService">
+        <h4 class="name" id="ParticleSystem">
             
-                new <span class="type-signature"></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span>
+                new <span class="type-signature"></span>ParticleSystem<span class="signature">(options)</span><span class="type-signature"></span>
                 
             
         </h4>
@@ -165,13 +165,13 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>origin</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
 
 
             
@@ -193,20 +193,20 @@
                 </td>
             
 
-            <td class="description last"><p>地图服务地址</p></td>
+            <td class="description last"><p>原点位置</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>layer</code></td>
+                <td class="name"><code>show</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Boolean</span>
 
 
             
@@ -214,6 +214,8 @@
 
             
                 <td class="attributes">
+                
+                    &lt;optional><br>
                 
 
                 
@@ -225,93 +227,25 @@
             
                 <td class="default">
                 
+                    true
+                
                 </td>
             
 
-            <td class="description last"><p>图层名</p></td>
+            <td class="description last"><p>是否显示</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>style</code></td>
+                <td class="name"><code>updateCallback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>图层样式名</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixSetID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>TileMatrixSet名称</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixLabels</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
+<span class="param-type">function</span>
 
 
             
@@ -335,20 +269,20 @@
                 </td>
             
 
-            <td class="description last"><p>tileMatrixLabels</p></td>
+            <td class="description last"><p>每一帧调用该函数更新粒子</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>tilingScheme</code></td>
+                <td class="name"><code>emitter</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#TilingScheme">TilingScheme</a></span>
+<span class="param-type">ParticleEmitter</span>
 
 
             
@@ -369,19 +303,134 @@
             
                 <td class="default">
                 
-                    GeographicTilingScheme
+                    new CircleEmitter(0.5)
                 
                 </td>
             
 
-            <td class="description last"><p>地图切片方案</p></td>
+            <td class="description last"><p>粒子发射器</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>maximumLevel</code></td>
+                <td class="name"><code>emitterModelMatrix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Matrix4.html">Matrix4</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>发射器矩阵，默认单位矩阵</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>emissionRate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    5
+                
+                </td>
+            
+
+            <td class="description last"><p>每秒发射率</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1.0
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子图片缩放比例</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startScale</code></td>
             
 
             <td class="type">
@@ -411,7 +460,611 @@
                 </td>
             
 
-            <td class="description last"><p>显示地图的最大层级</p></td>
+            <td class="description last"><p>粒子图片初始缩放比例</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endScale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子图片结束缩放比例</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Color.html">Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Color.WHITE
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子颜色</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Color.html">Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子起始颜色</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Color.html">Color</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子终止颜色</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子图片，可以是图片url、Image对象或者Canvas对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>imageSize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian2.html">Cartesian2</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Cartesian2(1.0, 1.0)
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子大小</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>speed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1.0
+                
+                </td>
+            
+
+            <td class="description last"><p>发射速度</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimumSpeed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>最小速度</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximumSpeed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>最大速度</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lifetime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Number.MAX_VALUE
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子系统发射粒子时长</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>particleLife</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    5.0
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子生命周期</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimumParticleLife</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子最小生命周期</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximumParticleLife</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子最大生命周期</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1.0
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子质量，单位千克</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimumMass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子最小质量</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maximumMass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>粒子最大质量</p></td>
         </tr>
 
     
@@ -486,15 +1139,6 @@
     
 
     
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="BaseMap.html">BaseMap</a></li>
-    </ul>
-
 
     
 
@@ -506,81 +1150,6 @@
 
     
 
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
-
-<dt>
-<h4 class="name" id="alpha">
-    <span class="type-signature"></span>alpha<span class="type-signature"></span>
-    
-</h4>
-
-
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>地图图层透明度</p>
-    </div>
-    
-
-    <!--
-    
-    -->
-
-    
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseMap.html#alpha">BaseMap#alpha</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-</dd>
-
-        </dl>
     
 
     
@@ -607,7 +1176,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'WebMapTileService_sub'.replace(/"/g, '_');
+        var id = 'ParticleSystem_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 

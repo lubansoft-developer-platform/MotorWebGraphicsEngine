@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Class: WebMapTileService | MotorJS</title>
+    <title>Class: WebMapService | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -59,7 +59,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>WebMapService<span class="signature">(options)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>WMTS地图服务类，参考<a href="tutorial-地图服务.html">地图服务</a></p></div>
         
@@ -74,9 +74,9 @@
 
 <dt>
     
-        <h4 class="name" id="WebMapTileService">
+        <h4 class="name" id="WebMapService">
             
-                new <span class="type-signature"></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span>
+                new <span class="type-signature"></span>WebMapService<span class="signature">(options)</span><span class="type-signature"></span>
                 
             
         </h4>
@@ -200,7 +200,7 @@
 
         <tr>
             
-                <td class="name"><code>layer</code></td>
+                <td class="name"><code>layers</code></td>
             
 
             <td class="type">
@@ -235,83 +235,13 @@
 
         <tr>
             
-                <td class="name"><code>style</code></td>
+                <td class="name"><code>parameters</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>图层样式名</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixSetID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>TileMatrixSet名称</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixLabels</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
             
@@ -335,7 +265,83 @@
                 </td>
             
 
-            <td class="description last"><p>tileMatrixLabels</p></td>
+            <td class="description last"><p>额外参数</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enablePickFeatures</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否支持点击查询</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pickCallback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>点击查询的回调函数</p></td>
         </tr>
 
     
@@ -607,7 +613,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'WebMapTileService_sub'.replace(/"/g, '_');
+        var id = 'WebMapService_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 

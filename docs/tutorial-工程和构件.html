@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Class: WebMapTileService | MotorJS</title>
+    <title>Tutorial: 工程和构件 | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -52,546 +52,53 @@
 <div class="main" id="main">
     
 
-
-
-
 <section>
-
-<header>
-    
-        <h2><span class="attribs"><span class="type-signature"></span></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>WMTS地图服务类，参考<a href="tutorial-地图服务.html">地图服务</a></p></div>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-<dt>
-    
-        <h4 class="name" id="WebMapTileService">
-            
-                new <span class="type-signature"></span>WebMapTileService<span class="signature">(options)</span><span class="type-signature"></span>
-                
-            
-        </h4>
-
-        
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-
-    
-    <div class="container-params">
-        <h5>Parameters:</h5>
-        
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
+    <header>
         
 
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>包含以下参数的对象</p>
-                <h6>Properties</h6>
-                
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>url</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>地图服务地址</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>layer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>图层名</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>style</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>图层样式名</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixSetID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>TileMatrixSet名称</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tileMatrixLabels</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>tileMatrixLabels</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tilingScheme</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#TilingScheme">TilingScheme</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    GeographicTilingScheme
-                
-                </td>
-            
-
-            <td class="description last"><p>地图切片方案</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>maximumLevel</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>显示地图的最大层级</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-</dd>
-
-        
-        </div>
-    
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="BaseMap.html">BaseMap</a></li>
-    </ul>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        <h2>工程和构件</h2>
+    </header>
+
+    
+        <article class="readme">
+            <h3>1. 工程</h3>
+<p><code>Project</code>：工程是Motor场景中的主要组成部分，一个工程也就是一个完整的三维场景</p>
+<h3>请求工程</h3>
+<pre class="prettyprint source lang-javascript"><code>//如果不存在该工程，则返回undefined
+let project = viewer.queryProject('工程guid');
+</code></pre>
+<h3>查询工程列表</h3>
+<p>查询该账号中的工程列表</p>
+<pre class="prettyprint source lang-javascript"><code>let list = viewer.getProjectList();
+</code></pre>
+<h3>查询当前打开的工程列表</h3>
+<pre class="prettyprint source lang-javascript"><code>let openinglist = viewer.getOpeningProjectList();
+</code></pre>
+<h3>2. 构件</h3>
+<p><code>Component</code>：构件是Motor场景中的最小单元，一个工程包含多个构件，对单个构件可以设置样式和显隐</p>
+<h3>查询构件</h3>
+<pre class="prettyprint source lang-javascript"><code>//根据guid查询构件
+project.queryComponents(['guid1','guid2',...]).then(components=>{
+    //返回构建列表
+    console.log(components)
+});
+//根据条件查询构件
+project.queryComponents({
+    floor:&quot;闷顶层&quot;
+}).then(components=>{
+    //返回构建列表
+    console.log(components)
+});
+</code></pre>
+<h3>设置构件颜色</h3>
+<pre class="prettyprint source lang-javascript"><code>//通过构件对象设置颜色
+component.setColor(Motor.Color.RED);
+//通过工程批量设置颜色
+project.setComponentsColor(Motor.Color.RED,['guid1','guid2'])
+</code></pre>
+        </article>
     
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
-
-<dt>
-<h4 class="name" id="alpha">
-    <span class="type-signature"></span>alpha<span class="type-signature"></span>
-    
-</h4>
-
-
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>地图图层透明度</p>
-    </div>
-    
-
-    <!--
-    
-    -->
-
-    
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseMap.html#alpha">BaseMap#alpha</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-</dd>
-
-        </dl>
-    
-
-    
-
-    
-
-    
-</article>
-
 </section>
-
 
 
 
@@ -607,13 +114,7 @@
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'WebMapTileService_sub'.replace(/"/g, '_');
-        var selectedApi = document.getElementById(id); // do not use jquery selector
-        var $selectedApi = $(selectedApi);
-
-        $selectedApi.removeClass('hidden');
-        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-        showLnbApi();
+        showLnbExamples();
     </script>
 
 </body>

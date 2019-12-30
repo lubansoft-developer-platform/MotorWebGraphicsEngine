@@ -1,8 +1,8 @@
-var parkicon = './assets/images/svg/园林.png';
-var gardenicon = './assets/images/svg/公园.png';
+var parkicon = './assets/images/svg/garden.png';
+var gardenicon = './assets/images/svg/park.png';
 var museumicon = './assets/images/svg/british-museum.png';
-var governmenticon = './assets/images/svg/政府 非营利机构.png';
-var buildingicon = './assets/images/svg/大厦小区地址.png';
+var governmenticon = './assets/images/svg/govern.png';
+var buildingicon = './assets/images/svg/building.png';
 var appid = "d0b3c61c6639434e84900b1fd8d391cb";
 var secret = "459dc8b77a63a0c009aec27f818febf6";
 Motor.ServiceConfig.server = "https://open.lubansoft.com/api";
@@ -64,14 +64,15 @@ var viewer = new Motor.Viewer({
     viewerMode: Motor.ViewerMode.CIM,
     appid: appid,
     secret: secret,
-    map: map,
     enableBloom:true
 });
 
-viewer.readyPromise.then(function(){
-    viewer.startLoading();
+viewer.initialize().then(function(){
+    viewer.mapCollection.removeAll();
+    viewer.mapCollection.add(map)
+    viewer.startOrbiting();
     setTimeout(function(){
-        viewer.stopLoading();
+        viewer.stopOrbiting();
         //加载3d-tiles模型
         //eslint-disable-next-line  
         let tileset_0 = this.viewer.loadTileset({
@@ -246,23 +247,21 @@ viewer.readyPromise.then(function(){
 
 function changeView(){
     // console.log(this.viewer.currentView)
-    viewer.currentView = {
+    viewer.flyTo({
         position: new Motor.Cartesian3(-2852726.408799274, 4656509.279496767, 3288785.3865226605),
         heading: 325.03985227174337,
-        pitch: -85,
+        pitch: 85,
         roll: 358.77912114745027,
-        callback:function(){
-            setTimeout(function(){
-                viewer.currentView = {
-                    position: new Motor.Cartesian3(-2852522.696043213, 4656705.0549966, 3288343.7270516744),
-                    heading: 14.252768365538435,
-                    pitch: -50.06079591133133,
-                    roll: 0.06555448028932681
-                }
-            },1000)
-            
-        }
-    }
+    },function(){
+        setTimeout(function(){
+            viewer.flyTo({
+                position: new Motor.Cartesian3(-2852522.696043213, 4656705.0549966, 3288343.7270516744),
+                heading: 14.252768365538435,
+                pitch: 50.06079591133133,
+                roll: 0.06555448028932681
+            });
+        },1000)
+    })
 }
 
 function computeVertex(startx, starty, endx, endy, startz, endz, arcFactor) {
