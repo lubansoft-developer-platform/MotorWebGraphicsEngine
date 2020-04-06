@@ -1,4 +1,50 @@
 # 更新日志
+## **Motor v2.3.0** 2020年3月30日
+
+#### 增加
+* 添加`AvatarControl`类，用于控制人物的功能
+* 添加`KeyboardEventModifier`类，用于键盘与鼠标组合的操作
+* `NavigationMode`
+  * 添加`NAV_WALK`，用于启用第一人称人物模式
+* `Viewer`
+  * 添加`initializeAfterGetProjectList`传入参数
+* `AnimationPlayer`
+  * 添加`stopByName`方法，支持根据动作名称停止动画
+  * `play`方法中增加`name`参数，可通过动作名称播放动画
+* `ClippingPlaneEditor`
+  * 添加`setPlaneVisibility`方法，支持控制切割面板显隐
+* `Project`
+  * 添加`customMap`变量，用于获取用户自定义的地图服务
+  * 添加`setComponentsColorFromTree`方法，方便用户使用构件树控制构件颜色
+  * 添加`queryComponentsByBIMGuid`方法，根据bimGuid查询构件
+* `Component`
+  * `infos`中添加`bimFloor`字段
+  
+#### 修复
+* 加载工程后使用鼠标中键平移，视角会飞走的bug
+* 工程中水面无法加载的bug
+* 工程默认视角在BIM和CIM模式下不同的bug
+* 修复ktx加载不到的报错bug
+* 修复viewer.destroy()方法报错的bug
+* 修复切换到正交视图渲染出错的bug
+* 修复homeView定位到全球不起作用的bug
+* 修复工程包围盒计算偏差的bug
+* 修复多个专业时，构件树控制模型显隐失败的bug
+* 修复没有楼层映射时构件树显示不全的bug
+* 修复鼠标拉近后不能旋转的bug
+* 修复全部隐藏后无法显示的bug
+
+#### 修改
+* 优化BIM模式下视角控制的逻辑
+* 在后台请求用户工程列表
+* 优化根据多个`QueryBIMCompOption`控制样式的逻辑
+* `Project`
+  * `isolate`相关方法屏蔽构件后，还可以设置构件颜色
+* `Component`
+  * CIM工程构件的`getProperties`方法，返回类型从`CompProperty[]`变成`CIMProperty`
+* `Viewer`
+  * `addMouseEventListener`方法添加第三个参数`modifier`，提供按键和鼠标配合使用的接口
+
 ## **Motor v2.2.0** 2019年12月31日
 
 #### 增加
@@ -21,7 +67,7 @@
 * 支持金字塔工程加载
 
 #### 修改
-* 接口全部更新，与JS SDK统一
+* 接口全部更新，与JS SDK统一，请参考接口文档
 * `MotorViewer`
   * `taaEnabled`参数变为`antialias`
 

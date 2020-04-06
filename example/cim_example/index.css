@@ -64,6 +64,41 @@
   bottom: 90px;
   z-index: 2;
 }
+.section_box_container{
+    display: none;
+    position: fixed;
+    right: 1rem;
+    bottom: 10rem;
+    z-index: 2;
+    background-color: #021430;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 0.2rem;
+}
+.section_box_container select{
+    line-height: 36px;
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+    background-color: #021430;
+    color: #00ffdd;
+    -webkit-text-stroke: 0.6px #000;
+    border: 1px solid skyblue;
+    font-size: 14px;
+    padding: 0.2rem;
+}
+.section_box_container button{
+    text-align: center;
+    background-color: #021430;
+    color: #00ffdd;
+    -webkit-text-stroke: 0.6px #000;
+    border: 1px solid skyblue;
+    font-size: 14px;
+    padding: 0.2rem;
+}
+.section_box_container .select{
+    color: white;
+}
 .section_box li {
   height: 36px;
   width: 36px;
@@ -146,4 +181,40 @@
   background-size: 50px;
   display: table;
   width: 100%;
+}
+#contextContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    display:none;
+    pointer-events:none;
+    z-index: 1;
+    display: none;
+}
+#contextmenu{
+    list-style: none;
+    padding: 5px 0;
+    line-height: 24px;
+    margin: 0;
+    pointer-events:none;
+}
+#contextmenu > .hr{
+    border: 1px solid grey;
+}
+#contextmenu > .li{
+    cursor:pointer;
+    padding:0 5px;
+    pointer-events:visible;
+}
+#contextmenu > .li:hover{
+    background: cadetblue;
+}
+#contextmenu > .li-disable{
+    padding:0 5px;
+    color: grey;
+    cursor: default;
+    pointer-events:none;
 }

@@ -4,16 +4,16 @@ var config = {
         motorAppId:"d0b3c61c6639434e84900b1fd8d391cb",
         motorSecret:"459dc8b77a63a0c009aec27f818febf6",
         bimProjectId:"bfdf508b-ae25-426a-ba6c-838f190eb4d6",
-        cimProjectId:"ad938619-858f-4a90-8451-0e5e8daa0a6f",
+        cimProjectId:"63881d38-aa76-4d69-a90d-d030d31599bf",
         library:"https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"
     },
     inner:{
         bimServer:"http://192.168.2.57:8765",
         motorAppId:"7bf7b151697c4adba41707f808daa7c2",
         motorSecret:"ed349b4563f7dbffb881b24ebf07e6ee",
-        bimProjectId:"82b19e53-d777-45b0-8817-fc8c72a8a01b",
+        bimProjectId:"49fb5920-2127-49c2-8025-674d6bbde749",
         cimProjectId:"c373a7e5-1c13-4fc1-91d1-f5158842478e",
-        library:"../../library/motor.js"
+        library:"http://192.168.2.57:7000/reference/motor-web-library/motor.js"
     },
     test:{
         bimServer:"https://opentest.lubansoft.com/api",

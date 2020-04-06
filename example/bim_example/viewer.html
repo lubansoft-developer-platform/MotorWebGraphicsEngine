@@ -23,7 +23,7 @@
     </div>
     <div id='container'></div>
     <div id='infoBox' style="display: none;"></div>
-    <div class="tree_container" style="display: none;">
+    <div class="tree_container">
         <ul id="treeDemo" class="ztree"></ul>
     </div>
     <ul class='btns'>
@@ -40,15 +40,19 @@
             title="切换地图服务"></li>
         <li class="edge" style='background: url("./static/images/ic_hide.png") no-repeat center;background-size: 50px 36px;'
             title="边线开关"></li>
-        <li class="antialias" style='background: url("./static/images/ic_hide.png") no-repeat center;background-size: 50px 36px;'
+        <li class="antialias" style='background: url("./static/images/ic_kjc_hover.png") no-repeat center;background-size: 50px 36px;'
             title="抗锯齿"></li>
     </ul>
-    <ul class="section_box">
-        <li>X</li>
-        <li>Y</li>
-        <li>Z</li>
-        <li>XYZ</li>
-    </ul>
+    <div class="section_box_container">
+        <select name="section_box" id="section_box">
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+            <option value="XYZ">XYZ</option>
+        </select>
+        <div id='togglePlane' style='background: url("./static/images/ic_display.png") no-repeat center;background-size: 50px 36px;'
+            title="剖面显隐"></div>
+    </div>
     <div class="roam_box">
         <ul>
             <!-- 开启录制, 每隔一秒添加一次相机姿态 -->
@@ -84,9 +88,21 @@
         <li style="background:url('./static/images/ImageryProviders/esriWorldImagery.png')" title="ArcGIS"></li>
         <li style="background:url('./static/images/ImageryProviders/WMTS.png')" title="WMTS"></li>
     </ul>
+    <div id="contextContainer">
+        <ul id="contextmenu">
+            <li class="li">构件详情</li>
+            <hr class="hr">
+            <li class="li">隐藏选中</li>
+            <li class="li">半透明选中</li>
+            <li class="li">隔离选中</li>
+            <hr class="hr">
+            <li class="li">还原所有</li>
+        </ul>
+    </div>
     <script>
+        $('.section_box_container').hide();
         // $('#infoBox').hide();
-        // $('.tree_container').hide();
+        $('.tree_container').hide();
         // $('.btns').hide();
         var isInSubScene = false,parentComponent;
         
@@ -94,7 +110,7 @@
         
         var parameters = window.location.search.substring(1).split('&');
         var paramObj = {};
-        var currentSelectedComponent,currentNameStr;
+        var currentSelectedComponent,selectedComponents=[],isolatedComponents=[],hiddenComponents=[],transparentComponents=[];
         parameters.forEach(function(ele){
             var keyvalue = ele.split("=");
             paramObj[keyvalue[0]] = keyvalue[1];
@@ -123,9 +139,6 @@
         // 重新设置数据
         function reSetNodes(zTreeObj) {
             let node = zTreeObj.getNodes();
-            node.forEach((rootnode)=>{
-                rootTreeNodes.push(rootnode);
-            })
             let nodes = zTreeObj.transformToArray(node);
             if (nodes.length > 0) {
                 for (let i = 0; i < nodes.length; i++) {
@@ -146,6 +159,7 @@
             viewerMode: Motor.ViewerMode.BIM,//viewer的模式
             appid:appid,
             secret:secret,
+            access_token:access_token,
             antialias:true
         });
         viewer.initialize().then(function(){
@@ -166,73 +180,16 @@
             });
 
             //高亮构件并显示信息框
-            function highlightComponent(component){
+            function highlightComponent(component,multi=false){
                 //改变构件透明度
-                component.select();
-                component.getProperties().then(data=>{
-                    let props = data.props;
-                    let groups = {};
-                    props.forEach(function(prop){
-                        if(prop.group){
-                            let groupIndex = undefined;
-                            for(let key in groups){
-                                if(key===prop.group){
-                                    groupIndex=key;
-                                    break;
-                                }
-                            }
-                            if(groupIndex){
-                                groups[groupIndex].push({
-                                    name:prop.name,
-                                    value:prop.value,
-                                    unit:prop.unit
-                                })
-                            }
-                            else{
-                                groups[prop.group] = [{
-                                    name:prop.name,
-                                    value:prop.value,
-                                    unit:prop.unit
-                                }]
-                            }
-                        }
-                        else{
-                            if(groups['属性']){
-                                groups['属性'].push({
-                                    name:prop.name,
-                                    value:prop.value,
-                                    unit:prop.unit
-                                })
-                            }
-                            else{
-                                groups['属性'] = [{
-                                    name:prop.name,
-                                    value:prop.value,
-                                    unit:prop.unit
-                                }];
-                            }
-                        }
-                    })
-
-                    var tableStr = '';
-                    for(let group in groups){
-                        let temp = '';
-                        groups[group].forEach(item=>{
-                            temp+=`
-                                <div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                    <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${item.name}</span>
-                                    <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${item.value?item.value:""} ${item.unit?item.unit:""}</span>
-                                </div>
-                            `;
-                        })
-                        tableStr+=`<div>
-                            <div style="background-color:grey;">${group}</div>
-                            ${temp}
-                        </div>`;
-                    }
-                    $('#infoBox').html(tableStr);
-                    $('#infoBox').show();
-                });
+                if(multi){
+                    selectedComponents.push(component);
+                }
+                else{
+                    selectedComponents=[component]
+                }
+                currentProject.selectComponents(selectedComponents);
+                currentSelectedComponent=component;
             }    
             //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
 
@@ -245,9 +202,27 @@
                 }
                 else{
                     currentProject.deselectAllComponents();
+                    selectedComponents=[];
+                    currentSelectedComponent=undefined;
+                }
+                $('#infoBox').hide();
+                $('#contextContainer').hide();
+            });
+
+            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
+                var obj = viewer.pick(mouse.position,currentProject);
+                if (obj instanceof Motor.Component) {
+                    var component = obj;
+                    highlightComponent(component,true);
+                }
+                else{
+                    currentProject.deselectAllComponents();
+                    selectedComponents=[];
+                    currentSelectedComponent=undefined;
                     $('#infoBox').hide();
                 }
-            });
+                $('#contextContainer').hide();
+            },Motor.KeyboardEventModifier.CTRL);
             //双击飞向构件
             viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
                 var obj = viewer.pick(mouse.position,currentProject);
@@ -256,12 +231,206 @@
                     viewer.flyTo(obj);
                 }
             })
+
+            document.addEventListener("keydown",function(e){
+                if(e.keyCode===27){
+                    if(selectedComponents.length>0){
+                        currentProject.deselectAllComponents();
+                        selectedComponents=[];
+                        currentSelectedComponent=undefined;
+                    }
+                    $('#infoBox').hide();
+                    $('#contextContainer').hide();
+                }
+            });
+
+            var contextContainer = document.getElementById('contextContainer');
+            var contextmenu = document.getElementById('contextmenu');
+            var liCount=0;
+            var infoNames = {'major':'专业','floor':'楼层','main_type':'大类','sub_type':'小类'}
+            contextmenu.childNodes.forEach(function(child){
+                // console.log(child.tagName)
+                if(child.tagName==="LI"){
+                    switch(liCount){
+                        case 0:
+                            child.onclick=function(){
+                                console.log("构件详情");
+                                
+                                currentSelectedComponent.getProperties().then(data=>{
+                                    var tableStr = '';
+                                    tableStr+=`<h3 style="color:white">${data.name?data.name:data.guid}</h3>`
+                                    tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">GUID</span>
+                                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data.guid}</span>
+                                                    </div>`;
+                                    if(currentSelectedComponent.type == Motor.ProjType.TYPE_BIM){
+                                        for (var key in infoNames) {
+                                            tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                                            <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${infoNames[key]}</span>
+                                                            <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data[key]}</span>
+                                                        </div>`;
+                                        }
+                                    }
+                                    let props = data?data.props:undefined;
+                                    if(props && props.length>0){
+                                        var groups = {};
+                                        props.forEach(function(prop){
+                                            if(prop.group){
+                                                let groupIndex = undefined;
+                                                for(let key in groups){
+                                                    if(key===prop.group){
+                                                        groupIndex=key;
+                                                        break;
+                                                    }
+                                                }
+                                                if(groupIndex){
+                                                    groups[groupIndex].push({
+                                                        name:prop.name,
+                                                        value:prop.value,
+                                                        unit:prop.unit
+                                                    })
+                                                }
+                                                else{
+                                                    groups[prop.group] = [{
+                                                        name:prop.name,
+                                                        value:prop.value,
+                                                        unit:prop.unit
+                                                    }]
+                                                }
+                                            }
+                                            else{
+                                                if(groups['属性']){
+                                                    groups['属性'].push({
+                                                        name:prop.name,
+                                                        value:prop.value,
+                                                        unit:prop.unit
+                                                    })
+                                                }
+                                                else{
+                                                    groups['属性'] = [{
+                                                        name:prop.name,
+                                                        value:prop.value,
+                                                        unit:prop.unit
+                                                    }];
+                                                }
+                                            }
+                                        })
+
+                                        for(let group in groups){
+                                            let temp = '';
+                                            groups[group].forEach(item=>{
+                                                temp+=`
+                                                    <div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${item.name}</span>
+                                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${item.value?item.value:""} ${item.unit?item.unit:""}</span>
+                                                    </div>
+                                                `;
+                                            })
+                                            tableStr+=`<div>
+                                                <div style="background-color:grey;">${group}</div>
+                                                ${temp}
+                                            </div>`;
+                                        }
+                                    }
+                                    
+                                    $('#infoBox').html(tableStr);
+                                    $('#infoBox').show();
+                                });
+                                // contextContainer.setAttribute('style','display:none;');
+                                $('#contextContainer').hide();
+                            }
+                            break;
+                        case 1:
+                            child.onclick=function(){
+                                currentProject.reset();
+                                if(currentProject.drawEdge){
+                                    currentProject.drawEdge=false;
+                                }
+                                console.log("隐藏选中构件");
+                                hiddenComponents = hiddenComponents.concat(selectedComponents);
+                                currentProject.setComponentsVisiblity(false,hiddenComponents);
+                                $('#contextContainer').hide();
+                            }
+                            break;
+                        case 2:
+                            child.onclick=function(){
+                                currentProject.reset();
+                                if(currentProject.drawEdge){
+                                    currentProject.drawEdge=false;
+                                }
+                                console.log("半透明选中构件");
+                                transparentComponents = transparentComponents.concat(selectedComponents);
+                                currentProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
+                                $('#contextContainer').hide();
+                            }
+                            break;
+                        case 3:
+                            child.onclick=function(){
+                                currentProject.reset();
+                                if(currentProject.drawEdge){
+                                    currentProject.drawEdge=false;
+                                }
+                                console.log("隔离选中构件");
+                                isolatedComponents = isolatedComponents.concat(selectedComponents);
+                                currentProject.isolateComponents(isolatedComponents);
+                                // isolateComponent = currentSelectedComponent;
+                                $('#contextContainer').hide();
+                            }
+                            break;
+                        case 4:
+                            child.onclick=function(){
+                                console.log("还原构件样式");
+                                // if(currentProject.drawEdge){
+                                //     currentProject.drawEdge=false;
+                                // }
+                                if(selectedComponents.length>0 || hiddenComponents.length>0 || transparentComponents.length>0 || isolatedComponents.length>0){
+                                    hiddenComponents=[];
+                                    transparentComponents=[];
+                                    isolatedComponents=[];
+                                    currentProject.reset();
+                                    currentProject.selectComponents(selectedComponents);
+                                }
+                                $('#contextContainer').hide();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    liCount++;
+                }
+            })
+            viewer.addMouseEventListener(Motor.MouseEventType.RIGHT_CLICK, function (mouse) {
+                //根据屏幕坐标coords，获取点选的对象
+                if (selectedComponents.length>0) {
+                    let index=0;
+                    contextmenu.childNodes.forEach(function(child){
+                        if(child.tagName==="LI"){
+                            if(index<4){
+                                if(index===0 && selectedComponents.length>1){
+                                    child.setAttribute('class','li-disable');
+                                }
+                                else{
+                                    child.setAttribute('class','li');
+                                }
+                                index++;
+                            }
+                        }
+                    })
+                }
+                else{
+                    let index=0;
+                    contextmenu.childNodes.forEach(function(child){
+                        if(child.tagName==="LI"){
+                            if(index<4){
+                                child.setAttribute('class','li-disable');
+                                index++;
+                            }
+                        }
+                    })
+                }
+                contextContainer.setAttribute('style','display:block;top:'+mouse.position.y+'px;left:'+mouse.position.x+'px;')
+            })
                 
-            
-
-            
-
-
             //相机复位按钮
             $('.camera_reset').on('click', function () {
                 viewer.flyTo(currentProject);
@@ -275,7 +444,7 @@
                 viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
                 if (viewer.viewerMode == Motor.ViewerMode.CIM) {
                     if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
-                        $('.section_box').css('display', 'none');
+                        $('.section_box_container').hide();
                         clippingPlaneEditor.destroy();
                     }
                 }
@@ -287,13 +456,16 @@
             $('.section').on('click', function () {
                 if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
                     $('.section').css('background', 'url("./static/images/ic_pouqie.png") no-repeat center')
-                    $('.section_box').css('display', 'none');
+                    $('.section_box_container').hide();
                     clippingPlaneEditor.destroy();
                 } else if (viewer.viewerMode != Motor.ViewerMode.CIM && viewer.navigationMode != Motor.NavigationMode.NAV_FREE_KEY) {
                     $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
-                    $('.section_box').css('display', 'block');
-                    $('.section_box>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
+                    $('.section_box_container').show();
+                    // $('.section_box_container>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
                     clippingPlaneEditor = new Motor.ClippingPlaneEditor(currentProject);
+                    planeVisibility = true;
+                    clippingPlaneEditor.addClippingPlane($('#section_box').val());
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
                 } else{
                     var str_1 = [];
                     if (viewer.viewerMode == Motor.ViewerMode.CIM) {
@@ -306,17 +478,48 @@
                         // str_1.push('请关闭全景漫游');
                     }
                     $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
-                    $('.section_box').css('display', 'block');
-                    $('.section_box>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
+                    $('.section_box_container').show();
+                    // $('.section_box_container>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
                     clippingPlaneEditor = new Motor.ClippingPlaneEditor(currentProject);
+                    planeVisibility = true;
+                    clippingPlaneEditor.addClippingPlane($('#section_box').val());
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
                     viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
                     // alert(str_1.join(','));
                 }
             });
-            $('.section_box').on('click', 'li', function () {
-                $(this).css({ 'backgroundColor': 'skyblue' }).siblings().css({ 'backgroundColor': 'rgb(2, 20, 48)' });
-                $('.section_box').css('display', 'none');
-                clippingPlaneEditor.addClippingPlane($(this).text());
+            $('#section_box').on('change', function () {
+                // $(this).css({ 'backgroundColor': 'skyblue' }).siblings().css({ 'backgroundColor': 'rgb(2, 20, 48)' });
+                // $('.section_box').css('display', 'none');
+                clippingPlaneEditor.addClippingPlane($(this).val());
+                $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
+            })
+            var planeVisibility = true;
+            $('#togglePlane').on('click', function () {
+                planeVisibility=!planeVisibility;
+                clippingPlaneEditor.setPlaneVisibility(planeVisibility);
+                // planeVisibility?$('#togglePlane').removeClass('select'):$('#togglePlane').addClass('select');
+                if(planeVisibility){
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display_hover.png") no-repeat center' })
+                }
+                else{
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide_hover.png") no-repeat center' })
+                }
+            })
+            $('#togglePlane').hover(function(){
+                if(planeVisibility){
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display_hover.png") no-repeat center' })
+                }
+                else{
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide_hover.png") no-repeat center' })
+                }
+            },function(){
+                if(planeVisibility){
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
+                }
+                else{
+                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide(1).png") no-repeat center' })
+                }
             })
 
 
@@ -453,7 +656,8 @@
 
             //开关抗锯齿
             $('.antialias').on('click', function () {
-                viewer.antialias = !viewer.antialias;
+                viewer.taaEnabled = !viewer.taaEnabled;
+                $('.antialias').css('background', 'url("./static/images/'+(viewer.taaEnabled?'ic_kjc_hover':'ic_kjc')+'.png") no-repeat center')
             })
         })
         /**
@@ -499,35 +703,8 @@
                                         })
                                     },
                                     onClick: function (e, id, treeNode) {
-                                        let tmp = treeNode;
-                                        let strArr = [];
-                                        let options = {};
-                                        for (let i = treeNode.level; i > 0; i--) {
-                                            strArr.push(tmp.name)
-                                            tmp = tmp.getParentNode();
-                                        }
-                                        if(strArr.length>0){
-                                            strArr = strArr.reverse();
-                                            strArr.forEach(function(str,index){
-                                                options[optionTemplate[index]] = str;
-                                            })
-                                        }
-                                        else{
-                                            options=undefined;
-                                        }
-                                        
-                                        const guid = treeNode.level === 4 ? treeNode.id : '';
+                                        currentProject.setComponentsColorFromTree(treeNode,Motor.Color.CYAN);
                                         $('#infobox').hide();
-                                        currentProject.resetComponentsDefaultColor();
-                                        if(treeNode.level===0){
-                                            currentProject.setComponentsColor(Motor.Color.CYAN);
-                                        }
-                                        else if(guid!==""){
-                                            currentProject.setComponentsColor(Motor.Color.CYAN,[guid]);
-                                        }
-                                        else if(options){
-                                            currentProject.setComponentsColorByOption(options,Motor.Color.CYAN);
-                                        }
                                     },
                                     onDblClick: function (e, id, treeNode) {
                                         if (!treeNode.children && treeNode.level === 4) {

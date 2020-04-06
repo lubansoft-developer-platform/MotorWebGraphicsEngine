@@ -76,7 +76,7 @@ viewer.initialize().then(function(){
         //加载3d-tiles模型
         //eslint-disable-next-line  
         let tileset_0 = this.viewer.loadTileset({
-            url: 'http://cim.citylinker.com:13381/sh3dtiles/shanghai_tiles_lujiazui/tileset.json',
+            url: 'https://lbdp.lubansoft.com/example/data/sh3dtiles/shanghai_tiles_lujiazui/tileset.json',
             gradualOptions: {
                 startColor: new Motor.Cartesian3(0, 0, 1),//起始色
                 endColor: new Motor.Cartesian3(1, 1, 1),//终止色
@@ -89,7 +89,7 @@ viewer.initialize().then(function(){
         });
         //eslint-disable-next-line  
         let tileset_1 = this.viewer.loadTileset({
-            url: 'http://cim.citylinker.com:13381/sh3dtiles/shanghai_tiles_nolujiazui/tileset.json',
+            url: 'https://lbdp.lubansoft.com/example/data/sh3dtiles/shanghai_tiles_nolujiazui/tileset.json',
             gradualOptions: {
                 startColor: new Motor.Cartesian3(0, 0, 1),//起始色
                 endColor: new Motor.Cartesian3(1, 1, 1),//终止色
