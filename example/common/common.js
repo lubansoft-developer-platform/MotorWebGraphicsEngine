@@ -4,7 +4,7 @@ var config = {
         motorAppId:"d0b3c61c6639434e84900b1fd8d391cb",
         motorSecret:"459dc8b77a63a0c009aec27f818febf6",
         bimProjectId:"bfdf508b-ae25-426a-ba6c-838f190eb4d6",
-        cimProjectId:"63881d38-aa76-4d69-a90d-d030d31599bf",
+        cimProjectId:"ad938619-858f-4a90-8451-0e5e8daa0a6f",
         library:"https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"
     },
     inner:{
@@ -31,7 +31,7 @@ function getEnvironment(){
         if(url.slice(8,16)==="opentest"){
             return "test";
         }
-        else if(url.slice(8,13)==="open."){
+        else if(url.slice(8,13)==="lbdp."){
             return "out";
         }
     }

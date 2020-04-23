@@ -180,7 +180,12 @@
                 else{
                     selectedComponents=[component]
                 }
-                currentProject.selectComponents(selectedComponents);
+                if(isInSubScene){
+                    bimProject.selectComponents(selectedComponents);
+                }
+                else{
+                    currentProject.selectComponents(selectedComponents);
+                }
                 currentSelectedComponent=component;
             }
 
@@ -200,6 +205,7 @@
                             subProject.open({
                                 drawEdge: true, //绘制边线
                             }).then(function(projects){
+                                bimProject = currentProject.getInnerProjectList()[0];
                                 console.log('子工程加载完成');
                                 $('#loading').hide();
                                 $('.section').show();
@@ -211,6 +217,9 @@
                 }
                 else{
                     currentProject.deselectAllComponents();
+                    if(isInSubScene){
+                        bimProject.deselectAllComponents();
+                    }
                     selectedComponents=[];
                     currentSelectedComponent=undefined;
                 }
@@ -224,7 +233,12 @@
                     highlightComponent(component,true);
                 }
                 else{
-                    currentProject.deselectAllComponents();
+                    if(isInSubScene){
+                        bimProject.selectComponents(selectedComponents);
+                    }
+                    else{
+                        currentProject.selectComponents(selectedComponents);
+                    }
                     selectedComponents=[];
                     currentSelectedComponent=undefined;
                     $('#infoBox').hide();
@@ -243,7 +257,12 @@
             document.addEventListener("keydown",function(e){
                 if(e.keyCode===27){
                     if(selectedComponents.length>0){
-                        currentProject.deselectAllComponents();
+                        if(isInSubScene){
+                            bimProject.deselectAllComponents();
+                        }
+                        else{
+                            currentProject.deselectAllComponents();
+                        }
                         selectedComponents=[];
                         currentSelectedComponent=undefined;
                     }
@@ -262,11 +281,29 @@
                     switch(liCount){
                         case 0:
                             child.onclick=function(){
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
                                 console.log("构件详情");
                                 currentSelectedComponent.getProperties().then(data=>{
+                                    var tableStr = '';
+                                    tableStr+=`<h3 style="color:white">${data.name?data.name:data.guid}</h3>`
+                                    tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">GUID</span>
+                                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data.guid}</span>
+                                                    </div>`;
+                                    if(currentSelectedComponent.type == Motor.ProjType.TYPE_BIM){
+                                        for (var key in infoNames) {
+                                            tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
+                                                            <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${infoNames[key]}</span>
+                                                            <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data[key]}</span>
+                                                        </div>`;
+                                        }
+                                    }
+                                    
                                     let props = data?data.props:undefined;
                                     if(props && props.length>0){
-                                        var tableStr = '';
                                         if(currentSelectedComponent.type===Motor.ProjType.TYPE_BIM){
                                             let groups = {};
                                             props.forEach(function(prop){
@@ -311,17 +348,6 @@
                                                 }
                                             })
 
-                                            tableStr+=`<h3 style="color:white">${data.name?data.name:data.guid}</h3>`
-                                            tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                                                <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">GUID</span>
-                                                                <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data.guid}</span>
-                                                            </div>`;
-                                            for (var key in infoNames) {
-                                                tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                                                <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${infoNames[key]}</span>
-                                                                <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data[key]}</span>
-                                                            </div>`;
-                                            }
                                             for(let group in groups){
                                                 let temp = '';
                                                 groups[group].forEach(item=>{
@@ -401,10 +427,9 @@
                                                 </div>`;
                                             }
                                         }
-                                        
-                                        $('#infoBox').html(tableStr);
-                                        $('#infoBox').show();
                                     }
+                                    $('#infoBox').html(tableStr);
+                                    $('#infoBox').show();
                                 });
                                 // contextContainer.setAttribute('style','display:none;');
                                 $('#contextContainer').hide();
@@ -412,43 +437,59 @@
                             break;
                         case 1:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.setAllComponentsVisibility(true);
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("隐藏选中构件");
                                 hiddenComponents = hiddenComponents.concat(selectedComponents);
-                                currentProject.setComponentsVisiblity(false,hiddenComponents);
+                                styleProject.setComponentsVisiblity(false,hiddenComponents);
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 2:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.resetDefaultColorForAll();
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("半透明选中构件");
                                 transparentComponents = transparentComponents.concat(selectedComponents);
-                                currentProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
+                                styleProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 3:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.clearIsolation();
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("隔离选中构件");
                                 isolatedComponents = isolatedComponents.concat(selectedComponents);
-                                currentProject.isolateComponents(isolatedComponents);
+                                styleProject.isolateComponents(isolatedComponents);
                                 // isolateComponent = currentSelectedComponent;
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 4:
                             child.onclick=function(){
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
                                 console.log("还原构件样式");
                                 // if(currentProject.drawEdge){
                                 //     currentProject.drawEdge=false;
@@ -457,8 +498,8 @@
                                     hiddenComponents=[];
                                     transparentComponents=[];
                                     isolatedComponents=[];
-                                    currentProject.reset();
-                                    currentProject.selectComponents(selectedComponents);
+                                    styleProject.reset();
+                                    styleProject.selectComponents(selectedComponents);
                                 }
                                 $('#contextContainer').hide();
                             }
@@ -750,7 +791,7 @@
         /**
          * 绘制工程
          */
-        var currentProject;
+        var currentProject,bimProject;
         function drawProject(projectId) {
             if(!(typeof projectId ==="string")){
                 if(projectId.length && projectId.length>0){

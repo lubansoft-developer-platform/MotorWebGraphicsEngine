@@ -190,7 +190,14 @@
                 else{
                     selectedComponents=[component]
                 }
-                currentProject.selectComponents(selectedComponents);
+                if(isInSubScene){
+                    if(bimProject){
+                        bimProject.selectComponents(selectedComponents);
+                    }
+                }
+                else{
+                    currentProject.selectComponents(selectedComponents);
+                }
                 currentSelectedComponent=component;
             }
 
@@ -205,11 +212,14 @@
                         let subProject = obj.getLinkedProject();
                         if(subProject){
                             $('#loading').show();
+                            currentProject.deselectAllComponents();
+                            currentSelectedComponent=undefined;
                             currentProject = subProject;
                             isInSubScene=true;
                             subProject.open({
                                 drawEdge: true, //绘制边线
                             }).then(function(projects){
+                                bimProject = currentProject.getInnerProjectList()[0];
                                 console.log('子工程加载完成');
                                 $('#loading').hide();
                                 $('.section').show();
@@ -220,7 +230,16 @@
                     }
                 }
                 else{
-                    currentProject.deselectAllComponents();
+                    if(isInSubScene){
+                        if(bimProject){
+                            bimProject.deselectAllComponents();
+                        }
+                    }
+                    else{
+                        if(currentProject){
+                            currentProject.deselectAllComponents();
+                        }
+                    }
                     selectedComponents=[];
                     currentSelectedComponent=undefined;
                 }
@@ -234,7 +253,14 @@
                     highlightComponent(component,true);
                 }
                 else{
-                    currentProject.deselectAllComponents();
+                    if(isInSubScene){
+                        if(bimProject){
+                            bimProject.deselectAllComponents();
+                        }
+                    }
+                    else{
+                        currentProject.deselectAllComponents();
+                    }
                     selectedComponents=[];
                     currentSelectedComponent=undefined;
                     $('#infoBox').hide();
@@ -253,7 +279,14 @@
             document.addEventListener("keydown",function(e){
                 if(e.keyCode===27){
                     if(selectedComponents.length>0){
-                        currentProject.deselectAllComponents();
+                        if(isInSubScene){
+                            if(bimProject){
+                                bimProject.deselectAllComponents();
+                            }
+                        }
+                        else{
+                            currentProject.deselectAllComponents();
+                        }
                         selectedComponents=[];
                         currentSelectedComponent=undefined;
                     }
@@ -272,6 +305,10 @@
                     switch(liCount){
                         case 0:
                             child.onclick=function(){
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
                                 console.log("构件详情");
                                 currentSelectedComponent.getProperties().then(data=>{
                                     var tableStr = '';
@@ -424,43 +461,59 @@
                             break;
                         case 1:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.setAllComponentsVisibility(true);
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("隐藏选中构件");
                                 hiddenComponents = hiddenComponents.concat(selectedComponents);
-                                currentProject.setComponentsVisiblity(false,hiddenComponents);
+                                styleProject.setComponentsVisiblity(false,hiddenComponents);
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 2:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.resetDefaultColorForAll();
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("半透明选中构件");
                                 transparentComponents = transparentComponents.concat(selectedComponents);
-                                currentProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
+                                styleProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 3:
                             child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
+                                styleProject.clearIsolation();
+                                if(styleProject.drawEdge){
+                                    styleProject.drawEdge=false;
                                 }
                                 console.log("隔离选中构件");
                                 isolatedComponents = isolatedComponents.concat(selectedComponents);
-                                currentProject.isolateComponents(isolatedComponents);
+                                styleProject.isolateComponents(isolatedComponents);
                                 // isolateComponent = currentSelectedComponent;
                                 $('#contextContainer').hide();
                             }
                             break;
                         case 4:
                             child.onclick=function(){
+                                let styleProject = currentProject;
+                                if(isInSubScene){
+                                    styleProject = bimProject;
+                                }
                                 console.log("还原构件样式");
                                 // if(currentProject.drawEdge){
                                 //     currentProject.drawEdge=false;
@@ -469,8 +522,8 @@
                                     hiddenComponents=[];
                                     transparentComponents=[];
                                     isolatedComponents=[];
-                                    currentProject.reset();
-                                    currentProject.selectComponents(selectedComponents);
+                                    styleProject.reset();
+                                    styleProject.selectComponents(selectedComponents);
                                 }
                                 $('#contextContainer').hide();
                             }
@@ -766,7 +819,7 @@
         /**
          * 绘制工程
          */
-        var currentProject;
+        var currentProject,bimProject;
         function drawProject(projectId) {
             if(!(typeof projectId ==="string")){
                 if(projectId.length && projectId.length>0){
