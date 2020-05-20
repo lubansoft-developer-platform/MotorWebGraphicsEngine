@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="zTreeStyle.css" type="text/css">
     <script src="jquery.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
-    <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
-    <!-- <script src="../../library/motor.js"></script> -->
-    <script src="../common/common.js"></script>
-    <!-- <script src="../common/config.js"></script> -->
+    <!-- 引用官网的js和静态库 注意:这个工程比较大-->
+    <!-- <script src="../common/common.js"></script> -->
+    <!-- 引用本地的js和静态库 -->
+    <script src="../common/config.js"></script>
 </head>
 
 <body>
@@ -103,7 +103,7 @@
         </ul>
     </div>
     <script>
-        $('.section_box_container').hide();
+        //$('.section_box_container').hide();
         // $('#infoBox').hide();
         // $('.tree_container').hide();
         // $('.btns').hide();
@@ -118,7 +118,7 @@
 
         var appid = motorAppId;
         var secret = motorSecret;
-        Motor.ServiceConfig.server = bimServer;
+        Motor.Config.serverUrl = bimServer;
 
         var projectId = cimProjectId;
         
@@ -149,13 +149,15 @@
         //初始化Viewer
         var viewer = new Motor.Viewer({
             container: 'container',//viewer所在的div元素id
-            // viewerMode: Motor.ViewerMode.BIM,//viewer的模式
+            viewerMode: Motor.ViewerMode.BIM,//viewer的模式
             appid:appid,
             secret:secret,
-            antialias:true
+            antialias:true,
+            viewCubeConfig:{width:0,height:0}
+            //enableBIMViewCube:false
         });
         viewer.initialize().then(function(){
-            drawProject(projectId,false);
+             drawProject(projectId,false);
             //开启框选放大
             viewer.enableMarquee = true;
             //框选放大
@@ -186,11 +188,15 @@
                 else{
                     currentProject.selectComponents(selectedComponents);
                 }
+                //currentProject.selectComponents(null);
+            
                 currentSelectedComponent=component;
             }
 
+
             //设置点选后的回调函数
             viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
+
                 var obj = viewer.pick(mouse.position,currentProject);
                 if (obj instanceof Motor.Component) {
                     var component = obj;
@@ -792,15 +798,20 @@
          * 绘制工程
          */
         var currentProject,bimProject;
-        function drawProject(projectId) {
+         function drawProject(projectId) {
             if(!(typeof projectId ==="string")){
                 if(projectId.length && projectId.length>0){
                     projectId = projectId[1];
                 }
             }
+            let pr = viewer.getProjectList();
+            
             currentProject = viewer.queryProject(projectId);
-            currentProject.open().then(function () {
+
+            currentProject.open({lazyLoad:true}).then(function () {
                 $('#loading').hide();  
+               
+            //    $(".cesium-viewer-fullscreenContainer").hide();
             });
         }
     </script>

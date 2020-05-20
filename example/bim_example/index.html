@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="zTreeStyle.css" type="text/css">
     <script src="jquery.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
-    <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
-    <!-- <script src="../../library/motor.js"></script> -->
-    <script src="../common/common.js"></script>
-    <!-- <script src="../common/config.js"></script> -->
+    <!-- 引用官网的js和静态库 -->
+    <!-- <script src="../common/common.js"></script> -->
+    <!-- 引用本地的js和静态库 -->
+    <script src="../common/config.js"></script>
 </head>
 
 <body>
@@ -124,7 +124,9 @@
 
         const appid = motorAppId;
         const secret = motorSecret;
-        Motor.ServiceConfig.server = bimServer;
+        //Motor.ServiceConfig.server = bimServer;
+
+        Motor.Config.serverUrl = bimServer;
 
         const projectId = bimProjectId;
         
