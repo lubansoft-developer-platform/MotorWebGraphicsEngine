@@ -578,7 +578,7 @@
                     $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
                     $('.section_box_container').show();
                     // $('.section_box_container>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
-                    clippingPlaneEditor = new Motor.ClippingPlaneEditor(currentProject);
+                    clippingPlaneEditor = new Motor.ClippingPlaneEditor(bimProject);
                     planeVisibility = true;
                     clippingPlaneEditor.addClippingPlane($('#section_box').val());
                     $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
