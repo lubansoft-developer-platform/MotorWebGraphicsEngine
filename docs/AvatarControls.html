@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: 特效 | MotorJS</title>
+    <title>Class: AvatarControls | MotorJS</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -52,128 +52,2300 @@
 <div class="main" id="main">
     
 
+
+
+
 <section>
-    <header>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>AvatarControls<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>化身控制器，用于在场景中加入一个可控制移动的模型
+键盘WASD键控制前后左右移动，QE键控制左右转向，RF键控制上下升降</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dt>
+    
+        <h4 class="name" id="AvatarControls">
+            
+                new <span class="type-signature"></span>AvatarControls<span class="signature">(options)</span><span class="type-signature"></span>
+                
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
         
 
-        <h2>特效</h2>
-    </header>
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含以下参数的对象</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>avatar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>模型对象</p></td>
+        </tr>
 
     
-        <article class="readme">
-            <h3>1. 水面</h3>
-<p>根据坐标点绘制水面</p>
-<pre class="prettyprint source lang-javascript"><code>var waterPositions = [Motor.Cartesian3.fromDegrees(121,31),Motor.Cartesian3.fromDegrees(121,32),Motor.Cartesian3.fromDegrees(122,31)];
-//绘制水面
-var water = viewer.addWater(waterPositions,options);
-//删除水面
-viewer.removeWater(water);
-</code></pre>
-<h3>2. 体渲染</h3>
-<h3>创建体渲染对象</h3>
-<pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
-    center: Motor.Cartesia3.fromDegrees(121,31,2.5),
-    dimensions: [10, 10, 5],
-    image: require('./assets/images/fires/room_fire_60s_3d.png')
-});
-</code></pre>
-<h3>自定义颜色表</h3>
-<pre class="prettyprint source lang-javascript"><code>viewer.createVolumeRender({
-    center: Motor.Cartesia3.fromDegrees(121,31,2.5),
-    dimensions: [10, 10, 5],
-    image: require('./assets/images/fires/room_fire_60s_3d.png'),
-    isRGB: false,
-    alphaCorrection: 0.1,//透明度矫正参数，0到1之间的数值
-    colorScheme: [
-        {stop: 0.1, color: 'rgba(0, 0, 255, 0.6)'},//给分布在10%以下的值设置颜色
-        {stop: 0.2, color: 'rgba(162, 180, 189, 1)'},//给分布在10%-20%的值设置颜色
-        {stop: 0.4, color: 'rgba(255, 255, 0, 1)'},//给分布在20%-40%的值设置颜色
-        {stop: 0.6, color: 'rgba(245, 152, 105, 1)'},//给分布在40%-60%的值设置颜色
-        {stop: 0.8, color: 'rgba(255, 10, 10, 1)'},//给分布在60%-80%的值设置颜色
-        {stop: 1.0, color: 'rgba(255, 0, 0, 1)'},//给分布在80%-100%的值设置颜色
-    ]
-});
-</code></pre>
-<h3>3. 建筑物3d-tiles特效</h3>
-<p>针对3d-tiles数据，MotorJS为其添加了特殊的显示效果</p>
-<h3>渐变</h3>
-<p>通过设置渐变的起始色和终止色，以及渐变的最大高度，给原本纯色的建筑物模型添加渐变效果</p>
-<pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
-  url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
-  gradualOptions:{
-    startColor: new Motor.Cartesian3(0,0,1),//起始色
-    endColor: new Motor.Cartesian3(1,1,1),//终止色
-    gradualOffset: 150//渐变终止的最大高度
-  }
-  useGradual:true
-});
-//渐变可以在运行时开关
-tileset.useGradual = false;
-</code></pre>
-<h3>俯视压平特效</h3>
-<p>当相机处于俯视建筑物的角度时，三维建筑会自动压平成二维图形</p>
-<pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
-  url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
-  planView:true
-});
-//俯视压平可以在运行时开关
-tileset.planView = false;
-</code></pre>
-<h3>俯仰动画</h3>
-<p>当相机从俯视变为仰视，建筑物从低到高升起的特效</p>
-<pre class="prettyprint source lang-javascript"><code>var tileset = viewer.loadTileset({
-  url: 'http://cim.citylinker.com:13381/sh3dtiles/tongji_tiles/tileset.json',
-  shouldAnimate:true
-});
-//俯俯仰动画可以在运行时开关
-tileset.shouldAnimate = false;
-</code></pre>
-<h3>建筑物上的扩散圈效果</h3>
-<p>在建筑物上添加由中心向外扩散的圆形效果</p>
-<pre class="prettyprint source lang-javascript"><code>var dc = new Motor.DynamicCircle({
-    position: Motor.Cartesian3.fromDegrees(121,31),
-    color:new Motor.Color(1,0,0,1),
-    radius:100,//圆圈半径
-    width:10//圆环宽度
-});
-tileset.dynamicCircleCollection.add(dc);
-//删除动态圈
-tileset.dynamicCircleCollection.remove(dc);
-tileset.dynamicCircleCollection.removeByIndex(0);
-tileset.dynamicCircleCollection.removeAll();
-</code></pre>
-<h3>4. 视频投影</h3>
-<pre class="prettyprint source lang-javascript"><code>let video = viewer.addVideoProject({
-    videoUrl:'./assets/video/big-buck-bunny_trailer.mp4',//视频地址
-    viewerPosition: Motor.Cartesian3.fromDegrees(121-0.00014,31.00028,35),//投影原点坐标
-    targetPosition: Motor.Cartesian3.fromDegrees(121-0.00014,31.00028,0)//投影目标点坐标
-});
-</code></pre>
-<h3>5. 粒子效果</h3>
-<pre class="prettyprint source lang-javascript"><code>let ps1 = new Motor.ParticleSystem({
-    image : './assets/images/fire4.png',
-    startColor : new Motor.Color(1, 1, 1, 1),
-    endColor : new Motor.Color(0.5, 0, 0, 0),
-    emissionRate: 200.0,
-    startScale: 3.0,
-    endScale: 1.5,
-    minimumParticleLife: 1.5,
-    maximumParticleLife: 1.8,
-    minimumSpeed: 7.0,
-    maximumSpeed: 9.0,
-    emitter: new Motor.CircleEmitter(2),
-    imageSize : new Motor.Cartesian2(2.0, 2.0),
-    origin : Motor.Cartesian3.fromDegrees(121.00071,31.00040,3.51),
-    lifetime : 6,
-    minimumParticleLife:1,
-    maximumParticleLife:2,
-    sizeInMeters:true
-});
-viewer.addParticleSystem(ps1);
-</code></pre>
-        </article>
+
+        <tr>
+            
+                <td class="name"><code>avatarHeight</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>化身高度，默认为模型包围球直径</p></td>
+        </tr>
+
     
+
+        <tr>
+            
+                <td class="name"><code>autoUpdate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>自动更新模型位置，独立使用时需要传入true</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firstPersonControl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>是否使用第一人称视角</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firstPersonControlPitch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>第一人称初始俯仰角，单位为弧度</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firstPersonControlOffset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>第一人称初始相机位置，x轴正方向向右，y轴正方向向前，z轴正方向向上</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+
+<dt>
+<h4 class="name" id="enabled">
+    <span class="type-signature"></span>enabled<span class="type-signature"> :Boolean</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>启用控制器</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="enableFirstPersonControl">
+    <span class="type-signature"></span>enableFirstPersonControl<span class="type-signature"> :Boolean</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>启用第一人称视角</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="gravitationalAcceleration">
+    <span class="type-signature"></span>gravitationalAcceleration<span class="type-signature"> :Number</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>重力加速度</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>10</li>
+        </ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="isCollision">
+    <span class="type-signature"></span>isCollision<span class="type-signature"> :Boolean</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>是否启用碰撞</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="isGravitative">
+    <span class="type-signature"></span>isGravitative<span class="type-signature"> :Boolean</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>是否启用重力</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="lookingSpeed">
+    <span class="type-signature"></span>lookingSpeed<span class="type-signature"> :Number</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>旋转速度</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>1</li>
+        </ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="movementSpeed">
+    <span class="type-signature"></span>movementSpeed<span class="type-signature"> :Number</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>移动速度</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="offset">
+    <span class="type-signature"></span>offset<span class="type-signature"> :<a href="Cartesian3.html">Cartesian3</a></span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>第一人称时相机相对模型的位置</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="Cartesian3.html">Cartesian3</a></span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onLookLeftEnd">
+    <span class="type-signature"></span>onLookLeftEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向左转向结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onLookLeftStart">
+    <span class="type-signature"></span>onLookLeftStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向左转向开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onLookRightEnd">
+    <span class="type-signature"></span>onLookRightEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向右转向结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onLookRightStart">
+    <span class="type-signature"></span>onLookRightStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向右转向开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveBackwardEnd">
+    <span class="type-signature"></span>onMoveBackwardEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向后移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveBackwardStart">
+    <span class="type-signature"></span>onMoveBackwardStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向后移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveDownEnd">
+    <span class="type-signature"></span>onMoveDownEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向下移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveDownStart">
+    <span class="type-signature"></span>onMoveDownStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向下移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveForwardEnd">
+    <span class="type-signature"></span>onMoveForwardEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向前移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveForwardStart">
+    <span class="type-signature"></span>onMoveForwardStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向前移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveLeftEnd">
+    <span class="type-signature"></span>onMoveLeftEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向左移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveLeftStart">
+    <span class="type-signature"></span>onMoveLeftStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向左移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveRightEnd">
+    <span class="type-signature"></span>onMoveRightEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向右移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveRightStart">
+    <span class="type-signature"></span>onMoveRightStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向右移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveUpEnd">
+    <span class="type-signature"></span>onMoveUpEnd<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向上移动结束事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="onMoveUpStart">
+    <span class="type-signature"></span>onMoveUpStart<span class="type-signature"> :Event</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>向上移动开始事件</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Event</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id="pitch">
+    <span class="type-signature"></span>pitch<span class="type-signature"> :Number</span>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>第一人称俯仰角</p>
+    </div>
+    
+
+    <!--
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Number</span>
+
+
+            </li>
+        </ul>
+    
+    -->
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
+
 
 
 
@@ -189,7 +2361,13 @@ viewer.addParticleSystem(ps1);
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        showLnbExamples();
+        var id = 'AvatarControls_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
     </script>
 
 </body>
