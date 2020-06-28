@@ -1,4 +1,54 @@
 # 更新日志
+## **Motor v2.4.0** 2020年6月28日
+#### 增加
+* 提升整体渲染效果
+* 添加DWG工程支持
+* 添加`AvatarRecorder`类，用于自定义模型漫游的录制
+* `MotorViewer`
+  * 添加`showMoon`传入参数和成员变量，用于控制月亮显示隐藏
+  * 添加`allowCameraUnderground`成员变量，支持相机潜入地下
+  * 添加`isFlashlight`传入参数和成员变量，支持视角前模型始终面向光源的模式
+* `Project`
+  * 添加`boundingBoxLocal`成员变量，获取工程在局部坐标系下的包围盒
+  * 添加`localCoordinatesToWorld`方法，用于将该工程下的局部坐标转换成世界坐标
+  * `open`方法添加`duration`参数，修改飞向工程的时间
+  * `close`方法添加`isFlyTo`参数，若为`true`，则飞回父工程
+* `Component`
+  * 添加`boundingBoxLocal`成员变量，获取构件在局部坐标系下的包围盒
+  * 添加`getBIMProject`方法，获取构件所属的BIM工程
+* `ClippingPlaneEditor`
+  * 添加`clipTerrain`传入参数，支持剖切地形
+  * 添加`dragStart`和`dragEnd`事件，监听剖切面拖动和释放
+* `GeometryCollection`
+  * 添加`addRectangle`方法，绘制沿地球表面的矩形区域
+* `AvatarControls`
+  * 添加`autoUpdate`传入参数，用于单独使用AvatarControls
+  * 添加`avatarModelReady`成员变量，监听avatar模型加载完成的事件
+  * 添加`firstPersonControlOffset`传入参数，设置视角相对于模型的位置
+  * 添加`offset`成员变量，用于修改视角相对于模型的位置
+
+#### 修改
+* `MotorViewer`
+  * `getProjectList`方法返回变为promise
+* `Project`
+  * lazyLoad加载完成的事件也放入`open()`返回的Promise中
+* `OrbitControl`
+  * BIM模式下不会拾取地面作为旋转中心
+* 优化style在传入上千个guid时设置样式的速度
+* 优化水面效果
+* 在cim场景下直接打开的bim工程可以由cim工程控制样式和隔离
+* 倾斜摄影支持剖切
+* 相机参数与客户端一致
+
+#### 修复
+* 修复未加载完工程时，点击高亮模型时会报错的bug
+* 修复键盘控制和人物模型控制切换的报错
+* 修复关键字查询不可用的bug
+* 修复自定义地图无法显示的bug
+* 修复CIM场景只有地形时相机飞行报错的bug
+* 修复定位初始化视角后maximumZoomDistance太小，导致BIM模式缩放失效的问题
+* 修复lazyLoad加载模型不全的bug
+
 ## **Motor v2.3.0** 2020年3月30日
 
 #### 增加
