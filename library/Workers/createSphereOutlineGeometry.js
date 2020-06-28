@@ -1,23 +1,2 @@
-/**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
- *
- * Copyright 2011-2017 Cesium Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Columbus View (Pat. Pend.)
- *
- * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
- */
-define(["./when-4ca4e419","./Check-430b3551","./defineProperties-163ddb68","./Cartesian3-32451e63","./Ellipsoid-d2aa3b12","./Transforms-7b04d7e0","./Matrix4-33464f2b","./RuntimeError-443472b0","./Cartesian2-f49a1383","./FeatureDetection-0d4fee13","./WebGLConstants-2ddfa2f9","./ComponentDatatype-329b9462","./GeometryAttribute-b8faa946","./GeometryAttributes-614c63f8","./IndexDatatype-153fdd7f","./arrayFill-11a46844","./EllipsoidOutlineGeometry-2bdf6cbe"],(function(e,i,t,r,n,a,o,s,d,l,u,c,p,f,m,y,b){"use strict";function G(i){var t=e.defaultValue(i.radius,1),n={radii:new r.Cartesian3(t,t,t),stackPartitions:i.stackPartitions,slicePartitions:i.slicePartitions,subdivisions:i.subdivisions};this._ellipsoidGeometry=new b.EllipsoidOutlineGeometry(n),this._workerName="createSphereOutlineGeometry"}G.packedLength=b.EllipsoidOutlineGeometry.packedLength,G.pack=function(e,t,r){return i.Check.typeOf.object("value",e),b.EllipsoidOutlineGeometry.pack(e._ellipsoidGeometry,t,r)};var k=new b.EllipsoidOutlineGeometry,v={radius:void 0,radii:new r.Cartesian3,stackPartitions:void 0,slicePartitions:void 0,subdivisions:void 0};return G.unpack=function(i,t,n){var a=b.EllipsoidOutlineGeometry.unpack(i,t,k);return v.stackPartitions=a._stackPartitions,v.slicePartitions=a._slicePartitions,v.subdivisions=a._subdivisions,e.defined(n)?(r.Cartesian3.clone(a._radii,v.radii),n._ellipsoidGeometry=new b.EllipsoidOutlineGeometry(v),n):(v.radius=a._radii.x,new G(v))},G.createGeometry=function(e){return b.EllipsoidOutlineGeometry.createGeometry(e._ellipsoidGeometry)},function(i,t){return e.defined(t)&&(i=G.unpack(i,t)),G.createGeometry(i)}}));
+define(["./when-7ef6387a","./Check-ed6a1804","./Math-55f9392d","./Ellipsoid-911f8bc2","./Transforms-d8f9dcbd","./RuntimeError-5b606d78","./Cartesian2-ff47d58f","./WebGLConstants-30fc6f5c","./ComponentDatatype-a863af81","./GeometryAttribute-45a4c7c8","./GeometryAttributes-cb18da36","./IndexDatatype-891b5845","./GeometryOffsetAttribute-5cfc2755","./EllipsoidOutlineGeometry-a0ee09d9"],(function(e,i,t,r,n,o,s,a,d,l,c,u,f,p){"use strict";function m(i){var t=e.defaultValue(i.radius,1),n={radii:new r.Cartesian3(t,t,t),stackPartitions:i.stackPartitions,slicePartitions:i.slicePartitions,subdivisions:i.subdivisions};this._ellipsoidGeometry=new p.EllipsoidOutlineGeometry(n),this._workerName="createSphereOutlineGeometry"}m.packedLength=p.EllipsoidOutlineGeometry.packedLength,m.pack=function(e,t,r){return i.Check.typeOf.object("value",e),p.EllipsoidOutlineGeometry.pack(e._ellipsoidGeometry,t,r)};var y=new p.EllipsoidOutlineGeometry,G={radius:void 0,radii:new r.Cartesian3,stackPartitions:void 0,slicePartitions:void 0,subdivisions:void 0};return m.unpack=function(i,t,n){var o=p.EllipsoidOutlineGeometry.unpack(i,t,y);return G.stackPartitions=o._stackPartitions,G.slicePartitions=o._slicePartitions,G.subdivisions=o._subdivisions,e.defined(n)?(r.Cartesian3.clone(o._radii,G.radii),n._ellipsoidGeometry=new p.EllipsoidOutlineGeometry(G),n):(G.radius=o._radii.x,new m(G))},m.createGeometry=function(e){return p.EllipsoidOutlineGeometry.createGeometry(e._ellipsoidGeometry)},function(i,t){return e.defined(t)&&(i=m.unpack(i,t)),m.createGeometry(i)}}));
+//# sourceMappingURL=createSphereOutlineGeometry.js.map
