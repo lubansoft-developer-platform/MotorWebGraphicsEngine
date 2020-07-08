@@ -1,8 +1,6 @@
 ## Classes
 
 <dl>
-<dt><a href="#Config">Config</a></dt>
-<dd><p>配置对象</p></dd>
 <dt><a href="#Cartesian2">Cartesian2</a></dt>
 <dd><p><p>二维坐标类，参考{@tutorial 坐标转换}</p></p>
 </dd>
@@ -91,9 +89,20 @@
 </dd>
 </dl>
 
+## Members
+
+<dl>
+<dt><a href="#MotorConfig">MotorConfig</a> : <code><a href="#Config">Config</a></code></dt>
+<dd><p>配置项</p></dd>
+<dt><a href="#MotorConfig">MotorConfig</a> : <code><a href="#Config">Config</a></code></dt>
+<dd><p>配置项</p></dd>
+</dl>
+
 ## Typedefs
 
 <dl>
+<dt><a href="#Config">Config</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#CompProperty">CompProperty</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#BIMProperty">BIMProperty</a> : <code>Object</code></dt>
@@ -126,32 +135,10 @@
 <dd></dd>
 <dt><a href="#MeasureResultCallback">MeasureResultCallback</a> : <code>function</code></dt>
 <dd></dd>
+<dt><a href="#Config">Config</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
-<a name="Config"></a>
-
-## Config
-<p>配置对象</p>
-
-**Kind**: global class  
-
-* [Config](#Config)
-    * [.serverUrl](#Config+serverUrl) : <code>String</code>
-    * [.MOTOR_BASE_URL](#Config+MOTOR_BASE_URL) : <code>String</code>
-
-<a name="Config+serverUrl"></a>
-
-### config.serverUrl : <code>String</code>
-<p>服务器地址</p>
-
-**Kind**: instance property of [<code>Config</code>](#Config)  
-**Default**: <code>https://open.lubansoft.com/api</code>  
-<a name="Config+MOTOR_BASE_URL"></a>
-
-### config.MOTOR\_BASE\_URL : <code>String</code>
-<p>Motor静态资源地址</p>
-
-**Kind**: instance property of [<code>Config</code>](#Config)  
 <a name="Cartesian2"></a>
 
 ## Cartesian2
@@ -983,6 +970,7 @@ markers.add({
     * [.roamEditor](#Viewer+roamEditor) : [<code>RoamEditor</code>](#RoamEditor)
     * [.cameraMoveStart](#Viewer+cameraMoveStart) : <code>Event</code>
     * [.cameraMoveEnd](#Viewer+cameraMoveEnd) : <code>Event</code>
+    * [.cameraChanged](#Viewer+cameraChanged) : <code>Event</code>
     * [.waterFlowSpeed](#Viewer+waterFlowSpeed) : <code>Number</code>
     * [.animatedSpeed](#Viewer+animatedSpeed) : <code>Number</code>
     * [.navigationMode](#Viewer+navigationMode) : [<code>NavigationMode</code>](#NavigationMode)
@@ -1031,6 +1019,7 @@ markers.add({
     * [.isolateComponents(options, [block])](#Viewer+isolateComponents)
     * [.getOpeningProjectList()](#Viewer+getOpeningProjectList) ⇒ [<code>[ &#x27;Array&#x27; ].&lt;Project&gt;</code>](#Project)
     * [.getProjectList()](#Viewer+getProjectList) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;Project&gt;&gt;</code>
+    * [.cartesianToCanvasCoordinates(point, result)](#Viewer+cartesianToCanvasCoordinates)
 
 <a name="new_Viewer_new"></a>
 
@@ -1056,7 +1045,7 @@ markers.add({
 | [options.enableTouchControl] | <code>Boolean</code> | <code>false</code> | <p>开启触屏控制</p> |
 | [options.viewCubeConfig] | [<code>ViewCubeConfig</code>](#ViewCubeConfig) |  | <p>导航方块参数</p> |
 | [options.cimControlMode] | [<code>CIMControlMode</code>](#CIMControlMode) | <code>Motor.CIMControlMode.MOTOR</code> | <p>CIM模式下的鼠标控制逻辑</p> |
-| [options.backgroundColor] | [<code>Color</code>](#Color) | <code>new Motor.Color(0.98, 0.98,, 0.95)</code> | <p>背景颜色，仅适用于BIM模式</p> |
+| [options.backgroundColor] | [<code>Color</code>](#Color) | <code>new Motor.Color(0.93,0.95,0.96)</code> | <p>背景颜色，仅适用于BIM模式</p> |
 | [options.enableVignetteMode] | <code>Boolean</code> | <code>false</code> | <p>开启渐变背景颜色</p> |
 | [options.enableDefaultBIMSkyBox] | <code>Boolean</code> | <code>true</code> | <p>启用默认环境贴图</p> |
 | [options.enableWebgl2] | <code>Boolean</code> | <code>true</code> | <p>启用WebGL2</p> |
@@ -1067,6 +1056,8 @@ markers.add({
 | [options.skyBox] | [<code>SkyBox</code>](#SkyBox) |  | <p>天空盒对象</p> |
 | [options.isFlashlight] | <code>Boolean</code> | <code>false</code> | <p>是否开启手电筒光源模式</p> |
 | [options.showMoon] | <code>Boolean</code> |  | <p>显示月亮</p> |
+| [options.fullscreenElement] | <code>Element</code> |  | <p>全屏的目标DOM元素</p> |
+| [options.fullscreenButton] | <code>Boolean</code> |  | <p>全屏按钮显示隐藏</p> |
 
 **Example**  
 ```js
@@ -1114,6 +1105,12 @@ viewer.shadowMap.darkness = 0.5;
 
 ### viewer.cameraMoveEnd : <code>Event</code>
 <p>相机结束移动的事件</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+cameraChanged"></a>
+
+### viewer.cameraChanged : <code>Event</code>
+<p>相机移动事件</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+waterFlowSpeed"></a>
@@ -1567,6 +1564,18 @@ var volumeRender = viewer.createVolumeRender({
 <p>获取当前账号中的所有工程</p>
 
 **Kind**: instance method of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+cartesianToCanvasCoordinates"></a>
+
+### viewer.cartesianToCanvasCoordinates(point, result)
+<p>将三维坐标转成当前屏幕坐标</p>
+
+**Kind**: instance method of [<code>Viewer</code>](#Viewer)  
+
+| Param | Type |
+| --- | --- |
+| point | [<code>Cartesian3</code>](#Cartesian3) | 
+| result | [<code>Cartesian2</code>](#Cartesian2) | 
+
 <a name="Project"></a>
 
 ## Project
@@ -3360,6 +3369,18 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 <p>销毁clippingPlaneEditor</p>
 
 **Kind**: instance method of [<code>ClippingPlaneEditor</code>](#ClippingPlaneEditor)  
+<a name="MotorConfig"></a>
+
+## MotorConfig : [<code>Config</code>](#Config)
+<p>配置项</p>
+
+**Kind**: global variable  
+<a name="MotorConfig"></a>
+
+## MotorConfig : [<code>Config</code>](#Config)
+<p>配置项</p>
+
+**Kind**: global variable  
 <a name="BIMMajor"></a>
 
 ## BIMMajor : <code>enum</code>
@@ -3618,6 +3639,35 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | rotateUp | <code>String</code> | <code>rotateUp</code> | <p>相机上转</p> |
 | rotateDown | <code>String</code> | <code>rotateDown</code> | <p>相机下转</p> |
 
+<a name="Config"></a>
+
+## Config : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| [serverUrl] | <code>String</code> | <code>https://open.lubansoft.com/api</code> | <p>服务器地址</p> |
+| [MOTOR_BASE_URL] | <code>String</code> |  | <p>Motor静态资源地址</p> |
+
+
+* [Config](#Config) : <code>Object</code>
+    * [.serverUrl](#Config+serverUrl) : <code>String</code>
+    * [.MOTOR_BASE_URL](#Config+MOTOR_BASE_URL) : <code>String</code>
+
+<a name="Config+serverUrl"></a>
+
+### config.serverUrl : <code>String</code>
+<p>服务器地址</p>
+
+**Kind**: instance property of [<code>Config</code>](#Config)  
+**Default**: <code>https://open.lubansoft.com/api</code>  
+<a name="Config+MOTOR_BASE_URL"></a>
+
+### config.MOTOR\_BASE\_URL : <code>String</code>
+<p>Motor静态资源地址</p>
+
+**Kind**: instance property of [<code>Config</code>](#Config)  
 <a name="CompProperty"></a>
 
 ## CompProperty : <code>Object</code>
@@ -3816,3 +3866,32 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | --- | --- | --- |
 | result | [<code>MeasureResult</code>](#MeasureResult) | <p>鼠标事件对象</p> |
 
+<a name="Config"></a>
+
+## Config : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| [serverUrl] | <code>String</code> | <code>https://open.lubansoft.com/api</code> | <p>服务器地址</p> |
+| [MOTOR_BASE_URL] | <code>String</code> |  | <p>Motor静态资源地址</p> |
+
+
+* [Config](#Config) : <code>Object</code>
+    * [.serverUrl](#Config+serverUrl) : <code>String</code>
+    * [.MOTOR_BASE_URL](#Config+MOTOR_BASE_URL) : <code>String</code>
+
+<a name="Config+serverUrl"></a>
+
+### config.serverUrl : <code>String</code>
+<p>服务器地址</p>
+
+**Kind**: instance property of [<code>Config</code>](#Config)  
+**Default**: <code>https://open.lubansoft.com/api</code>  
+<a name="Config+MOTOR_BASE_URL"></a>
+
+### config.MOTOR\_BASE\_URL : <code>String</code>
+<p>Motor静态资源地址</p>
+
+**Kind**: instance property of [<code>Config</code>](#Config)  
