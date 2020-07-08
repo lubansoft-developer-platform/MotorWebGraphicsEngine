@@ -1,4 +1,13 @@
 # 更新日志
+## **Motor v2.4.1** 2020年7月08日
+#### 增加
+* `MotorViewer`
+  * 添加fullscreenElement传入参数，可以设置全屏的目标DOM元素，默认为场景所在canvas
+  * 添加fullscreenButton传入参数，可以设置全屏按钮的显示或隐藏
+  * 添加backgroundColor成员变量，可以在运行时调整背景颜色
+  * 添加cameraChanged成员变量，监听相机变化
+  * 添加cartesianToCanvasCoordinates方法，可将三维世界坐标转成相对于所在canvas的二维屏幕坐标
+
 ## **Motor v2.4.0** 2020年6月28日
 #### 增加
 * 提升整体渲染效果
