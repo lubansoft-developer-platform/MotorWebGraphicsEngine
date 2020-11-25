@@ -5,7 +5,7 @@
 根目录
 * docs
 * example
-* library
+* library 
 
 `docs`: API文档的教程（包含`html`和`markdown`）[Markdown文档](./docs/README.md)
 
