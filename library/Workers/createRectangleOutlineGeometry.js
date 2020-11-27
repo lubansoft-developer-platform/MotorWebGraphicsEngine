@@ -1,2 +1,451 @@
-define(["./when-7ef6387a","./Check-ed6a1804","./Math-85667bf9","./Ellipsoid-1cbb4ac9","./Transforms-c20c38d0","./RuntimeError-5b606d78","./Cartesian2-73569d25","./WebGLConstants-30fc6f5c","./ComponentDatatype-a863af81","./GeometryAttribute-6b3c7112","./GeometryAttributes-cb18da36","./IndexDatatype-f12d39b5","./GeometryOffsetAttribute-5cfc2755","./EllipsoidRhumbLine-01425f3c","./PolygonPipeline-5110db34","./RectangleGeometryLibrary-47979a32"],(function(e,t,i,r,a,n,o,l,u,s,d,p,c,f,g,h){"use strict";var y=new a.BoundingSphere,m=new a.BoundingSphere,b=new r.Cartesian3,v=new o.Rectangle;function _(e,t){var i=e._ellipsoid,r=t.height,a=t.width,n=t.northCap,o=t.southCap,l=r,c=2,f=0,g=4;n&&(c-=1,l-=1,f+=1,g-=2),o&&(c-=1,l-=1,f+=1,g-=2),f+=c*a+2*l-g;var y,m=new Float64Array(3*f),v=0,_=0,E=b;if(n)h.RectangleGeometryLibrary.computePosition(t,i,!1,_,0,E),m[v++]=E.x,m[v++]=E.y,m[v++]=E.z;else for(y=0;y<a;y++)h.RectangleGeometryLibrary.computePosition(t,i,!1,_,y,E),m[v++]=E.x,m[v++]=E.y,m[v++]=E.z;for(y=a-1,_=1;_<r;_++)h.RectangleGeometryLibrary.computePosition(t,i,!1,_,y,E),m[v++]=E.x,m[v++]=E.y,m[v++]=E.z;if(_=r-1,!o)for(y=a-2;y>=0;y--)h.RectangleGeometryLibrary.computePosition(t,i,!1,_,y,E),m[v++]=E.x,m[v++]=E.y,m[v++]=E.z;for(y=0,_=r-2;_>0;_--)h.RectangleGeometryLibrary.computePosition(t,i,!1,_,y,E),m[v++]=E.x,m[v++]=E.y,m[v++]=E.z;for(var A=m.length/3*2,w=p.IndexDatatype.createTypedArray(m.length/3,A),G=0,R=0;R<m.length/3-1;R++)w[G++]=R,w[G++]=R+1;w[G++]=m.length/3-1,w[G++]=0;var P=new s.Geometry({attributes:new d.GeometryAttributes,primitiveType:s.PrimitiveType.LINES});return P.attributes.position=new s.GeometryAttribute({componentDatatype:u.ComponentDatatype.DOUBLE,componentsPerAttribute:3,values:m}),P.indices=w,P}function E(a){var n=(a=e.defaultValue(a,e.defaultValue.EMPTY_OBJECT)).rectangle,l=e.defaultValue(a.granularity,i.CesiumMath.RADIANS_PER_DEGREE),u=e.defaultValue(a.ellipsoid,r.Ellipsoid.WGS84),s=e.defaultValue(a.rotation,0);if(!e.defined(n))throw new t.DeveloperError("rectangle is required.");if(o.Rectangle.validate(n),n.north<n.south)throw new t.DeveloperError("options.rectangle.north must be greater than options.rectangle.south");var d=e.defaultValue(a.height,0),p=e.defaultValue(a.extrudedHeight,d);this._rectangle=o.Rectangle.clone(n),this._granularity=l,this._ellipsoid=u,this._surfaceHeight=Math.max(d,p),this._rotation=s,this._extrudedHeight=Math.min(d,p),this._offsetAttribute=a.offsetAttribute,this._workerName="createRectangleOutlineGeometry"}E.packedLength=o.Rectangle.packedLength+r.Ellipsoid.packedLength+5,E.pack=function(i,a,n){if(!e.defined(i))throw new t.DeveloperError("value is required");if(!e.defined(a))throw new t.DeveloperError("array is required");return n=e.defaultValue(n,0),o.Rectangle.pack(i._rectangle,a,n),n+=o.Rectangle.packedLength,r.Ellipsoid.pack(i._ellipsoid,a,n),n+=r.Ellipsoid.packedLength,a[n++]=i._granularity,a[n++]=i._surfaceHeight,a[n++]=i._rotation,a[n++]=i._extrudedHeight,a[n]=e.defaultValue(i._offsetAttribute,-1),a};var A=new o.Rectangle,w=r.Ellipsoid.clone(r.Ellipsoid.UNIT_SPHERE),G={rectangle:A,ellipsoid:w,granularity:void 0,height:void 0,rotation:void 0,extrudedHeight:void 0,offsetAttribute:void 0};E.unpack=function(i,a,n){if(!e.defined(i))throw new t.DeveloperError("array is required");a=e.defaultValue(a,0);var l=o.Rectangle.unpack(i,a,A);a+=o.Rectangle.packedLength;var u=r.Ellipsoid.unpack(i,a,w);a+=r.Ellipsoid.packedLength;var s=i[a++],d=i[a++],p=i[a++],c=i[a++],f=i[a];return e.defined(n)?(n._rectangle=o.Rectangle.clone(l,n._rectangle),n._ellipsoid=r.Ellipsoid.clone(u,n._ellipsoid),n._surfaceHeight=d,n._rotation=p,n._extrudedHeight=c,n._offsetAttribute=-1===f?void 0:f,n):(G.granularity=s,G.height=d,G.rotation=p,G.extrudedHeight=c,G.offsetAttribute=-1===f?void 0:f,new E(G))};var R=new r.Cartographic;return E.createGeometry=function(t){var r,n,o=t._rectangle,l=t._ellipsoid,d=h.RectangleGeometryLibrary.computeOptions(o,t._granularity,t._rotation,0,v,R);if(!i.CesiumMath.equalsEpsilon(o.north,o.south,i.CesiumMath.EPSILON10)&&!i.CesiumMath.equalsEpsilon(o.east,o.west,i.CesiumMath.EPSILON10)){var f,b=t._surfaceHeight,E=t._extrudedHeight;if(!i.CesiumMath.equalsEpsilon(b,E,0,i.CesiumMath.EPSILON2)){if(r=function(e,t){var i=e._surfaceHeight,r=e._extrudedHeight,a=e._ellipsoid,n=r,o=i,l=_(e,t),u=t.height,s=t.width,d=g.PolygonPipeline.scaleToGeodeticHeight(l.attributes.position.values,o,a,!1),c=d.length,f=new Float64Array(2*c);f.set(d);var h=g.PolygonPipeline.scaleToGeodeticHeight(l.attributes.position.values,n,a);f.set(h,c),l.attributes.position.values=f;var y=t.northCap,m=t.southCap,b=4;y&&(b-=1),m&&(b-=1);var v=2*(f.length/3+b),E=p.IndexDatatype.createTypedArray(f.length/3,v);c=f.length/6;for(var A,w=0,G=0;G<c-1;G++)E[w++]=G,E[w++]=G+1,E[w++]=G+c,E[w++]=G+c+1;if(E[w++]=c-1,E[w++]=0,E[w++]=c+c-1,E[w++]=c,E[w++]=0,E[w++]=c,y)A=u-1;else{var R=s-1;E[w++]=R,E[w++]=R+c,A=s+u-2}if(E[w++]=A,E[w++]=A+c,!m){var P=s+A-1;E[w++]=P,E[w]=P+c}return l.indices=E,l}(t,d),e.defined(t._offsetAttribute)){var A=r.attributes.position.values.length/3,w=new Uint8Array(A);t._offsetAttribute===c.GeometryOffsetAttribute.TOP?w=c.arrayFill(w,1,0,A/2):(f=t._offsetAttribute===c.GeometryOffsetAttribute.NONE?0:1,w=c.arrayFill(w,f)),r.attributes.applyOffset=new s.GeometryAttribute({componentDatatype:u.ComponentDatatype.UNSIGNED_BYTE,componentsPerAttribute:1,values:w})}var G=a.BoundingSphere.fromRectangle3D(o,l,b,m),P=a.BoundingSphere.fromRectangle3D(o,l,E,y);n=a.BoundingSphere.union(G,P)}else{if((r=_(t,d)).attributes.position.values=g.PolygonPipeline.scaleToGeodeticHeight(r.attributes.position.values,b,l,!1),e.defined(t._offsetAttribute)){var D=r.attributes.position.values.length,L=new Uint8Array(D/3);f=t._offsetAttribute===c.GeometryOffsetAttribute.NONE?0:1,c.arrayFill(L,f),r.attributes.applyOffset=new s.GeometryAttribute({componentDatatype:u.ComponentDatatype.UNSIGNED_BYTE,componentsPerAttribute:1,values:L})}n=a.BoundingSphere.fromRectangle3D(o,l,b)}return new s.Geometry({attributes:r.attributes,indices:r.indices,primitiveType:s.PrimitiveType.LINES,boundingSphere:n,offsetAttribute:t._offsetAttribute})}},function(t,i){return e.defined(i)&&(t=E.unpack(t,i)),t._ellipsoid=r.Ellipsoid.clone(t._ellipsoid),t._rectangle=o.Rectangle.clone(t._rectangle),E.createGeometry(t)}}));
+/**
+ * Cesium - https://github.com/CesiumGS/cesium
+ *
+ * Copyright 2011-2020 Cesium Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Columbus View (Pat. Pend.)
+ *
+ * Portions licensed separately.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
+ */
+
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './GeometryAttribute-de79a9c2', './PrimitiveType-4c1d698a', './FeatureDetection-0c56f1be', './GeometryAttributes-cb18da36', './IndexDatatype-571b3b65', './GeometryOffsetAttribute-5cfc2755', './EllipsoidRhumbLine-e9bf1af4', './PolygonPipeline-5f144950', './RectangleGeometryLibrary-993232c7'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, GeometryAttribute, PrimitiveType, FeatureDetection, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipsoidRhumbLine, PolygonPipeline, RectangleGeometryLibrary) { 'use strict';
+
+    var bottomBoundingSphere = new Transforms.BoundingSphere();
+        var topBoundingSphere = new Transforms.BoundingSphere();
+        var positionScratch = new Cartesian3.Cartesian3();
+        var rectangleScratch = new Cartesian2.Rectangle();
+
+        function constructRectangle(geometry, computedOptions) {
+            var ellipsoid = geometry._ellipsoid;
+            var height = computedOptions.height;
+            var width = computedOptions.width;
+            var northCap = computedOptions.northCap;
+            var southCap = computedOptions.southCap;
+
+            var rowHeight = height;
+            var widthMultiplier = 2;
+            var size = 0;
+            var corners = 4;
+            if (northCap) {
+                widthMultiplier -= 1;
+                rowHeight -= 1;
+                size += 1;
+                corners -= 2;
+            }
+            if (southCap) {
+                widthMultiplier -= 1;
+                rowHeight -= 1;
+                size += 1;
+                corners -= 2;
+            }
+            size += (widthMultiplier * width + 2 * rowHeight - corners);
+
+            var positions = new Float64Array(size * 3);
+
+            var posIndex = 0;
+            var row = 0;
+            var col;
+            var position = positionScratch;
+            if (northCap) {
+                RectangleGeometryLibrary.RectangleGeometryLibrary.computePosition(computedOptions, ellipsoid, false, row, 0, position);
+                positions[posIndex++] = position.x;
+                positions[posIndex++] = position.y;
+                positions[posIndex++] = position.z;
+            } else {
+                for (col = 0; col < width; col++) {
+                    RectangleGeometryLibrary.RectangleGeometryLibrary.computePosition(computedOptions, ellipsoid, false, row, col, position);
+                    positions[posIndex++] = position.x;
+                    positions[posIndex++] = position.y;
+                    positions[posIndex++] = position.z;
+                }
+            }
+
+            col = width - 1;
+            for (row = 1; row < height; row++) {
+                RectangleGeometryLibrary.RectangleGeometryLibrary.computePosition(computedOptions, ellipsoid, false, row, col, position);
+                positions[posIndex++] = position.x;
+                positions[posIndex++] = position.y;
+                positions[posIndex++] = position.z;
+            }
+
+            row = height - 1;
+            if (!southCap) {  // if southCap is true, we dont need to add any more points because the south pole point was added by the iteration above
+                for (col = width - 2; col >= 0; col--) {
+                    RectangleGeometryLibrary.RectangleGeometryLibrary.computePosition(computedOptions, ellipsoid, false, row, col, position);
+                    positions[posIndex++] = position.x;
+                    positions[posIndex++] = position.y;
+                    positions[posIndex++] = position.z;
+                }
+            }
+
+            col = 0;
+            for (row = height - 2; row > 0; row--) {
+                RectangleGeometryLibrary.RectangleGeometryLibrary.computePosition(computedOptions, ellipsoid, false, row, col, position);
+                positions[posIndex++] = position.x;
+                positions[posIndex++] = position.y;
+                positions[posIndex++] = position.z;
+            }
+
+            var indicesSize = positions.length / 3 * 2;
+            var indices = IndexDatatype.IndexDatatype.createTypedArray(positions.length / 3, indicesSize);
+
+            var index = 0;
+            for (var i = 0; i < (positions.length / 3) - 1; i++) {
+                indices[index++] = i;
+                indices[index++] = i + 1;
+            }
+            indices[index++] = (positions.length / 3) - 1;
+            indices[index++] = 0;
+
+            var geo = new GeometryAttribute.Geometry({
+                attributes : new GeometryAttributes.GeometryAttributes(),
+                primitiveType : PrimitiveType.PrimitiveType.LINES
+            });
+
+            geo.attributes.position = new GeometryAttribute.GeometryAttribute({
+                componentDatatype : ComponentDatatype.ComponentDatatype.DOUBLE,
+                componentsPerAttribute : 3,
+                values : positions
+            });
+            geo.indices = indices;
+
+            return geo;
+        }
+
+        function constructExtrudedRectangle(rectangleGeometry, computedOptions) {
+            var surfaceHeight = rectangleGeometry._surfaceHeight;
+            var extrudedHeight = rectangleGeometry._extrudedHeight;
+            var ellipsoid = rectangleGeometry._ellipsoid;
+            var minHeight = extrudedHeight;
+            var maxHeight = surfaceHeight;
+            var geo = constructRectangle(rectangleGeometry, computedOptions);
+
+            var height = computedOptions.height;
+            var width = computedOptions.width;
+
+            var topPositions = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(geo.attributes.position.values, maxHeight, ellipsoid, false);
+            var length = topPositions.length;
+            var positions = new Float64Array(length * 2);
+            positions.set(topPositions);
+            var bottomPositions = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(geo.attributes.position.values, minHeight, ellipsoid);
+            positions.set(bottomPositions, length);
+            geo.attributes.position.values = positions;
+
+            var northCap = computedOptions.northCap;
+            var southCap = computedOptions.southCap;
+            var corners = 4;
+            if (northCap) {
+                corners -= 1;
+            }
+            if (southCap) {
+                corners -= 1;
+            }
+
+            var indicesSize = (positions.length / 3 + corners) * 2;
+            var indices = IndexDatatype.IndexDatatype.createTypedArray(positions.length / 3, indicesSize);
+            length = positions.length / 6;
+            var index = 0;
+            for (var i = 0; i < length - 1; i++) {
+                indices[index++] = i;
+                indices[index++] = i + 1;
+                indices[index++] = i + length;
+                indices[index++] = i + length + 1;
+            }
+            indices[index++] = length - 1;
+            indices[index++] = 0;
+            indices[index++] = length + length - 1;
+            indices[index++] = length;
+
+            indices[index++] = 0;
+            indices[index++] = length;
+
+            var bottomCorner;
+            if (northCap) {
+                bottomCorner = height - 1;
+            } else {
+                var topRightCorner = width - 1;
+                indices[index++] = topRightCorner;
+                indices[index++] = topRightCorner + length;
+                bottomCorner = width + height - 2;
+            }
+
+            indices[index++] = bottomCorner;
+            indices[index++] = bottomCorner + length;
+
+            if (!southCap) {
+                var bottomLeftCorner = width + bottomCorner - 1;
+                indices[index++] = bottomLeftCorner;
+                indices[index] = bottomLeftCorner + length;
+            }
+
+            geo.indices = indices;
+
+            return geo;
+        }
+
+        /**
+         * A description of the outline of a a cartographic rectangle on an ellipsoid centered at the origin.
+         *
+         * @alias RectangleOutlineGeometry
+         * @constructor
+         *
+         * @param {Object} options Object with the following properties:
+         * @param {Rectangle} options.rectangle A cartographic rectangle with north, south, east and west properties in radians.
+         * @param {Ellipsoid} [options.ellipsoid=Ellipsoid.WGS84] The ellipsoid on which the rectangle lies.
+         * @param {Number} [options.granularity=CesiumMath.RADIANS_PER_DEGREE] The distance, in radians, between each latitude and longitude. Determines the number of positions in the buffer.
+         * @param {Number} [options.height=0.0] The distance in meters between the rectangle and the ellipsoid surface.
+         * @param {Number} [options.rotation=0.0] The rotation of the rectangle, in radians. A positive rotation is counter-clockwise.
+         * @param {Number} [options.extrudedHeight] The distance in meters between the rectangle's extruded face and the ellipsoid surface.
+         *
+         * @exception {DeveloperError} <code>options.rectangle.north</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
+         * @exception {DeveloperError} <code>options.rectangle.south</code> must be in the interval [<code>-Pi/2</code>, <code>Pi/2</code>].
+         * @exception {DeveloperError} <code>options.rectangle.east</code> must be in the interval [<code>-Pi</code>, <code>Pi</code>].
+         * @exception {DeveloperError} <code>options.rectangle.west</code> must be in the interval [<code>-Pi</code>, <code>Pi</code>].
+         * @exception {DeveloperError} <code>options.rectangle.north</code> must be greater than <code>rectangle.south</code>.
+         *
+         * @see RectangleOutlineGeometry#createGeometry
+         *
+         * @example
+         * var rectangle = new Cesium.RectangleOutlineGeometry({
+         *   ellipsoid : Cesium.Ellipsoid.WGS84,
+         *   rectangle : Cesium.Rectangle.fromDegrees(-80.0, 39.0, -74.0, 42.0),
+         *   height : 10000.0
+         * });
+         * var geometry = Cesium.RectangleOutlineGeometry.createGeometry(rectangle);
+         */
+        function RectangleOutlineGeometry(options) {
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+
+            var rectangle = options.rectangle;
+            var granularity = when.defaultValue(options.granularity, Cartesian3.CesiumMath.RADIANS_PER_DEGREE);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Ellipsoid.Ellipsoid.WGS84);
+            var rotation = when.defaultValue(options.rotation, 0.0);
+
+            //>>includeStart('debug', pragmas.debug);
+            if (!when.defined(rectangle)) {
+                throw new Check.DeveloperError('rectangle is required.');
+            }
+            Cartesian2.Rectangle.validate(rectangle);
+            if (rectangle.north < rectangle.south) {
+                throw new Check.DeveloperError('options.rectangle.north must be greater than options.rectangle.south');
+            }
+            //>>includeEnd('debug');
+
+            var height = when.defaultValue(options.height, 0.0);
+            var extrudedHeight = when.defaultValue(options.extrudedHeight, height);
+
+            this._rectangle = Cartesian2.Rectangle.clone(rectangle);
+            this._granularity = granularity;
+            this._ellipsoid = ellipsoid;
+            this._surfaceHeight = Math.max(height, extrudedHeight);
+            this._rotation = rotation;
+            this._extrudedHeight = Math.min(height, extrudedHeight);
+            this._offsetAttribute = options.offsetAttribute;
+            this._workerName = 'createRectangleOutlineGeometry';
+        }
+
+        /**
+         * The number of elements used to pack the object into an array.
+         * @type {Number}
+         */
+        RectangleOutlineGeometry.packedLength = Cartesian2.Rectangle.packedLength + Ellipsoid.Ellipsoid.packedLength + 5;
+
+        /**
+         * Stores the provided instance into the provided array.
+         *
+         * @param {RectangleOutlineGeometry} value The value to pack.
+         * @param {Number[]} array The array to pack into.
+         * @param {Number} [startingIndex=0] The index into the array at which to start packing the elements.
+         *
+         * @returns {Number[]} The array that was packed into
+         */
+        RectangleOutlineGeometry.pack = function(value, array, startingIndex) {
+            //>>includeStart('debug', pragmas.debug);
+            if (!when.defined(value)) {
+                throw new Check.DeveloperError('value is required');
+            }
+
+            if (!when.defined(array)) {
+                throw new Check.DeveloperError('array is required');
+            }
+            //>>includeEnd('debug');
+
+            startingIndex = when.defaultValue(startingIndex, 0);
+
+            Cartesian2.Rectangle.pack(value._rectangle, array, startingIndex);
+            startingIndex += Cartesian2.Rectangle.packedLength;
+
+            Ellipsoid.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
+            startingIndex += Ellipsoid.Ellipsoid.packedLength;
+
+            array[startingIndex++] = value._granularity;
+            array[startingIndex++] = value._surfaceHeight;
+            array[startingIndex++] = value._rotation;
+            array[startingIndex++] = value._extrudedHeight;
+            array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
+
+            return array;
+        };
+
+        var scratchRectangle = new Cartesian2.Rectangle();
+        var scratchEllipsoid = Ellipsoid.Ellipsoid.clone(Ellipsoid.Ellipsoid.UNIT_SPHERE);
+        var scratchOptions = {
+            rectangle : scratchRectangle,
+            ellipsoid : scratchEllipsoid,
+            granularity : undefined,
+            height : undefined,
+            rotation : undefined,
+            extrudedHeight : undefined,
+            offsetAttribute : undefined
+        };
+
+        /**
+         * Retrieves an instance from a packed array.
+         *
+         * @param {Number[]} array The packed array.
+         * @param {Number} [startingIndex=0] The starting index of the element to be unpacked.
+         * @param {RectangleOutlineGeometry} [result] The object into which to store the result.
+         * @returns {RectangleOutlineGeometry} The modified result parameter or a new Quaternion instance if one was not provided.
+         */
+        RectangleOutlineGeometry.unpack = function(array, startingIndex, result) {
+            //>>includeStart('debug', pragmas.debug);
+            if (!when.defined(array)) {
+                throw new Check.DeveloperError('array is required');
+            }
+            //>>includeEnd('debug');
+
+            startingIndex = when.defaultValue(startingIndex, 0);
+
+            var rectangle = Cartesian2.Rectangle.unpack(array, startingIndex, scratchRectangle);
+            startingIndex += Cartesian2.Rectangle.packedLength;
+
+            var ellipsoid = Ellipsoid.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
+            startingIndex += Ellipsoid.Ellipsoid.packedLength;
+
+            var granularity = array[startingIndex++];
+            var height = array[startingIndex++];
+            var rotation = array[startingIndex++];
+            var extrudedHeight = array[startingIndex++];
+            var offsetAttribute = array[startingIndex];
+
+            if (!when.defined(result)) {
+                scratchOptions.granularity = granularity;
+                scratchOptions.height = height;
+                scratchOptions.rotation = rotation;
+                scratchOptions.extrudedHeight = extrudedHeight;
+                scratchOptions.offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
+
+                return new RectangleOutlineGeometry(scratchOptions);
+            }
+
+            result._rectangle = Cartesian2.Rectangle.clone(rectangle, result._rectangle);
+            result._ellipsoid = Ellipsoid.Ellipsoid.clone(ellipsoid, result._ellipsoid);
+            result._surfaceHeight = height;
+            result._rotation = rotation;
+            result._extrudedHeight = extrudedHeight;
+            result._offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
+
+            return result;
+        };
+
+        var nwScratch = new Ellipsoid.Cartographic();
+        /**
+         * Computes the geometric representation of an outline of a rectangle, including its vertices, indices, and a bounding sphere.
+         *
+         * @param {RectangleOutlineGeometry} rectangleGeometry A description of the rectangle outline.
+         * @returns {Geometry|undefined} The computed vertices and indices.
+         *
+         * @exception {DeveloperError} Rotated rectangle is invalid.
+         */
+        RectangleOutlineGeometry.createGeometry = function(rectangleGeometry) {
+            var rectangle = rectangleGeometry._rectangle;
+            var ellipsoid = rectangleGeometry._ellipsoid;
+            var computedOptions = RectangleGeometryLibrary.RectangleGeometryLibrary.computeOptions(rectangle, rectangleGeometry._granularity, rectangleGeometry._rotation, 0, rectangleScratch, nwScratch);
+
+            var geometry;
+            var boundingSphere;
+
+            if ((Cartesian3.CesiumMath.equalsEpsilon(rectangle.north, rectangle.south, Cartesian3.CesiumMath.EPSILON10) ||
+                 (Cartesian3.CesiumMath.equalsEpsilon(rectangle.east, rectangle.west, Cartesian3.CesiumMath.EPSILON10)))) {
+                return undefined;
+            }
+
+            var surfaceHeight = rectangleGeometry._surfaceHeight;
+            var extrudedHeight = rectangleGeometry._extrudedHeight;
+            var extrude = !Cartesian3.CesiumMath.equalsEpsilon(surfaceHeight, extrudedHeight, 0, Cartesian3.CesiumMath.EPSILON2);
+            var offsetValue;
+            if (extrude) {
+                geometry = constructExtrudedRectangle(rectangleGeometry, computedOptions);
+                if (when.defined(rectangleGeometry._offsetAttribute)) {
+                    var size = geometry.attributes.position.values.length / 3;
+                    var offsetAttribute = new Uint8Array(size);
+                    if (rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+                        offsetAttribute = GeometryOffsetAttribute.arrayFill(offsetAttribute, 1, 0, size / 2);
+                    } else {
+                        offsetValue = rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+                        offsetAttribute = GeometryOffsetAttribute.arrayFill(offsetAttribute, offsetValue);
+                    }
+
+                    geometry.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
+                        componentDatatype : ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+                        componentsPerAttribute : 1,
+                        values : offsetAttribute
+                    });
+                }
+                var topBS = Transforms.BoundingSphere.fromRectangle3D(rectangle, ellipsoid, surfaceHeight, topBoundingSphere);
+                var bottomBS = Transforms.BoundingSphere.fromRectangle3D(rectangle, ellipsoid, extrudedHeight, bottomBoundingSphere);
+                boundingSphere = Transforms.BoundingSphere.union(topBS, bottomBS);
+            } else {
+                geometry = constructRectangle(rectangleGeometry, computedOptions);
+                geometry.attributes.position.values = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(geometry.attributes.position.values, surfaceHeight, ellipsoid, false);
+
+                if (when.defined(rectangleGeometry._offsetAttribute)) {
+                    var length = geometry.attributes.position.values.length;
+                    var applyOffset = new Uint8Array(length / 3);
+                    offsetValue = rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
+                    GeometryOffsetAttribute.arrayFill(applyOffset, offsetValue);
+                    geometry.attributes.applyOffset = new GeometryAttribute.GeometryAttribute({
+                        componentDatatype : ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
+                        componentsPerAttribute : 1,
+                        values : applyOffset
+                    });
+                }
+
+                boundingSphere = Transforms.BoundingSphere.fromRectangle3D(rectangle, ellipsoid, surfaceHeight);
+            }
+
+            return new GeometryAttribute.Geometry({
+                attributes : geometry.attributes,
+                indices : geometry.indices,
+                primitiveType : PrimitiveType.PrimitiveType.LINES,
+                boundingSphere : boundingSphere,
+                offsetAttribute : rectangleGeometry._offsetAttribute
+            });
+        };
+
+    function createRectangleOutlineGeometry(rectangleGeometry, offset) {
+            if (when.defined(offset)) {
+                rectangleGeometry = RectangleOutlineGeometry.unpack(rectangleGeometry, offset);
+            }
+            rectangleGeometry._ellipsoid = Ellipsoid.Ellipsoid.clone(rectangleGeometry._ellipsoid);
+            rectangleGeometry._rectangle = Cartesian2.Rectangle.clone(rectangleGeometry._rectangle);
+            return RectangleOutlineGeometry.createGeometry(rectangleGeometry);
+        }
+
+    return createRectangleOutlineGeometry;
+
+});
 //# sourceMappingURL=createRectangleOutlineGeometry.js.map
