@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './createTaskProcessorWorker', './materem-6f89acf1'], function (when, Check, Cartesian3, Matrix4, RuntimeError, createTaskProcessorWorker, materem) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './WebGLConstants-30fc6f5c', './PrimitiveType-4c1d698a', './createTaskProcessorWorker', './CreatePhysicalArray-7d701538'], function (when, Check, Cartesian3, Matrix4, RuntimeError, WebGLConstants, PrimitiveType, createTaskProcessorWorker, CreatePhysicalArray) { 'use strict';
 
     var PhysicalLogicType = {
         ADD_PRIMITIVE : 0,
@@ -245,16 +245,28 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
 
     function addPrimitive(projectCenterMatrixArray, primitive) {
         var modelGUID = primitive.guid;
+        var primitiveMode = primitive.primitiveMode;
         var physicalArray = primitive.physicalArray;
+        var physicalArrayOptions = primitive.physicalArrayOptions;
         var pointer;
 
-        //serial read
-        var pSerialRead = new physicalModule.LBSpaSerial();
-        var pBufferAry = physicalModule._malloc(physicalArray.byteLength);
-        physicalModule.HEAPU8.set(physicalArray, pBufferAry);
-        var pPrimitiveSpatial = pSerialRead.ReadSpatial(pBufferAry, physicalArray.byteLength);
-        physicalModule._free(pBufferAry);
-        physicalModule.destroy(pSerialRead);
+        var pPrimitiveSpatial;
+        if(when.defined(physicalArray)){
+            //serial read
+            var pSerialRead = new physicalModule.LBSpaSerial();
+            var pBufferAry = physicalModule._malloc(physicalArray.byteLength);
+            physicalModule.HEAPU8.set(physicalArray, pBufferAry);
+            pPrimitiveSpatial = pSerialRead.ReadSpatial(pBufferAry, physicalArray.byteLength);
+            physicalModule._free(pBufferAry);
+            physicalModule.destroy(pSerialRead);
+        }
+        if(when.defined(physicalArrayOptions)){
+            var pPtAry = physicalArrayOptions.pPtAry;
+            var pBatchIdAry = physicalArrayOptions.pBatchIdAry;
+            var pIndexAry = physicalArrayOptions.pIndexAry;
+            var pEdgeCheckAry = physicalArrayOptions.pEdgeCheckAry;
+            pPrimitiveSpatial = CreatePhysicalArray.CreatePhysicalArray.createSpaPrimitive(physicalModule, lbSpaMgr, primitiveMode, pPtAry, pBatchIdAry, pIndexAry, pEdgeCheckAry);
+        }
 
         if (when.defined(primitive.instanceMatrixTypeArray) || when.defined(primitive.lodInstanceMatrixTypeArray)) {
             var pPrimitiveCluster = lbSpaMgr.CreatePrimitiveCluster(pPrimitiveSpatial);
@@ -552,7 +564,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
                         }
                     };
 
-                    materem.materem(WebAssemblyType);
+                    CreatePhysicalArray.materem(WebAssemblyType);
                 });
         }
     }

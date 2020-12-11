@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './PrimitiveType-4c1d698a', './FeatureDetection-0c56f1be', './AttributeCompression-414035f7', './IndexDatatype-571b3b65', './IntersectionTests-927a9102', './Plane-f22e7e98', './WebMercatorProjection-96eb07e4', './createTaskProcessorWorker', './EllipsoidTangentPlane-09857d60', './OrientedBoundingBox-bb4a9bc7', './materem-6f89acf1', './TerrainEncoding-04aaa789', './TerrainProvider-d509ef7c', './CreatePhysicalArray-d5d894bc'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, PrimitiveType, FeatureDetection, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, materem, TerrainEncoding, TerrainProvider, CreatePhysicalArray) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './PrimitiveType-4c1d698a', './FeatureDetection-0c56f1be', './AttributeCompression-414035f7', './IndexDatatype-571b3b65', './IntersectionTests-927a9102', './Plane-f22e7e98', './WebMercatorProjection-96eb07e4', './createTaskProcessorWorker', './EllipsoidTangentPlane-09857d60', './OrientedBoundingBox-bb4a9bc7', './CreatePhysicalArray-7d701538', './TerrainEncoding-04aaa789', './TerrainProvider-d509ef7c'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, PrimitiveType, FeatureDetection, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, CreatePhysicalArray, TerrainEncoding, TerrainProvider) { 'use strict';
 
     var maxShort = 32767;
 
@@ -367,7 +367,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                         }
                     };
 
-                    materem.materem(WebAssemblyType);
+                    CreatePhysicalArray.materem(WebAssemblyType);
                 });
         }
     }
