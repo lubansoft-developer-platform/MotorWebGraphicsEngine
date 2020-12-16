@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './FeatureDetection-0c56f1be', './AttributeCompression-414035f7', './IndexDatatype-571b3b65', './IntersectionTests-927a9102', './Plane-f22e7e98', './createTaskProcessorWorker', './EllipsoidTangentPlane-09857d60', './OrientedBoundingBox-bb4a9bc7', './Color-baaf341e'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, FeatureDetection, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-6e3c043b', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './EnvironmentVariables-7e1444a0', './AttributeCompression-414035f7', './IndexDatatype-571b3b65', './IntersectionTests-6415221a', './Plane-f22e7e98', './createTaskProcessorWorker', './EllipsoidTangentPlane-ea3c97b6', './OrientedBoundingBox-cf9a8b04'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, EnvironmentVariables, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox) { 'use strict';
 
     var scratchCenter = new Cartesian3.Cartesian3();
         var scratchEllipsoid = new Ellipsoid.Ellipsoid();
@@ -54,7 +54,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             var length = batchedIndices.length;
             var count = 0;
             for (var i = 0; i < length; ++i) {
-                count += Color.Color.packedLength + 3 + batchedIndices[i].batchIds.length;
+                count += EnvironmentVariables.Color.packedLength + 3 + batchedIndices[i].batchIds.length;
             }
             return count;
         }
@@ -80,8 +80,8 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             for (var j = 0; j < indicesLength; ++j) {
                 var batchedIndex = batchedIndices[j];
 
-                Color.Color.pack(batchedIndex.color, packedBuffer, offset);
-                offset += Color.Color.packedLength;
+                EnvironmentVariables.Color.pack(batchedIndex.color, packedBuffer, offset);
+                offset += EnvironmentVariables.Color.packedLength;
 
                 packedBuffer[offset++] = batchedIndex.offset;
                 packedBuffer[offset++] = batchedIndex.count;
@@ -226,7 +226,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                     buffer = colorToBuffers[rgba];
 
                     batchedDrawCalls.push({
-                        color : Color.Color.fromRgba(parseInt(rgba)),
+                        color : EnvironmentVariables.Color.fromRgba(parseInt(rgba)),
                         offset : buffer.indexOffset,
                         count : buffer.indexLength,
                         batchIds : buffer.batchIds

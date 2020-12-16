@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './WebGLConstants-30fc6f5c', './PrimitiveType-4c1d698a', './createTaskProcessorWorker', './CreatePhysicalArray-7d701538'], function (when, Check, Cartesian3, Matrix4, RuntimeError, WebGLConstants, PrimitiveType, createTaskProcessorWorker, CreatePhysicalArray) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './WebGLConstants-30fc6f5c', './PrimitiveType-4c1d698a', './createTaskProcessorWorker', './CreatePhysicalArray-a5662e79'], function (when, Check, Cartesian3, Matrix4, RuntimeError, WebGLConstants, PrimitiveType, createTaskProcessorWorker, CreatePhysicalArray) { 'use strict';
 
     var PhysicalLogicType = {
         ADD_PRIMITIVE : 0,
@@ -242,6 +242,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
 
     //默认矩阵
     var defautlNodeMatrixArray = Matrix4.Matrix4.toArray(Axis$1.Y_UP_TO_Z_UP);
+    var primitiveMatrix = new Matrix4.Matrix4();
+    var projectCenterMatrix = new Matrix4.Matrix4();
+    var modelMatrix = new Matrix4.Matrix4();
+    var modelMatrixArray = [];
 
     function addPrimitive(projectCenterMatrixArray, primitive) {
         var modelGUID = primitive.guid;
@@ -277,8 +281,18 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
             var instanceArray = isLodInstance ? primitive.lodInstanceMatrixTypeArray : primitive.instanceMatrixTypeArray;
             setInstanceMatrix(pPrimitiveCluster, projectCenterMatrixArray, nodeMatrixArray, instanceArray, isLodInstance);
         } else {
+            //i3s 有primitiveMatrix
+            if(when.defined(primitive.primitiveMatrixArray)){
+                Matrix4.Matrix4.fromArray(primitive.primitiveMatrixArray, 0 , primitiveMatrix);
+                Matrix4.Matrix4.fromArray(projectCenterMatrixArray, 0 , projectCenterMatrix);
+                Matrix4.Matrix4.multiply(projectCenterMatrix, primitiveMatrix, modelMatrix);
+                Matrix4.Matrix4.toArray(modelMatrix, modelMatrixArray);
+            }
+            else {
+                modelMatrixArray = projectCenterMatrixArray;
+            }
             pointer = lbSpaMgr.AddPrimitiveSpatial(pPrimitiveSpatial);
-            setSpatialMatrix(pointer, projectCenterMatrixArray);
+            setSpatialMatrix(pointer, modelMatrixArray);
         }
         addToKeyCollection(modelGUID, pointer);
 
@@ -294,7 +308,6 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
         }
     }
 
-    var projectCenterMatrix = new Matrix4.Matrix4();
     var nodeMatrix = new Matrix4.Matrix4();
     var instanceMatrix = new Matrix4.Matrix4();
 

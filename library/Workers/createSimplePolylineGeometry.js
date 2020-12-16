@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './GeometryAttribute-de79a9c2', './PrimitiveType-4c1d698a', './FeatureDetection-0c56f1be', './GeometryAttributes-cb18da36', './IndexDatatype-571b3b65', './IntersectionTests-927a9102', './Plane-f22e7e98', './ArcType-2ee8dfbb', './EllipsoidRhumbLine-e9bf1af4', './EllipsoidGeodesic-80195a45', './PolylinePipeline-b60c6e78', './Color-baaf341e'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, GeometryAttribute, PrimitiveType, FeatureDetection, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline, Color) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-6e3c043b', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './GeometryAttribute-175788cc', './PrimitiveType-4c1d698a', './EnvironmentVariables-7e1444a0', './GeometryAttributes-cb18da36', './IndexDatatype-571b3b65', './IntersectionTests-6415221a', './Plane-f22e7e98', './ArcType-2ee8dfbb', './EllipsoidRhumbLine-e9bf1af4', './EllipsoidGeodesic-80195a45', './PolylinePipeline-5d786ac6'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, GeometryAttribute, PrimitiveType, EnvironmentVariables, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
 
     function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
             var numPoints = PolylinePipeline.PolylinePipeline.numberOfPoints(p0, p1, minDistance);
@@ -37,12 +37,12 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             var b1 = color1.blue;
             var a1 = color1.alpha;
 
-            if (Color.Color.equals(color0, color1)) {
+            if (EnvironmentVariables.Color.equals(color0, color1)) {
                 for (i = 0; i < numPoints; i++) {
-                    array[offset++] = Color.Color.floatToByte(r0);
-                    array[offset++] = Color.Color.floatToByte(g0);
-                    array[offset++] = Color.Color.floatToByte(b0);
-                    array[offset++] = Color.Color.floatToByte(a0);
+                    array[offset++] = EnvironmentVariables.Color.floatToByte(r0);
+                    array[offset++] = EnvironmentVariables.Color.floatToByte(g0);
+                    array[offset++] = EnvironmentVariables.Color.floatToByte(b0);
+                    array[offset++] = EnvironmentVariables.Color.floatToByte(a0);
                 }
                 return offset;
             }
@@ -54,10 +54,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
 
             var index = offset;
             for (i = 0; i < numPoints; i++) {
-                array[index++] = Color.Color.floatToByte(r0 + i * redPerVertex);
-                array[index++] = Color.Color.floatToByte(g0 + i * greenPerVertex);
-                array[index++] = Color.Color.floatToByte(b0 + i * bluePerVertex);
-                array[index++] = Color.Color.floatToByte(a0 + i * alphaPerVertex);
+                array[index++] = EnvironmentVariables.Color.floatToByte(r0 + i * redPerVertex);
+                array[index++] = EnvironmentVariables.Color.floatToByte(g0 + i * greenPerVertex);
+                array[index++] = EnvironmentVariables.Color.floatToByte(b0 + i * bluePerVertex);
+                array[index++] = EnvironmentVariables.Color.floatToByte(a0 + i * alphaPerVertex);
             }
 
             return index;
@@ -119,7 +119,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             this._workerName = 'createSimplePolylineGeometry';
 
             var numComponents = 1 + positions.length * Cartesian3.Cartesian3.packedLength;
-            numComponents += when.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
+            numComponents += when.defined(colors) ? 1 + colors.length * EnvironmentVariables.Color.packedLength : 1;
 
             /**
              * The number of elements used to pack the object into an array.
@@ -163,8 +163,8 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             length = when.defined(colors) ? colors.length : 0.0;
             array[startingIndex++] = length;
 
-            for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
-                Color.Color.pack(colors[i], array, startingIndex);
+            for (i = 0; i < length; ++i, startingIndex += EnvironmentVariables.Color.packedLength) {
+                EnvironmentVariables.Color.pack(colors[i], array, startingIndex);
             }
 
             Ellipsoid.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
@@ -206,8 +206,8 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             length = array[startingIndex++];
             var colors = length > 0 ? new Array(length) : undefined;
 
-            for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
-                colors[i] = Color.Color.unpack(array, startingIndex);
+            for (i = 0; i < length; ++i, startingIndex += EnvironmentVariables.Color.packedLength) {
+                colors[i] = EnvironmentVariables.Color.unpack(array, startingIndex);
             }
 
             var ellipsoid = Ellipsoid.Ellipsoid.unpack(array, startingIndex);
@@ -324,10 +324,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                             var segLen = pos.length / 3;
                             color = colors[i];
                             for(var k = 0; k < segLen; ++k) {
-                                colorValues[ci++] = Color.Color.floatToByte(color.red);
-                                colorValues[ci++] = Color.Color.floatToByte(color.green);
-                                colorValues[ci++] = Color.Color.floatToByte(color.blue);
-                                colorValues[ci++] = Color.Color.floatToByte(color.alpha);
+                                colorValues[ci++] = EnvironmentVariables.Color.floatToByte(color.red);
+                                colorValues[ci++] = EnvironmentVariables.Color.floatToByte(color.green);
+                                colorValues[ci++] = EnvironmentVariables.Color.floatToByte(color.blue);
+                                colorValues[ci++] = EnvironmentVariables.Color.floatToByte(color.alpha);
                             }
                         }
 
@@ -351,10 +351,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                         }
 
                         var lastColor = colors[length - 1];
-                        colorValues[offset++] = Color.Color.floatToByte(lastColor.red);
-                        colorValues[offset++] = Color.Color.floatToByte(lastColor.green);
-                        colorValues[offset++] = Color.Color.floatToByte(lastColor.blue);
-                        colorValues[offset++] = Color.Color.floatToByte(lastColor.alpha);
+                        colorValues[offset++] = EnvironmentVariables.Color.floatToByte(lastColor.red);
+                        colorValues[offset++] = EnvironmentVariables.Color.floatToByte(lastColor.green);
+                        colorValues[offset++] = EnvironmentVariables.Color.floatToByte(lastColor.blue);
+                        colorValues[offset++] = EnvironmentVariables.Color.floatToByte(lastColor.alpha);
                     }
                 }
             } else {
@@ -373,10 +373,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                         positionIndex += 3;
 
                         color = colors[i - 1];
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.red);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.green);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.blue);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.alpha);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.red);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.green);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.blue);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.alpha);
                     }
 
                     if (perSegmentColors && i === length - 1) {
@@ -388,10 +388,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
 
                     if (when.defined(colors)) {
                         color = colors[i];
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.red);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.green);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.blue);
-                        colorValues[colorIndex++] = Color.Color.floatToByte(color.alpha);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.red);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.green);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.blue);
+                        colorValues[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.alpha);
                     }
                 }
             }

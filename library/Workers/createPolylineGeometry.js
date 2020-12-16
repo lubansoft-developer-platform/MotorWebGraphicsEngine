@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-239db6ff', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './GeometryAttribute-de79a9c2', './PrimitiveType-4c1d698a', './FeatureDetection-0c56f1be', './GeometryAttributes-cb18da36', './IndexDatatype-571b3b65', './IntersectionTests-927a9102', './Plane-f22e7e98', './VertexFormat-d75df48f', './arrayRemoveDuplicates-7f5acdbe', './ArcType-2ee8dfbb', './EllipsoidRhumbLine-e9bf1af4', './EllipsoidGeodesic-80195a45', './PolylinePipeline-b60c6e78', './Color-baaf341e'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, GeometryAttribute, PrimitiveType, FeatureDetection, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline, Color) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellipsoid-f29f901d', './Transforms-6e3c043b', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './Cartesian2-e5f465dc', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './GeometryAttribute-175788cc', './PrimitiveType-4c1d698a', './EnvironmentVariables-7e1444a0', './GeometryAttributes-cb18da36', './IndexDatatype-571b3b65', './IntersectionTests-6415221a', './Plane-f22e7e98', './VertexFormat-d75df48f', './arrayRemoveDuplicates-7f5acdbe', './ArcType-2ee8dfbb', './EllipsoidRhumbLine-e9bf1af4', './EllipsoidGeodesic-80195a45', './PolylinePipeline-5d786ac6'], function (when, Check, Cartesian3, Ellipsoid, Transforms, Matrix4, RuntimeError, Cartesian2, WebGLConstants, ComponentDatatype, GeometryAttribute, PrimitiveType, EnvironmentVariables, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
 
     var scratchInterpolateColorsArray = [];
 
@@ -40,9 +40,9 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             var b1 = color1.blue;
             var a1 = color1.alpha;
 
-            if (Color.Color.equals(color0, color1)) {
+            if (EnvironmentVariables.Color.equals(color0, color1)) {
                 for (i = 0; i < numPoints; i++) {
-                    colors[i] = Color.Color.clone(color0);
+                    colors[i] = EnvironmentVariables.Color.clone(color0);
                 }
                 return colors;
             }
@@ -53,7 +53,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             var alphaPerVertex = (a1 - a0) / numPoints;
 
             for (i = 0; i < numPoints; i++) {
-                colors[i] = new Color.Color(r0 + i * redPerVertex, g0 + i * greenPerVertex, b0 + i * bluePerVertex, a0 + i * alphaPerVertex);
+                colors[i] = new EnvironmentVariables.Color(r0 + i * redPerVertex, g0 + i * greenPerVertex, b0 + i * bluePerVertex, a0 + i * alphaPerVertex);
             }
 
             return colors;
@@ -128,7 +128,7 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             this._workerName = 'createPolylineGeometry';
 
             var numComponents = 1 + positions.length * Cartesian3.Cartesian3.packedLength;
-            numComponents += when.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
+            numComponents += when.defined(colors) ? 1 + colors.length * EnvironmentVariables.Color.packedLength : 1;
 
             /**
              * The number of elements used to pack the object into an array.
@@ -172,8 +172,8 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             length = when.defined(colors) ? colors.length : 0.0;
             array[startingIndex++] = length;
 
-            for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
-                Color.Color.pack(colors[i], array, startingIndex);
+            for (i = 0; i < length; ++i, startingIndex += EnvironmentVariables.Color.packedLength) {
+                EnvironmentVariables.Color.pack(colors[i], array, startingIndex);
             }
 
             Ellipsoid.Ellipsoid.pack(value._ellipsoid, array, startingIndex);
@@ -232,8 +232,8 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
             length = array[startingIndex++];
             var colors = length > 0 ? new Array(length) : undefined;
 
-            for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
-                colors[i] = Color.Color.unpack(array, startingIndex);
+            for (i = 0; i < length; ++i, startingIndex += EnvironmentVariables.Color.packedLength) {
+                colors[i] = EnvironmentVariables.Color.unpack(array, startingIndex);
             }
 
             var ellipsoid = Ellipsoid.Ellipsoid.unpack(array, startingIndex, scratchEllipsoid);
@@ -339,12 +339,12 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                             }
                         } else {
                             for (j = 0; j < numColors; ++j) {
-                                newColors[newColorIndex++] = Color.Color.clone(c0);
+                                newColors[newColorIndex++] = EnvironmentVariables.Color.clone(c0);
                             }
                         }
                     }
 
-                    newColors[newColorIndex] = Color.Color.clone(colors[colors.length - 1]);
+                    newColors[newColorIndex] = EnvironmentVariables.Color.clone(colors[colors.length - 1]);
                     colors = newColors;
 
                     scratchInterpolateColorsArray.length = 0;
@@ -439,10 +439,10 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Ellip
                     if (when.defined(finalColors)) {
                         var color = (k < 2) ? color0 : color1;
 
-                        finalColors[colorIndex++] = Color.Color.floatToByte(color.red);
-                        finalColors[colorIndex++] = Color.Color.floatToByte(color.green);
-                        finalColors[colorIndex++] = Color.Color.floatToByte(color.blue);
-                        finalColors[colorIndex++] = Color.Color.floatToByte(color.alpha);
+                        finalColors[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.red);
+                        finalColors[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.green);
+                        finalColors[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.blue);
+                        finalColors[colorIndex++] = EnvironmentVariables.Color.floatToByte(color.alpha);
                     }
                 }
             }
