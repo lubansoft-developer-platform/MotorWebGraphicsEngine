@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 const bimServer = "https://open.lubansoft.com/api";
 const appid = "d0b3c61c6639434e84900b1fd8d391cb";
 const secret = "459dc8b77a63a0c009aec27f818febf6";
-const projectId = "a0f833a0-7bc5-43ec-a360-f696d4a11b8d";
+const projectId = "62453677-1903-4e24-a19e-776dc72ee21d";
 
 const loadingStyle = {
     position: "absolute",
