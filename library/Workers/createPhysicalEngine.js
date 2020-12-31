@@ -231,11 +231,11 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
     }
 
     function addPrimitives(parameters) {
-        var projectCenterMatrixArray = parameters.projectCenterMatrixArray;
+        // var projectCenterMatrixArray = parameters.projectCenterMatrixArray;
         var primitives = parameters.primitives;
         if (primitives.length > 0) {
             for (var primitive of primitives) {
-                addPrimitive(projectCenterMatrixArray, primitive);
+                addPrimitive(primitive);
             }
         }
     }
@@ -247,11 +247,12 @@ define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matri
     var modelMatrix = new Matrix4.Matrix4();
     var modelMatrixArray = [];
 
-    function addPrimitive(projectCenterMatrixArray, primitive) {
+    function addPrimitive(primitive) {
         var modelGUID = primitive.guid;
         var primitiveMode = primitive.primitiveMode;
         var physicalArray = primitive.physicalArray;
         var physicalArrayOptions = primitive.physicalArrayOptions;
+        var projectCenterMatrixArray = primitive.projectCenterMatrixArray;
         var pointer;
 
         var pPrimitiveSpatial;

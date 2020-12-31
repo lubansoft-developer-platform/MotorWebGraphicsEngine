@@ -1,6 +1,8 @@
 ## Classes
 
 <dl>
+<dt><a href="#TreeNode">TreeNode</a></dt>
+<dd><p>树节点类</p></dd>
 <dt><a href="#Cartesian2">Cartesian2</a></dt>
 <dd><p><p>二维坐标类，参考{@tutorial 坐标转换}</p></p>
 </dd>
@@ -57,10 +59,17 @@
 </dd>
 <dt><a href="#BingMap">BingMap</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
 <dd><p>Bing地图服务类，参考{@tutorial 地图服务}</p></dd>
+<dt><a href="#MapboxStyleMap">MapboxStyleMap</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
+<dd><p>MapBox地图服务，参考{@tutorial 地图服务}</p></dd>
 <dt><a href="#MapCollection">MapCollection</a></dt>
 <dd><p>地图集合类</p></dd>
 <dt><a href="#TiandituMap">TiandituMap</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
 <dd><p><p>天地图类，参考{@tutorial 地图服务}</p></p>
+</dd>
+<dt><a href="#TileMapService">TileMapService</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
+<dd><p>TMS地图服务类，参考{@tutorial 地图服务}</p></dd>
+<dt><a href="#UrlTemplateMap">UrlTemplateMap</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
+<dd><p><p>自定义地图服务模板类，参考{@tutorial 地图服务}</p></p>
 </dd>
 <dt><a href="#WebMapService">WebMapService</a> ⇐ <code><a href="#BaseMap">BaseMap</a></code></dt>
 <dd><p>WMTS地图服务类，参考{@tutorial 地图服务}</p></dd>
@@ -76,6 +85,8 @@
 </dd>
 <dt><a href="#AvatarRecorder">AvatarRecorder</a></dt>
 <dd><p>化身模型录制类</p></dd>
+<dt><a href="#Camera">Camera</a></dt>
+<dd><p>相机对象</p></dd>
 <dt><a href="#OrbitControl">OrbitControl</a></dt>
 <dd><p>围绕一个原点旋转的控制器，无需自行初始化</p></dd>
 <dt><a href="#AvatarControls">AvatarControls</a></dt>
@@ -94,6 +105,8 @@
 <dl>
 <dt><a href="#MotorConfig">MotorConfig</a> : <code><a href="#Config">Config</a></code></dt>
 <dd><p>配置项</p></dd>
+<dt><a href="#snapDistanceFactor">snapDistanceFactor</a> : <code>Number</code></dt>
+<dd><p>可以捕捉的最远距离因子，默认为1</p></dd>
 <dt><a href="#MotorConfig">MotorConfig</a> : <code><a href="#Config">Config</a></code></dt>
 <dd><p>配置项</p></dd>
 </dl>
@@ -102,6 +115,8 @@
 
 <dl>
 <dt><a href="#Config">Config</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#BoundingRegion">BoundingRegion</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#CompProperty">CompProperty</a> : <code>Object</code></dt>
 <dd></dd>
@@ -131,6 +146,10 @@
 <dd></dd>
 <dt><a href="#QueryCIMCompOption">QueryCIMCompOption</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#BIMGuidFloorPair">BIMGuidFloorPair</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#TreeStructureJSON">TreeStructureJSON</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#MeasureResult">MeasureResult</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#MeasureResultCallback">MeasureResultCallback</a> : <code>function</code></dt>
@@ -138,6 +157,106 @@
 <dt><a href="#Config">Config</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
+
+<a name="TreeNode"></a>
+
+## TreeNode
+<p>树节点类</p>
+
+**Kind**: global class  
+
+* [TreeNode](#TreeNode)
+    * [.name](#TreeNode+name) : <code>String</code>
+    * [.children](#TreeNode+children) : [<code>Array.&lt;TreeNode&gt;</code>](#TreeNode) \| <code>undefined</code>
+    * [.level](#TreeNode+level) : <code>Number</code>
+    * [.project](#TreeNode+project) : [<code>Project</code>](#Project)
+    * [.isChecked](#TreeNode+isChecked) : <code>Boolean</code>
+    * [.isParent](#TreeNode+isParent) : <code>Boolean</code>
+    * [.getParentNode()](#TreeNode+getParentNode) ⇒ [<code>TreeNode</code>](#TreeNode)
+    * [.getComponents()](#TreeNode+getComponents) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;(Component\|Array.&lt;Component&gt;)&gt;</code>
+    * [.loadChildNodes()](#TreeNode+loadChildNodes) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;TreeStructureJSON&gt;&gt;</code>
+    * [.setVisibility(bVisible)](#TreeNode+setVisibility)
+    * [.setComponentsColor(color)](#TreeNode+setComponentsColor)
+
+<a name="TreeNode+name"></a>
+
+### treeNode.name : <code>String</code>
+<p>节点名称</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+**Read only**: true  
+<a name="TreeNode+children"></a>
+
+### treeNode.children : [<code>Array.&lt;TreeNode&gt;</code>](#TreeNode) \| <code>undefined</code>
+<p>子节点列表</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+**Read only**: true  
+<a name="TreeNode+level"></a>
+
+### treeNode.level : <code>Number</code>
+<p>节点层级</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+**Read only**: true  
+<a name="TreeNode+project"></a>
+
+### treeNode.project : [<code>Project</code>](#Project)
+<p>节点所属工程</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+**Read only**: true  
+<a name="TreeNode+isChecked"></a>
+
+### treeNode.isChecked : <code>Boolean</code>
+<p>获取或设置节点勾选状态</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+isParent"></a>
+
+### treeNode.isParent : <code>Boolean</code>
+<p>节点是否为父节点</p>
+
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+getParentNode"></a>
+
+### treeNode.getParentNode() ⇒ [<code>TreeNode</code>](#TreeNode)
+<p>获取父节点</p>
+
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+getComponents"></a>
+
+### treeNode.getComponents() ⇒ <code>[ &#x27;Promise&#x27; ].&lt;(Component\|Array.&lt;Component&gt;)&gt;</code>
+<p>获取该节点下所有构件</p>
+
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+loadChildNodes"></a>
+
+### treeNode.loadChildNodes() ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;TreeStructureJSON&gt;&gt;</code>
+<p>加载子节点</p>
+
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+setVisibility"></a>
+
+### treeNode.setVisibility(bVisible)
+<p>设置节点下构件的显隐</p>
+
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| bVisible | <code>Boolean</code> | <p>是否显示</p> |
+
+<a name="TreeNode+setComponentsColor"></a>
+
+### treeNode.setComponentsColor(color)
+<p>设置节点下构件的颜色</p>
+
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| color | [<code>Color</code>](#Color) | <p>颜色</p> |
 
 <a name="Cartesian2"></a>
 
@@ -395,7 +514,7 @@ var color1 = Motor.Color.fromCssColorString('#67ADDF');var green = Motor.Color.
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
-| [options.extent] | <code>Array</code> |  | <p>西南东北顺序的数组</p> |
+| [options.extent] | <code>Array</code> \| <code>Rectangle</code> |  | <p>西南东北顺序的数组</p> |
 | [options.extrudedHeight] | <code>Number</code> | <code>0</code> | <p>拉伸高度</p> |
 | [options.id] | <code>String</code> |  | <p>几何体的id</p> |
 | [options.fillColor] | [<code>Color</code>](#Color) |  | <p>几何体的填充色</p> |
@@ -733,13 +852,16 @@ markers.add({
 * [Component](#Component)
     * [.guid](#Component+guid) : <code>String</code>
     * [.name](#Component+name) : <code>String</code>
+    * [.code](#Component+code) : <code>String</code>
     * [.infos](#Component+infos) : <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code>
+    * [.dirs](#Component+dirs) : <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code>
     * [.color](#Component+color) : [<code>Color</code>](#Color) \| <code>undefined</code>
     * [.type](#Component+type) : [<code>ProjType</code>](#ProjType)
     * [.position](#Component+position) : [<code>Cartesian3</code>](#Cartesian3)
     * [.positionCartographic](#Component+positionCartographic) : [<code>Cartographic</code>](#Cartographic)
     * [.flatten](#Component+flatten) : <code>Boolean</code>
     * [.boundingBoxLocal](#Component+boundingBoxLocal) : [<code>BoundingBox</code>](#BoundingBox)
+    * [.boundingRegion](#Component+boundingRegion) : [<code>BoundingRegion</code>](#BoundingRegion)
     * [.getBIMProject()](#Component+getBIMProject) ⇒ [<code>Project</code>](#Project)
     * [.setColor(color)](#Component+setColor)
     * [.resetColor()](#Component+resetColor)
@@ -748,7 +870,6 @@ markers.add({
     * [.show()](#Component+show)
     * [.hide()](#Component+hide)
     * [.isolate(block)](#Component+isolate)
-    * [.translate(offset)](#Component+translate)
     * [.rotate(xyz)](#Component+rotate)
     * [.scale(xyz)](#Component+scale)
     * [.getLinkedProject()](#Component+getLinkedProject) ⇒ [<code>Project</code>](#Project)
@@ -768,10 +889,24 @@ markers.add({
 
 **Kind**: instance property of [<code>Component</code>](#Component)  
 **Read only**: true  
+<a name="Component+code"></a>
+
+### component.code : <code>String</code>
+<p>获取第三方系统编码</p>
+
+**Kind**: instance property of [<code>Component</code>](#Component)  
+**Read only**: true  
 <a name="Component+infos"></a>
 
 ### component.infos : <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code>
 <p>获取构件内置属性</p>
+
+**Kind**: instance property of [<code>Component</code>](#Component)  
+**Read only**: true  
+<a name="Component+dirs"></a>
+
+### component.dirs : <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code>
+<p>获取构件部位树数组</p>
 
 **Kind**: instance property of [<code>Component</code>](#Component)  
 **Read only**: true  
@@ -812,7 +947,13 @@ markers.add({
 <a name="Component+boundingBoxLocal"></a>
 
 ### component.boundingBoxLocal : [<code>BoundingBox</code>](#BoundingBox)
-<p>工程局部坐标系下的AABB包围盒</p>
+<p>局部坐标系下的AABB包围盒</p>
+
+**Kind**: instance property of [<code>Component</code>](#Component)  
+<a name="Component+boundingRegion"></a>
+
+### component.boundingRegion : [<code>BoundingRegion</code>](#BoundingRegion)
+<p>世界坐标系下的矩形范围</p>
 
 **Kind**: instance property of [<code>Component</code>](#Component)  
 <a name="Component+getBIMProject"></a>
@@ -872,17 +1013,6 @@ markers.add({
 | Param | Type | Description |
 | --- | --- | --- |
 | block | <code>Boolean</code> | <p>是否隔离</p> |
-
-<a name="Component+translate"></a>
-
-### component.translate(offset)
-<p>平移构件</p>
-
-**Kind**: instance method of [<code>Component</code>](#Component)  
-
-| Param | Type |
-| --- | --- |
-| offset | [<code>Cartesian3</code>](#Cartesian3) | 
 
 <a name="Component+rotate"></a>
 
@@ -971,13 +1101,17 @@ markers.add({
     * [.cameraMoveStart](#Viewer+cameraMoveStart) : <code>Event</code>
     * [.cameraMoveEnd](#Viewer+cameraMoveEnd) : <code>Event</code>
     * [.cameraChanged](#Viewer+cameraChanged) : <code>Event</code>
+    * [.camera](#Viewer+camera) : [<code>Camera</code>](#Camera)
     * [.waterFlowSpeed](#Viewer+waterFlowSpeed) : <code>Number</code>
     * [.animatedSpeed](#Viewer+animatedSpeed) : <code>Number</code>
     * [.navigationMode](#Viewer+navigationMode) : [<code>NavigationMode</code>](#NavigationMode)
     * [.enableMarquee](#Viewer+enableMarquee) : <code>Boolean</code>
+    * [.enableSnap](#Viewer+enableSnap) : <code>Boolean</code>
+    * [.adsorbEditor](#Viewer+adsorbEditor) : <code>AdsorbEditor</code>
     * [.cimControlMode](#Viewer+cimControlMode) : [<code>CIMControlMode</code>](#CIMControlMode)
     * [.viewerMode](#Viewer+viewerMode) : [<code>ViewerMode</code>](#ViewerMode)
     * [.controller](#Viewer+controller) : [<code>OrbitControl</code>](#OrbitControl) \| <code>ScreenSpaceCameraController</code>
+    * [.planeModeOrigin](#Viewer+planeModeOrigin)
     * [.antialias](#Viewer+antialias) : <code>Boolean</code>
     * [.taaEnabled](#Viewer+taaEnabled) : <code>Boolean</code>
     * [.shouldAnimate](#Viewer+shouldAnimate) : <code>Boolean</code>
@@ -986,16 +1120,22 @@ markers.add({
     * [.envDate](#Viewer+envDate) : <code>Date</code>
     * [.enableAO](#Viewer+enableAO) : <code>Boolean</code>
     * [.enableShadow](#Viewer+enableShadow) : <code>Boolean</code>
+    * [.enableSharpen](#Viewer+enableSharpen) : <code>Boolean</code>
+    * [.enableSkyBox](#Viewer+enableSkyBox)
     * [.sunlightIntensity](#Viewer+sunlightIntensity) : <code>Number</code>
     * [.isFlashlight](#Viewer+isFlashlight) : <code>Boolean</code>
     * [.allowCameraUnderground](#Viewer+allowCameraUnderground) : <code>Boolean</code>
     * [.showMoon](#Viewer+showMoon) : <code>Boolean</code>
+    * [.showUniverse](#Viewer+showUniverse) : <code>Boolean</code>
+    * [.showAtmosphere](#Viewer+showAtmosphere) : <code>Boolean</code>
+    * [.drawEdge](#Viewer+drawEdge) : <code>Boolean</code>
+    * [.edgeColor](#Viewer+edgeColor) : [<code>Color</code>](#Color)
     * [.initialize()](#Viewer+initialize) ⇒ <code>Promise</code>
     * [.loadModel(options)](#Viewer+loadModel) ⇒ <code>Object</code>
     * [.loadTileset(options)](#Viewer+loadTileset) ⇒ <code>Object</code>
     * [.remove(primitive)](#Viewer+remove)
-    * [.queryProject(guid)](#Viewer+queryProject)
-    * [.flyTo(object, callback)](#Viewer+flyTo)
+    * [.queryProject(guid, [options])](#Viewer+queryProject)
+    * [.flyTo(object, callback, duration)](#Viewer+flyTo)
     * [.pick(cartesian2, [project])](#Viewer+pick) ⇒ [<code>Component</code>](#Component) \| [<code>MarkerView</code>](#MarkerView) \| <code>Object</code>
     * [.pickPosition(cartesian2)](#Viewer+pickPosition) ⇒ [<code>Cartesian3</code>](#Cartesian3)
     * [.addMouseEventListener(eventType, eventHandler, modifier)](#Viewer+addMouseEventListener)
@@ -1038,6 +1178,7 @@ markers.add({
 | [options.enableBloom] | <code>Boolean</code> | <code>false</code> | <p>是否开启辉光</p> |
 | [options.enableAO] | <code>Boolean</code> | <code>false</code> | <p>是否开启环境光遮蔽</p> |
 | [options.enableShadow] | <code>Boolean</code> | <code>false</code> | <p>是否开启阴影</p> |
+| [options.enableSkyBox] | <code>Boolean</code> | <code>true</code> | <p>是否开启天空盒和环境贴图</p> |
 | [options.enableFixedFrameRate] | <code>Boolean</code> | <code>false</code> | <p>是否开启固定帧率</p> |
 | [options.enableBIMViewCube] | <code>Boolean</code> | <code>true</code> | <p>是否开启导航方块，默认开启，移动端不开启</p> |
 | [options.taaEnabled] | <code>Boolean</code> | <code>false</code> | <p>开启TAA抗锯齿</p> |
@@ -1047,17 +1188,20 @@ markers.add({
 | [options.cimControlMode] | [<code>CIMControlMode</code>](#CIMControlMode) | <code>Motor.CIMControlMode.MOTOR</code> | <p>CIM模式下的鼠标控制逻辑</p> |
 | [options.backgroundColor] | [<code>Color</code>](#Color) | <code>new Motor.Color(0.93,0.95,0.96)</code> | <p>背景颜色，仅适用于BIM模式</p> |
 | [options.enableVignetteMode] | <code>Boolean</code> | <code>false</code> | <p>开启渐变背景颜色</p> |
-| [options.enableDefaultBIMSkyBox] | <code>Boolean</code> | <code>true</code> | <p>启用默认环境贴图</p> |
 | [options.enableWebgl2] | <code>Boolean</code> | <code>true</code> | <p>启用WebGL2</p> |
-| [options.initializeAfterGetProjectList] | <code>Boolean</code> | <code>false</code> | <p>是否等待账号中工程列表获取完成再初始化Viewer</p> |
 | [options.backgroundColor1] | [<code>Color</code>](#Color) |  | <p>渐变背景色1</p> |
 | [options.backgroundColor2] | [<code>Color</code>](#Color) |  | <p>渐变背景色2</p> |
 | [options.backgroundImageCss] | <code>String</code> |  | <p>背景图片Css样式</p> |
 | [options.skyBox] | [<code>SkyBox</code>](#SkyBox) |  | <p>天空盒对象</p> |
 | [options.isFlashlight] | <code>Boolean</code> | <code>false</code> | <p>是否开启手电筒光源模式</p> |
 | [options.showMoon] | <code>Boolean</code> |  | <p>显示月亮</p> |
+| [options.showUniverse] | <code>Boolean</code> |  | <p>显示星空</p> |
+| [options.showAtmosphere] | <code>Boolean</code> |  | <p>显示大气</p> |
 | [options.fullscreenElement] | <code>Element</code> |  | <p>全屏的目标DOM元素</p> |
 | [options.fullscreenButton] | <code>Boolean</code> |  | <p>全屏按钮显示隐藏</p> |
+| [options.drawEdge] | <code>Boolean</code> |  | <p>显示边线</p> |
+| [options.enableLazyLoad] | <code>Boolean</code> | <code>false</code> | <p>开启懒加载模型网格</p> |
+| [options.lazyLoadMaxByteLength] | <code>Number</code> | <code>1000000</code> | <p>懒加载网格字节数</p> |
 
 **Example**  
 ```js
@@ -1113,6 +1257,12 @@ viewer.shadowMap.darkness = 0.5;
 <p>相机移动事件</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+camera"></a>
+
+### viewer.camera : [<code>Camera</code>](#Camera)
+<p>相机对象</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+waterFlowSpeed"></a>
 
 ### viewer.waterFlowSpeed : <code>Number</code>
@@ -1137,6 +1287,18 @@ viewer.shadowMap.darkness = 0.5;
 <p>开启/关闭框选放大，参考{@tutorial 视角控制}</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+enableSnap"></a>
+
+### viewer.enableSnap : <code>Boolean</code>
+<p>开启或关闭捕捉点</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+adsorbEditor"></a>
+
+### viewer.adsorbEditor : <code>AdsorbEditor</code>
+<p>捕捉编辑器</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+cimControlMode"></a>
 
 ### viewer.cimControlMode : [<code>CIMControlMode</code>](#CIMControlMode)
@@ -1153,6 +1315,12 @@ viewer.shadowMap.darkness = 0.5;
 
 ### viewer.controller : [<code>OrbitControl</code>](#OrbitControl) \| <code>ScreenSpaceCameraController</code>
 <p>相机控制器，BIM模式下为OrbitControl, CIM模式下为ScreenSpaceCameraController</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+planeModeOrigin"></a>
+
+### viewer.planeModeOrigin
+<p>平面模式下的原点在ECEF坐标系下的位置</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+antialias"></a>
@@ -1204,6 +1372,18 @@ viewer.shadowMap.darkness = 0.5;
 <p>开启或关闭阴影</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+enableSharpen"></a>
+
+### viewer.enableSharpen : <code>Boolean</code>
+<p>锐化开关</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+enableSkyBox"></a>
+
+### viewer.enableSkyBox
+<p>开启或关闭天空盒子</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+sunlightIntensity"></a>
 
 ### viewer.sunlightIntensity : <code>Number</code>
@@ -1230,6 +1410,30 @@ viewer.shadowMap.darkness = 0.5;
 <p>控制月亮显隐</p>
 
 **Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+showUniverse"></a>
+
+### viewer.showUniverse : <code>Boolean</code>
+<p>显示隐藏星空</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+showAtmosphere"></a>
+
+### viewer.showAtmosphere : <code>Boolean</code>
+<p>显示隐藏大气</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+drawEdge"></a>
+
+### viewer.drawEdge : <code>Boolean</code>
+<p>绘制边框线</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
+<a name="Viewer+edgeColor"></a>
+
+### viewer.edgeColor : [<code>Color</code>](#Color)
+<p>设置边框线颜色</p>
+
+**Kind**: instance property of [<code>Viewer</code>](#Viewer)  
 <a name="Viewer+initialize"></a>
 
 ### viewer.initialize() ⇒ <code>Promise</code>
@@ -1253,7 +1457,6 @@ viewer.shadowMap.darkness = 0.5;
 | [options.rotationZ] | <code>Number</code> | <code>0</code> | <p>Z轴旋转量</p> |
 | [options.zoomTo] | <code>Boolean</code> | <code>true</code> | <p>加载完成后，镜头是否移动到模型</p> |
 | [options.luminanceAtZenith] | <code>Number</code> | <code>0.2</code> | <p>模型亮度,[0-1]</p> |
-| [options.drawEdge] | <code>Boolean</code> | <code>false</code> | <p>是否绘制边线</p> |
 
 **Example**  
 ```js
@@ -1294,7 +1497,7 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 
 <a name="Viewer+queryProject"></a>
 
-### viewer.queryProject(guid)
+### viewer.queryProject(guid, [options])
 <p>根据guid请求工程对象</p>
 
 **Kind**: instance method of [<code>Viewer</code>](#Viewer)  
@@ -1302,10 +1505,12 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 | Param | Type | Description |
 | --- | --- | --- |
 | guid | <code>String</code> | <p>工程guid</p> |
+| [options] | <code>Object</code> | <p>配置参数</p> |
+| [options.forceCenter] | <code>Array</code> | <p>中心点经纬度</p> |
 
 <a name="Viewer+flyTo"></a>
 
-### viewer.flyTo(object, callback)
+### viewer.flyTo(object, callback, duration)
 <p>飞向目标</p>
 
 **Kind**: instance method of [<code>Viewer</code>](#Viewer)  
@@ -1314,6 +1519,7 @@ var model = viewer.loadModel({ url:'path/to/model.gltf', origin:Motor.Cartesia
 | --- | --- | --- |
 | object | [<code>FlyOption</code>](#FlyOption) \| [<code>Project</code>](#Project) \| [<code>Component</code>](#Component) \| [<code>Array.&lt;Component&gt;</code>](#Component) | <p>飞行参数、工程对象或者构件对象</p> |
 | callback | <code>function</code> | <p>飞行完成后的回调函数</p> |
+| duration | <code>Number</code> | <p>飞行时间</p> |
 
 <a name="Viewer+pick"></a>
 
@@ -1591,10 +1797,11 @@ var volumeRender = viewer.createVolumeRender({
         * [.name](#Project+name) : <code>String</code>
         * [.isOpened](#Project+isOpened) : <code>Boolean</code>
         * [.lightIntensity](#Project+lightIntensity) ⇒ <code>Number</code>
-        * [.drawEdge](#Project+drawEdge) : <code>Boolean</code>
-        * [.edgeColor](#Project+edgeColor) : <code>Boolean</code>
         * [.boundingBoxLocal](#Project+boundingBoxLocal) : [<code>BoundingBox</code>](#BoundingBox)
+        * [.boundingRegion](#Project+boundingRegion) : [<code>BoundingRegion</code>](#BoundingRegion)
+        * [.code](#Project+code) : <code>String</code>
         * [.customMap](#Project+customMap) : [<code>BaseMap</code>](#BaseMap)
+        * [.position](#Project+position) : [<code>Cartesian3</code>](#Cartesian3)
         * [.positionCartographic](#Project+positionCartographic) : [<code>Cartographic</code>](#Cartographic)
         * [.open([options])](#Project+open) ⇒ [<code>[ &#x27;Promise&#x27; ].&lt;Project&gt;</code>](#Project)
         * [.close([options])](#Project+close) ⇒ [<code>Project</code>](#Project) \| <code>undefined</code>
@@ -1602,9 +1809,12 @@ var volumeRender = viewer.createVolumeRender({
         * [.getPropTemplateInfo()](#Project+getPropTemplateInfo) ⇒ [<code>[ &#x27;Array&#x27; ].&lt;TemplateProps&gt;</code>](#TemplateProps)
         * [.reset()](#Project+reset)
         * [.getFloors()](#Project+getFloors) : <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code>
-        * [.queryComponents([options])](#Project+queryComponents) ⇒ [<code>[ &#x27;Promise&#x27; ].&lt;Component&gt;</code>](#Component)
+        * [.queryComponents([options])](#Project+queryComponents) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;Component&gt;&gt;</code>
+        * [.queryComponentsWithCode()](#Project+queryComponentsWithCode) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;Component&gt;&gt;</code>
         * [.getInnerProjectList()](#Project+getInnerProjectList) ⇒ [<code>[ &#x27;Array&#x27; ].&lt;Project&gt;</code>](#Project)
         * [.selectComponents([components])](#Project+selectComponents)
+        * [.deselectComponents([components])](#Project+deselectComponents)
+        * [.selectComponentsByBimGuidAndFloor(conditions)](#Project+selectComponentsByBimGuidAndFloor)
         * [.selectComponentsByOption(options)](#Project+selectComponentsByOption)
         * [.deselectAllComponents()](#Project+deselectAllComponents)
         * [.setComponentsColor(color, [components])](#Project+setComponentsColor)
@@ -1614,9 +1824,10 @@ var volumeRender = viewer.createVolumeRender({
         * [.setComponentsVisiblity(bVisible, [components])](#Project+setComponentsVisiblity)
         * [.setComponentsVisibilityByOption(options, bVisible)](#Project+setComponentsVisibilityByOption)
         * [.setAllComponentsVisibility(bVisible)](#Project+setAllComponentsVisibility)
-        * [.setVisiblityFromTree(treeObjects)](#Project+setVisiblityFromTree)
-        * [.getTreeStructure()](#Project+getTreeStructure) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Object&gt;</code>
-        * [.getComponentFromTree(treeNode)](#Project+getComponentFromTree) ⇒ [<code>Component</code>](#Component)
+        * ~~[.setVisiblityFromTree(treeObjects)](#Project+setVisiblityFromTree)~~
+        * ~~[.getTreeStructure()](#Project+getTreeStructure) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Object&gt;</code>~~
+        * [.getMotorTreeStructure()](#Project+getMotorTreeStructure) ⇒ [<code>[ &#x27;Promise&#x27; ].&lt;TreeStructureJSON&gt;</code>](#TreeStructureJSON)
+        * ~~[.getComponentFromTree(treeNode)](#Project+getComponentFromTree) ⇒ [<code>Component</code>](#Component)~~
         * [.isolateComponents(components, [block])](#Project+isolateComponents)
         * [.isolateComponentsByOption(options, [block])](#Project+isolateComponentsByOption)
         * [.clearIsolation()](#Project+clearIsolation)
@@ -1628,9 +1839,12 @@ var volumeRender = viewer.createVolumeRender({
         * [.fadeInComponentsByOption(options, [time])](#Project+fadeInComponentsByOption)
         * [.findBIMComponentsByKeywords(options)](#Project+findBIMComponentsByKeywords) ⇒ <code>Promise</code>
         * [.showFloors(floorName)](#Project+showFloors)
-        * [.localCoordinatesToWorld(coordinates)](#Project+localCoordinatesToWorld)
+        * [.localCoordinatesToWorld(coordinates, [result])](#Project+localCoordinatesToWorld)
+        * [.worldCoordinatesToLocal(coordinates, [result])](#Project+worldCoordinatesToLocal)
+        * [.worldCoordinatesToProjectionCoordinates(coordinates, [result])](#Project+worldCoordinatesToProjectionCoordinates)
+        * [.projectionCoordinatesToWorldCoordinates(coordinates, [result])](#Project+projectionCoordinatesToWorldCoordinates)
     * _static_
-        * [.getChildNodesFromTree(treeNode)](#Project.getChildNodesFromTree)
+        * ~~[.getChildNodesFromTree(treeNode)](#Project.getChildNodesFromTree)~~
 
 <a name="Project+boundingSphere"></a>
 
@@ -1672,28 +1886,34 @@ var volumeRender = viewer.createVolumeRender({
 <p>获取或设置场景光照强度</p>
 
 **Kind**: instance property of [<code>Project</code>](#Project)  
-<a name="Project+drawEdge"></a>
-
-### project.drawEdge : <code>Boolean</code>
-<p>是否绘制边线</p>
-
-**Kind**: instance property of [<code>Project</code>](#Project)  
-<a name="Project+edgeColor"></a>
-
-### project.edgeColor : <code>Boolean</code>
-<p>获取或设置边线颜色</p>
-
-**Kind**: instance property of [<code>Project</code>](#Project)  
 <a name="Project+boundingBoxLocal"></a>
 
 ### project.boundingBoxLocal : [<code>BoundingBox</code>](#BoundingBox)
 <p>工程局部坐标系下的AABB包围盒</p>
 
 **Kind**: instance property of [<code>Project</code>](#Project)  
+<a name="Project+boundingRegion"></a>
+
+### project.boundingRegion : [<code>BoundingRegion</code>](#BoundingRegion)
+<p>工程世界坐标系下的矩形范围</p>
+
+**Kind**: instance property of [<code>Project</code>](#Project)  
+<a name="Project+code"></a>
+
+### project.code : <code>String</code>
+<p>用户自定义的第三方系统编码</p>
+
+**Kind**: instance property of [<code>Project</code>](#Project)  
 <a name="Project+customMap"></a>
 
 ### project.customMap : [<code>BaseMap</code>](#BaseMap)
 <p>用户自定义的地图</p>
+
+**Kind**: instance property of [<code>Project</code>](#Project)  
+<a name="Project+position"></a>
+
+### project.position : [<code>Cartesian3</code>](#Cartesian3)
+<p>获取工程原点三维坐标</p>
 
 **Kind**: instance property of [<code>Project</code>](#Project)  
 <a name="Project+positionCartographic"></a>
@@ -1712,7 +1932,6 @@ var volumeRender = viewer.createVolumeRender({
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [options] | <code>Object</code> |  | <p>包含以下参数的对象</p> |
-| [options.drawEdge] | <code>Boolean</code> | <code>false</code> | <p>是否绘制边线</p> |
 | [options.lightIntensity] | <code>Number</code> | <code>0.2</code> | <p>模型亮度, [0-1]</p> |
 | [options.enableShadowPlane] | <code>Boolean</code> | <code>false</code> | <p>是否开启下方阴影面</p> |
 | [options.lazyLoad] | <code>Boolean</code> | <code>false</code> | <p>开启懒加载</p> |
@@ -1720,6 +1939,9 @@ var volumeRender = viewer.createVolumeRender({
 | [options.openlocal] | <code>Boolean</code> | <code>false</code> | <p>打开本地文件夹模型</p> |
 | [options.localPath] | <code>String</code> |  | <p>本地文件夹路径</p> |
 | [options.duration] | <code>Number</code> |  | <p>飞行时间</p> |
+| [options.projected] | <code>Boolean</code> |  | <p>是否投影变换</p> |
+| [options.forceCenter] | <code>Array</code> |  | <p>中心点经纬度</p> |
+| [options.dynamicSkipLevels] | <code>Array</code> |  | <p>是否跳过顶层层级</p> |
 
 <a name="Project+close"></a>
 
@@ -1760,15 +1982,25 @@ var volumeRender = viewer.createVolumeRender({
 **Kind**: instance method of [<code>Project</code>](#Project)  
 <a name="Project+queryComponents"></a>
 
-### project.queryComponents([options]) ⇒ [<code>[ &#x27;Promise&#x27; ].&lt;Component&gt;</code>](#Component)
+### project.queryComponents([options]) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;Component&gt;&gt;</code>
 <p>查询构件列表</p>
 
 **Kind**: instance method of [<code>Project</code>](#Project)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [options] | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| <code>Array.&lt;String&gt;</code> | <p>传入查询条件或者guid数组，如果不填，则查询(CIM工程)全部构件</p> |
+| [options] | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| <code>Array.&lt;String&gt;</code> \| <code>Array.&lt;Array&gt;</code> | <p>传入查询条件或者guid数组，如果不填，则查询(CIM工程)全部构件</p> |
 
+**Example**  
+```js
+project.queryComponents([['RF'],['22F']]).then(function(components){  alert("共查找到"+components.length+"个构件")  project.isolateComponents(components);  viewer.flyTo(components)})
+```
+<a name="Project+queryComponentsWithCode"></a>
+
+### project.queryComponentsWithCode() ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Array.&lt;Component&gt;&gt;</code>
+<p>获取带有第三方系统编码的构件列表</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
 <a name="Project+getInnerProjectList"></a>
 
 ### project.getInnerProjectList() ⇒ [<code>[ &#x27;Array&#x27; ].&lt;Project&gt;</code>](#Project)
@@ -1786,6 +2018,28 @@ var volumeRender = viewer.createVolumeRender({
 | --- | --- | --- |
 | [components] | [<code>Array.&lt;Component&gt;</code>](#Component) \| <code>Array.&lt;String&gt;</code> | <p>构件列表或者构件guid列表</p> |
 
+<a name="Project+deselectComponents"></a>
+
+### project.deselectComponents([components])
+<p>取消选择构件，如果不填参数，则全部取消选择</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [components] | [<code>Array.&lt;Component&gt;</code>](#Component) \| <code>Array.&lt;String&gt;</code> | <p>构件列表或者构件guid列表</p> |
+
+<a name="Project+selectComponentsByBimGuidAndFloor"></a>
+
+### project.selectComponentsByBimGuidAndFloor(conditions)
+<p>根据bimGuid和floor设置高亮构件，新数据接口，不支持2.4.6版本之前的老数据，鲁班软件内部使用</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| conditions | [<code>Array.&lt;BIMGuidFloorPair&gt;</code>](#BIMGuidFloorPair) \| [<code>BIMGuidFloorPair</code>](#BIMGuidFloorPair) | <p>条件数组</p> |
+
 <a name="Project+selectComponentsByOption"></a>
 
 ### project.selectComponentsByOption(options)
@@ -1795,7 +2049,7 @@ var volumeRender = viewer.createVolumeRender({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) | <p>传入筛选条件</p> |
+| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) \| <code>Array.&lt;Array&gt;</code> | <p>传入筛选条件</p> |
 
 <a name="Project+deselectAllComponents"></a>
 
@@ -1824,7 +2078,7 @@ var volumeRender = viewer.createVolumeRender({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) | <p>传入筛选条件</p> |
+| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) \| <code>Array.&lt;Array&gt;</code> | <p>传入筛选条件</p> |
 | color | [<code>Color</code>](#Color) | <p>颜色</p> |
 
 <a name="Project+resetComponentsDefaultColorByOption"></a>
@@ -1870,7 +2124,7 @@ var volumeRender = viewer.createVolumeRender({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) | <p>传入筛选条件</p> |
+| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) \| <code>Array.&lt;Array&gt;</code> | <p>传入筛选条件</p> |
 | bVisible | <code>Boolean</code> | <p>是否显示</p> |
 
 <a name="Project+setAllComponentsVisibility"></a>
@@ -1886,7 +2140,9 @@ var volumeRender = viewer.createVolumeRender({
 
 <a name="Project+setVisiblityFromTree"></a>
 
-### project.setVisiblityFromTree(treeObjects)
+### ~~project.setVisiblityFromTree(treeObjects)~~
+***Deprecated***
+
 <p>根据构件树控制显示隐藏</p>
 
 **Kind**: instance method of [<code>Project</code>](#Project)  
@@ -1897,14 +2153,25 @@ var volumeRender = viewer.createVolumeRender({
 
 <a name="Project+getTreeStructure"></a>
 
-### project.getTreeStructure() ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Object&gt;</code>
+### ~~project.getTreeStructure() ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Object&gt;</code>~~
+***Deprecated***
+
 <p>获取工程构件树</p>
 
 **Kind**: instance method of [<code>Project</code>](#Project)  
 **Returns**: <code>[ &#x27;Promise&#x27; ].&lt;Object&gt;</code> - <p>构件树对象</p>  
+<a name="Project+getMotorTreeStructure"></a>
+
+### project.getMotorTreeStructure() ⇒ [<code>[ &#x27;Promise&#x27; ].&lt;TreeStructureJSON&gt;</code>](#TreeStructureJSON)
+<p>获取工程构件树（新版）</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+**Returns**: [<code>[ &#x27;Promise&#x27; ].&lt;TreeStructureJSON&gt;</code>](#TreeStructureJSON) - <p>构件树对象</p>  
 <a name="Project+getComponentFromTree"></a>
 
-### project.getComponentFromTree(treeNode) ⇒ [<code>Component</code>](#Component)
+### ~~project.getComponentFromTree(treeNode) ⇒ [<code>Component</code>](#Component)~~
+***Deprecated***
+
 <p>根据构件树节点返回构件，只适用于BIM工程，参考{@tutorial 构件树}</p>
 
 **Kind**: instance method of [<code>Project</code>](#Project)  
@@ -1935,7 +2202,7 @@ var volumeRender = viewer.createVolumeRender({
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) |  | <p>传入筛选条件</p> |
+| options | [<code>QueryBIMCompOption</code>](#QueryBIMCompOption) \| [<code>QueryCIMCompOption</code>](#QueryCIMCompOption) \| [<code>Array.&lt;QueryBIMCompOption&gt;</code>](#QueryBIMCompOption) \| <code>Array.&lt;Array&gt;</code> |  | <p>传入筛选条件</p> |
 | [block] | <code>Boolean</code> | <code>false</code> | <p>是否屏蔽该构件</p> |
 
 <a name="Project+clearIsolation"></a>
@@ -2041,25 +2308,64 @@ var volumeRender = viewer.createVolumeRender({
 
 <a name="Project+localCoordinatesToWorld"></a>
 
-### project.localCoordinatesToWorld(coordinates)
+### project.localCoordinatesToWorld(coordinates, [result])
 <p>工程局部坐标转世界坐标</p>
 
 **Kind**: instance method of [<code>Project</code>](#Project)  
 
-| Param | Type |
-| --- | --- |
-| coordinates | [<code>Cartesian3</code>](#Cartesian3) | 
+| Param | Type | Description |
+| --- | --- | --- |
+| coordinates | [<code>Cartesian3</code>](#Cartesian3) |  |
+| [result] | [<code>Cartesian3</code>](#Cartesian3) | <p>存放世界坐标结果的变量</p> |
+
+<a name="Project+worldCoordinatesToLocal"></a>
+
+### project.worldCoordinatesToLocal(coordinates, [result])
+<p>世界坐标转工程局部坐标</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| coordinates | [<code>Cartesian3</code>](#Cartesian3) | <p>世界坐标</p> |
+| [result] | [<code>Cartesian3</code>](#Cartesian3) | <p>存放局部坐标结果的变量</p> |
+
+<a name="Project+worldCoordinatesToProjectionCoordinates"></a>
+
+### project.worldCoordinatesToProjectionCoordinates(coordinates, [result])
+<p>世界坐标转投影坐标</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| coordinates | [<code>Cartesian3</code>](#Cartesian3) | <p>世界坐标</p> |
+| [result] | [<code>Cartesian3</code>](#Cartesian3) | <p>存放投影坐标结果的变量</p> |
+
+<a name="Project+projectionCoordinatesToWorldCoordinates"></a>
+
+### project.projectionCoordinatesToWorldCoordinates(coordinates, [result])
+<p>投影坐标转世界坐标</p>
+
+**Kind**: instance method of [<code>Project</code>](#Project)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| coordinates | [<code>Cartesian3</code>](#Cartesian3) | <p>投影坐标</p> |
+| [result] | [<code>Cartesian3</code>](#Cartesian3) | <p>存放世界坐标结果的变量</p> |
 
 <a name="Project.getChildNodesFromTree"></a>
 
-### Project.getChildNodesFromTree(treeNode)
+### ~~Project.getChildNodesFromTree(treeNode)~~
+***Deprecated***
+
 <p>获取构件树节点的子节点</p>
 
 **Kind**: static method of [<code>Project</code>](#Project)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| treeNode | <code>Object</code> | <p>构件树节点</p> |
+| treeNode | <code>Object</code> | <p>构件树节</p> |
 
 <a name="VolumeRender"></a>
 
@@ -2275,6 +2581,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [ArcGISMap](#ArcGISMap) ⇐ [<code>BaseMap</code>](#BaseMap)
     * [new ArcGISMap(options)](#new_ArcGISMap_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2291,6 +2598,12 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
 
+<a name="BaseMap+show"></a>
+
+### arcGISMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>ArcGISMap</code>](#ArcGISMap)  
 <a name="BaseMap+alpha"></a>
 
 ### arcGISMap.alpha
@@ -2326,6 +2639,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [BaseMap](#BaseMap)
     * [new BaseMap(options)](#new_BaseMap_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2340,6 +2654,12 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
 
+<a name="BaseMap+show"></a>
+
+### baseMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>BaseMap</code>](#BaseMap)  
 <a name="BaseMap+alpha"></a>
 
 ### baseMap.alpha
@@ -2368,6 +2688,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [BingMap](#BingMap) ⇐ [<code>BaseMap</code>](#BaseMap)
     * [new BingMap(options)](#new_BingMap_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2385,6 +2706,12 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
 
+<a name="BaseMap+show"></a>
+
+### bingMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>BingMap</code>](#BingMap)  
 <a name="BaseMap+alpha"></a>
 
 ### bingMap.alpha
@@ -2403,6 +2730,59 @@ var volumeRender = viewer.createVolumeRender({
 <p>地图图层对比度</p>
 
 **Kind**: instance property of [<code>BingMap</code>](#BingMap)  
+<a name="MapboxStyleMap"></a>
+
+## MapboxStyleMap ⇐ [<code>BaseMap</code>](#BaseMap)
+<p>MapBox地图服务，参考{@tutorial 地图服务}</p>
+
+**Kind**: global class  
+**Extends**: [<code>BaseMap</code>](#BaseMap)  
+
+* [MapboxStyleMap](#MapboxStyleMap) ⇐ [<code>BaseMap</code>](#BaseMap)
+    * [new MapboxStyleMap(options)](#new_MapboxStyleMap_new)
+    * [.show](#BaseMap+show)
+    * [.alpha](#BaseMap+alpha)
+    * [.brightness](#BaseMap+brightness)
+    * [.contrast](#BaseMap+contrast)
+
+<a name="new_MapboxStyleMap_new"></a>
+
+### new MapboxStyleMap(options)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| [options.url] | <code>String</code> | <code>&#x27;https://api.mapbox.com/styles/v1/&#x27;</code> | <p>服务地址</p> |
+| [options.username] | <code>String</code> | <code>&#x27;mapbox&#x27;</code> | <p>账号名</p> |
+| [options.styleId] | <code>String</code> |  | <p>样式id</p> |
+| [options.accessToken] | <code>String</code> |  | <p>服务秘钥</p> |
+| [options.tilesize] | <code>Number</code> | <code>512</code> | <p>地图瓦片大小</p> |
+| [options.scaleFactor] | <code>Boolean</code> |  | <p>设置地图是否按照@2x缩放因子渲染</p> |
+
+<a name="BaseMap+show"></a>
+
+### mapboxStyleMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>MapboxStyleMap</code>](#MapboxStyleMap)  
+<a name="BaseMap+alpha"></a>
+
+### mapboxStyleMap.alpha
+<p>地图图层透明度</p>
+
+**Kind**: instance property of [<code>MapboxStyleMap</code>](#MapboxStyleMap)  
+<a name="BaseMap+brightness"></a>
+
+### mapboxStyleMap.brightness
+<p>地图图层亮度</p>
+
+**Kind**: instance property of [<code>MapboxStyleMap</code>](#MapboxStyleMap)  
+<a name="BaseMap+contrast"></a>
+
+### mapboxStyleMap.contrast
+<p>地图图层对比度</p>
+
+**Kind**: instance property of [<code>MapboxStyleMap</code>](#MapboxStyleMap)  
 <a name="MapCollection"></a>
 
 ## MapCollection
@@ -2514,6 +2894,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [TiandituMap](#TiandituMap) ⇐ [<code>BaseMap</code>](#BaseMap)
     * [new TiandituMap(options)](#new_TiandituMap_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2530,6 +2911,12 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
 
+<a name="BaseMap+show"></a>
+
+### tiandituMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>TiandituMap</code>](#TiandituMap)  
 <a name="BaseMap+alpha"></a>
 
 ### tiandituMap.alpha
@@ -2548,6 +2935,108 @@ var volumeRender = viewer.createVolumeRender({
 <p>地图图层对比度</p>
 
 **Kind**: instance property of [<code>TiandituMap</code>](#TiandituMap)  
+<a name="TileMapService"></a>
+
+## TileMapService ⇐ [<code>BaseMap</code>](#BaseMap)
+<p>TMS地图服务类，参考{@tutorial 地图服务}</p>
+
+**Kind**: global class  
+**Extends**: [<code>BaseMap</code>](#BaseMap)  
+
+* [TileMapService](#TileMapService) ⇐ [<code>BaseMap</code>](#BaseMap)
+    * [new TileMapService(options)](#new_TileMapService_new)
+    * [.show](#BaseMap+show)
+    * [.alpha](#BaseMap+alpha)
+    * [.brightness](#BaseMap+brightness)
+    * [.contrast](#BaseMap+contrast)
+
+<a name="new_TileMapService_new"></a>
+
+### new TileMapService(options)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | <p>包含以下参数的对象</p> |
+| options.url | <code>String</code> |  | <p>地图服务地址</p> |
+| [options.fileExtension] | <code>String</code> |  | <p>后缀名</p> |
+| [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
+| [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
+
+<a name="BaseMap+show"></a>
+
+### tileMapService.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>TileMapService</code>](#TileMapService)  
+<a name="BaseMap+alpha"></a>
+
+### tileMapService.alpha
+<p>地图图层透明度</p>
+
+**Kind**: instance property of [<code>TileMapService</code>](#TileMapService)  
+<a name="BaseMap+brightness"></a>
+
+### tileMapService.brightness
+<p>地图图层亮度</p>
+
+**Kind**: instance property of [<code>TileMapService</code>](#TileMapService)  
+<a name="BaseMap+contrast"></a>
+
+### tileMapService.contrast
+<p>地图图层对比度</p>
+
+**Kind**: instance property of [<code>TileMapService</code>](#TileMapService)  
+<a name="UrlTemplateMap"></a>
+
+## UrlTemplateMap ⇐ [<code>BaseMap</code>](#BaseMap)
+<p>自定义地图服务模板类，参考{@tutorial 地图服务}</p>
+
+**Kind**: global class  
+**Extends**: [<code>BaseMap</code>](#BaseMap)  
+
+* [UrlTemplateMap](#UrlTemplateMap) ⇐ [<code>BaseMap</code>](#BaseMap)
+    * [new UrlTemplateMap(options)](#new_UrlTemplateMap_new)
+    * [.show](#BaseMap+show)
+    * [.alpha](#BaseMap+alpha)
+    * [.brightness](#BaseMap+brightness)
+    * [.contrast](#BaseMap+contrast)
+
+<a name="new_UrlTemplateMap_new"></a>
+
+### new UrlTemplateMap(options)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | <p>包含以下参数的对象</p> |
+| [options.url] | <code>String</code> | <p>地图模板</p> |
+| [options.subdomains] | <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code> | <p>子域，如['0','1','2']</p> |
+| [options.maximumLevel] | <code>Number</code> | <p>显示地图的最大层级</p> |
+| [options.customTags] | <code>Object</code> | <p>自定义标签</p> |
+
+<a name="BaseMap+show"></a>
+
+### urlTemplateMap.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>UrlTemplateMap</code>](#UrlTemplateMap)  
+<a name="BaseMap+alpha"></a>
+
+### urlTemplateMap.alpha
+<p>地图图层透明度</p>
+
+**Kind**: instance property of [<code>UrlTemplateMap</code>](#UrlTemplateMap)  
+<a name="BaseMap+brightness"></a>
+
+### urlTemplateMap.brightness
+<p>地图图层亮度</p>
+
+**Kind**: instance property of [<code>UrlTemplateMap</code>](#UrlTemplateMap)  
+<a name="BaseMap+contrast"></a>
+
+### urlTemplateMap.contrast
+<p>地图图层对比度</p>
+
+**Kind**: instance property of [<code>UrlTemplateMap</code>](#UrlTemplateMap)  
 <a name="WebMapService"></a>
 
 ## WebMapService ⇐ [<code>BaseMap</code>](#BaseMap)
@@ -2558,6 +3047,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [WebMapService](#WebMapService) ⇐ [<code>BaseMap</code>](#BaseMap)
     * [new WebMapService(options)](#new_WebMapService_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2577,6 +3067,12 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
 
+<a name="BaseMap+show"></a>
+
+### webMapService.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>WebMapService</code>](#WebMapService)  
 <a name="BaseMap+alpha"></a>
 
 ### webMapService.alpha
@@ -2605,6 +3101,7 @@ var volumeRender = viewer.createVolumeRender({
 
 * [WebMapTileService](#WebMapTileService) ⇐ [<code>BaseMap</code>](#BaseMap)
     * [new WebMapTileService(options)](#new_WebMapTileService_new)
+    * [.show](#BaseMap+show)
     * [.alpha](#BaseMap+alpha)
     * [.brightness](#BaseMap+brightness)
     * [.contrast](#BaseMap+contrast)
@@ -2623,7 +3120,14 @@ var volumeRender = viewer.createVolumeRender({
 | [options.tileMatrixLabels] | <code>String</code> |  | <p>tileMatrixLabels</p> |
 | [options.tilingScheme] | [<code>TilingScheme</code>](#TilingScheme) | <code>GeographicTilingScheme</code> | <p>地图切片方案</p> |
 | [options.maximumLevel] | <code>Number</code> |  | <p>显示地图的最大层级</p> |
+| [options.subdomains] | <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code> |  | <p>子域，如['0','1','2']</p> |
 
+<a name="BaseMap+show"></a>
+
+### webMapTileService.show
+<p>地图图层显隐</p>
+
+**Kind**: instance property of [<code>WebMapTileService</code>](#WebMapTileService)  
 <a name="BaseMap+alpha"></a>
 
 ### webMapTileService.alpha
@@ -2719,6 +3223,7 @@ viewer.marqueeEditor.marqueeStop.addEventListener(()=>{  console.log('marquee s
 | options.viewer | [<code>Viewer</code>](#Viewer) |  | <p>Motor.Viewer实例化对象</p> |
 | [options.callback] | [<code>MeasureResultCallback</code>](#MeasureResultCallback) |  | <p>测量结果回调函数，返回距离或者角度值</p> |
 | [options.mode] | [<code>MeasureMode</code>](#MeasureMode) | <code>MeasureMode.ANGLE</code> | <p>测量模式</p> |
+| [options.style] | <code>Object</code> | <code>defaultStyle</code> | <p>线条、点和弧形的样式</p> |
 
 <a name="MeasureEditor+mode"></a>
 
@@ -2951,6 +3456,295 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>Object</code> | <p>路径配置对象</p> |
+
+<a name="Camera"></a>
+
+## Camera
+<p>相机对象</p>
+
+**Kind**: global class  
+
+* [Camera](#Camera)
+    * [.position](#Camera+position)
+    * [.positionWC](#Camera+positionWC)
+    * [.direction](#Camera+direction) : [<code>Cartesian3</code>](#Cartesian3)
+    * [.up](#Camera+up) : [<code>Cartesian3</code>](#Cartesian3)
+    * [.upWC](#Camera+upWC) : [<code>Cartesian3</code>](#Cartesian3)
+    * [.right](#Camera+right) : [<code>Cartesian3</code>](#Cartesian3)
+    * [.rightWC](#Camera+rightWC) : [<code>Cartesian3</code>](#Cartesian3)
+    * [.rotateLeft(angle)](#Camera+rotateLeft)
+    * [.rotateRight(angle)](#Camera+rotateRight)
+    * [.rotateUp(angle)](#Camera+rotateUp)
+    * [.rotateDown(angle)](#Camera+rotateDown)
+    * [.rotate(axis, angle)](#Camera+rotate)
+    * [.lookLeft(angle)](#Camera+lookLeft)
+    * [.lookRight(angle)](#Camera+lookRight)
+    * [.lookUp(angle)](#Camera+lookUp)
+    * [.lookDown(angle)](#Camera+lookDown)
+    * [.look(axis, angle)](#Camera+look)
+    * [.moveDown(amount)](#Camera+moveDown)
+    * [.moveUp(amount)](#Camera+moveUp)
+    * [.moveRight(amount)](#Camera+moveRight)
+    * [.moveLeft(amount)](#Camera+moveLeft)
+    * [.moveForward(amount)](#Camera+moveForward)
+    * [.moveBackward(amount)](#Camera+moveBackward)
+    * [.move(direction, amount)](#Camera+move)
+    * [.setLookAtCenter(cartesian2)](#Camera+setLookAtCenter)
+    * [.lookAt(target)](#Camera+lookAt)
+
+<a name="Camera+position"></a>
+
+### camera.position
+<p>相机位置</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+positionWC"></a>
+
+### camera.positionWC
+<p>相机位置(世界坐标)</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+direction"></a>
+
+### camera.direction : [<code>Cartesian3</code>](#Cartesian3)
+<p>视角前方向向量</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+up"></a>
+
+### camera.up : [<code>Cartesian3</code>](#Cartesian3)
+<p>视角上方向向量</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+upWC"></a>
+
+### camera.upWC : [<code>Cartesian3</code>](#Cartesian3)
+<p>视角上方向向量(世界坐标)</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+right"></a>
+
+### camera.right : [<code>Cartesian3</code>](#Cartesian3)
+<p>视角右方向向量</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+rightWC"></a>
+
+### camera.rightWC : [<code>Cartesian3</code>](#Cartesian3)
+<p>视角右方向向量(世界坐标)</p>
+
+**Kind**: instance property of [<code>Camera</code>](#Camera)  
+<a name="Camera+rotateLeft"></a>
+
+### camera.rotateLeft(angle)
+<p>视角向左旋转</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度，单位为弧度</p> |
+
+<a name="Camera+rotateRight"></a>
+
+### camera.rotateRight(angle)
+<p>视角向右旋转</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度，单位为弧度</p> |
+
+<a name="Camera+rotateUp"></a>
+
+### camera.rotateUp(angle)
+<p>视角向上旋转</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度，单位为弧度</p> |
+
+<a name="Camera+rotateDown"></a>
+
+### camera.rotateDown(angle)
+<p>视角向下旋转</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度，单位为弧度</p> |
+
+<a name="Camera+rotate"></a>
+
+### camera.rotate(axis, angle)
+<p>绕特定轴旋转</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| axis | [<code>Cartesian3</code>](#Cartesian3) | <p>旋转轴</p> |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+lookLeft"></a>
+
+### camera.lookLeft(angle)
+<p>视角向左转向</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+lookRight"></a>
+
+### camera.lookRight(angle)
+<p>视角向右转向</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+lookUp"></a>
+
+### camera.lookUp(angle)
+<p>视角向上转向</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+lookDown"></a>
+
+### camera.lookDown(angle)
+<p>视角向下转向</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+look"></a>
+
+### camera.look(axis, angle)
+<p>视角绕指定向量转向</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| axis | [<code>Cartesian3</code>](#Cartesian3) | <p>旋转角度</p> |
+| angle | <code>Number</code> | <p>旋转角度</p> |
+
+<a name="Camera+moveDown"></a>
+
+### camera.moveDown(amount)
+<p>视角向下移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+moveUp"></a>
+
+### camera.moveUp(amount)
+<p>视角向上移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+moveRight"></a>
+
+### camera.moveRight(amount)
+<p>视角向右移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+moveLeft"></a>
+
+### camera.moveLeft(amount)
+<p>视角向左移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+moveForward"></a>
+
+### camera.moveForward(amount)
+<p>视角向前移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+moveBackward"></a>
+
+### camera.moveBackward(amount)
+<p>视角向后移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+move"></a>
+
+### camera.move(direction, amount)
+<p>视角指定方向移动</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| direction | [<code>Cartesian3</code>](#Cartesian3) | <p>移动方向向量</p> |
+| amount | <code>Number</code> | <p>移动距离</p> |
+
+<a name="Camera+setLookAtCenter"></a>
+
+### camera.setLookAtCenter(cartesian2)
+<p>设置旋转中心锚点</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cartesian2 | [<code>Cartesian2</code>](#Cartesian2) | <p>屏幕坐标</p> |
+
+<a name="Camera+lookAt"></a>
+
+### camera.lookAt(target)
+<p>视角锁定位置</p>
+
+**Kind**: instance method of [<code>Camera</code>](#Camera)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| target | [<code>Cartesian3</code>](#Cartesian3) | <p>目标坐标</p> |
 
 <a name="OrbitControl"></a>
 
@@ -3316,6 +4110,8 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
     * [new ClippingPlaneEditor(project, [options])](#new_ClippingPlaneEditor_new)
     * [.dragStart](#ClippingPlaneEditor+dragStart) : <code>Event</code>
     * [.dragEnd](#ClippingPlaneEditor+dragEnd) : <code>Event</code>
+    * [.rotateSpeed](#ClippingPlaneEditor+rotateSpeed) : <code>Number</code>
+    * [.axisLength](#ClippingPlaneEditor+axisLength) : <code>Number</code>
     * [.addClippingPlane(type)](#ClippingPlaneEditor+addClippingPlane)
     * [.setPlaneVisibility(value, faces)](#ClippingPlaneEditor+setPlaneVisibility)
     * [.destroy()](#ClippingPlaneEditor+destroy)
@@ -3340,6 +4136,19 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 
 ### clippingPlaneEditor.dragEnd : <code>Event</code>
 <p>剖切面拖动结束的事件</p>
+
+**Kind**: instance property of [<code>ClippingPlaneEditor</code>](#ClippingPlaneEditor)  
+<a name="ClippingPlaneEditor+rotateSpeed"></a>
+
+### clippingPlaneEditor.rotateSpeed : <code>Number</code>
+<p>旋转速度</p>
+
+**Kind**: instance property of [<code>ClippingPlaneEditor</code>](#ClippingPlaneEditor)  
+**Default**: <code>1</code>  
+<a name="ClippingPlaneEditor+axisLength"></a>
+
+### clippingPlaneEditor.axisLength : <code>Number</code>
+<p>旋转轴半径，默认根据工程范围设置</p>
 
 **Kind**: instance property of [<code>ClippingPlaneEditor</code>](#ClippingPlaneEditor)  
 <a name="ClippingPlaneEditor+addClippingPlane"></a>
@@ -3375,6 +4184,13 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 <p>配置项</p>
 
 **Kind**: global variable  
+<a name="snapDistanceFactor"></a>
+
+## snapDistanceFactor : <code>Number</code>
+<p>可以捕捉的最远距离因子，默认为1</p>
+
+**Kind**: global variable  
+**Default**: <code>1</code>  
 <a name="MotorConfig"></a>
 
 ## MotorConfig : [<code>Config</code>](#Config)
@@ -3420,6 +4236,20 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | sub_type | <code>number</code> | <code>3</code> | <p>小类</p> |
 | name | <code>number</code> | <code>4</code> | <p>属性名称</p> |
 | extent | <code>number</code> | <code>5</code> | <p>范围</p> |
+
+<a name="InfoFieldDir"></a>
+
+## InfoFieldDir : <code>enum</code>
+<p>构件属性字段枚举类</p>
+
+**Kind**: global enum  
+**Read only**: true  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| bimGuid | <code>number</code> | <code>0</code> | <p>BIM Guid</p> |
+| extent | <code>number</code> | <code>1</code> | <p>范围</p> |
 
 <a name="KeyboardEventModifier"></a>
 
@@ -3622,6 +4452,7 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | --- | --- | --- | --- |
 | CIM | <code>number</code> | <code>0</code> | <p>CIM模式</p> |
 | BIM | <code>number</code> | <code>1</code> | <p>BIM模式</p> |
+| PLANE | <code>number</code> | <code>2</code> | <p>平面模式</p> |
 
 <a name="CameraMotionInputs"></a>
 
@@ -3668,6 +4499,18 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 <p>Motor静态资源地址</p>
 
 **Kind**: instance property of [<code>Config</code>](#Config)  
+<a name="BoundingRegion"></a>
+
+## BoundingRegion : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| rectangle | <code>Rectangle</code> | <p>矩形范围</p> |
+| bottom | <code>Number</code> | <p>底面高度</p> |
+| top | <code>Number</code> | <p>顶面高度</p> |
+
 <a name="CompProperty"></a>
 
 ## CompProperty : <code>Object</code>
@@ -3764,6 +4607,7 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | [range] | <code>Number</code> | <p>相机与中心点距离</p> |
 | [roll] | <code>Number</code> | <p>相机的旋转角，相机方向顺时针旋转为正</p> |
 | [duration] | <code>Number</code> | <p>飞行时间，单位秒</p> |
+| [maximumHeight] | <code>Number</code> | <p>飞行过程中的制高点的高度</p> |
 
 <a name="Mouse"></a>
 
@@ -3834,6 +4678,7 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | [main_type] | <code>String</code> | <p>大类</p> |
 | [sub_type] | <code>String</code> | <p>小类</p> |
 | [name] | <code>String</code> | <p>属性名称</p> |
+| [dir] | <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code> | <p>部位树数组</p> |
 
 <a name="QueryCIMCompOption"></a>
 
@@ -3845,6 +4690,30 @@ avatarRecorder.onPosePlayed.addEventListener(function(id){    console.log("到�
 | --- | --- | --- |
 | [sysName] | <code>String</code> | <p>属性名</p> |
 | [sysNames] | <code>[ &#x27;Array&#x27; ].&lt;String&gt;</code> | <p>属性名</p> |
+
+<a name="BIMGuidFloorPair"></a>
+
+## BIMGuidFloorPair : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| bimGuid | <code>String</code> | 
+| floor | <code>String</code> | 
+
+<a name="TreeStructureJSON"></a>
+
+## TreeStructureJSON : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> | <p>节点名称</p> |
+| isParent | <code>Boolean</code> | <p>是否父节点</p> |
+| getMotorTreeNode | <code>function</code> | <p>获取motor树节点的方法</p> |
+| [children] | [<code>[ &#x27;Array&#x27; ].&lt;TreeStructureJSON&gt;</code>](#TreeStructureJSON) | <p>子节点树结构，叶子结点没有children属性</p> |
 
 <a name="MeasureResult"></a>
 

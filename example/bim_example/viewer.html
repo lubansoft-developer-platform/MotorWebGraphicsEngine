@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BIM工程预览</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="zTreeStyle.css" type="text/css">
-    <script src="jquery.min.js"></script>
-    <script src="jquery.ztree.all.min.js"></script>
+    <link rel="stylesheet" href="../common/lib/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../common/lib/index_bim.css">
+    <script src="../common/lib/jquery.min.js"></script>
+    <script src="../common/lib/jquery.ztree.all.js"></script>
     <!-- <script src="https://lbdp.lubansoft.com/reference/motor-web-library/motor.js"></script> -->
     <!-- <script src="../../library/motor.js"></script> -->
     <script src="../common/common.js"></script>
@@ -17,31 +17,74 @@
 
 <body>
     <div id="loading">
-        <div class="loading-image" style="background-image:url('./img/ezgif.com-crop.gif');">
+        <div class="loading-image" style="background-image:url('../common/lib/img/ezgif.com-crop.gif');">
             <div style="text-align: center;vertical-align: middle;display: table-cell;color: white;height: 100px;padding-top: 80px;margin-top: 80px;">正在努力加载中...</div>
         </div>
     </div>
     <div id='container'></div>
     <div id='infoBox' style="display: none;"></div>
-    <div class="tree_container">
-        <ul id="treeDemo" class="ztree"></ul>
+    <div class="tree-background" style="display: none;">
+        <div class="tree_container">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
     </div>
     <ul class='btns'>
-        <li class='camera_reset' style='background: url("./static/images/ic_xiangji.png") no-repeat center' title="相机复位">
-        </li>
-        <li class="cim_bim" style='background: url("./static/images/ic_map.png") no-repeat center'
-            title="地图显隐"></li>
-        <li class="section" style='background: url("./static/images/ic_pouqie.png") no-repeat center;' title="剖切"></li>
-        <li class="selectd" style='background: url("./static/images/ic_kuangxuanfangda.png") no-repeat center'
+        <li class='camera_reset' style='background: url("../common/lib/static/images/ic_xiangji.png") no-repeat center' title="相机复位"></li>
+        <li class='switchmode' style='background: url("../common/lib/static/images/ic_qiehuan.png") no-repeat center' title="切换背景色"></li>
+        <!-- <li class="cim_bim" style='background: url("../common/lib/static/images/ic_map.png") no-repeat center'
+            title="地图显隐"></li> -->
+        <li class="section" style='background: url("../common/lib/static/images/ic_pouqie.png") no-repeat center;' title="剖切"></li>
+        <li class="measure" style='background: url("../common/lib/static/images/ic_measure.png") no-repeat center;' title="测量"></li>
+        <li class="selectd" style='background: url("../common/lib/static/images/ic_kuangxuanfangda.png") no-repeat center'
             title="框选放大"></li>
         <!-- let autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象 -->
-        <li class="roam" style='background: url("./static/images/ic_manyou.png") no-repeat center' title="漫游"></li>
-        <li class="map_serve" style='background: url("./static/images/ic_map_serve.png") no-repeat center'
-            title="切换地图服务"></li>
-        <li class="edge" style='background: url("./static/images/ic_hide.png") no-repeat center;background-size: 50px 36px;'
+        <li class="roam" style='background: url("../common/lib/static/images/ic_manyou.png") no-repeat center' title="漫游"></li>
+        <!-- <li class="map_serve" style='background: url("../common/lib/static/images/ic_map_serve.png") no-repeat center'
+            title="切换地图服务">
+            <ul class="map_serve_box">
+                <li style="background:url('../common/lib/static/images/ImageryProviders/bingAerial.png')" title="Bing"></li>
+                <li style="background:url('../common/lib/static/images/ImageryProviders/sentinel-2.png')" title="天地图"></li>
+                <li style="background:url('../common/lib/static/images/ImageryProviders/esriWorldImagery.png')" title="ArcGIS"></li>
+                <li style="background:url('../common/lib/static/images/ImageryProviders/WMTS.png')" title="WMTS"></li>
+            </ul>
+        </li> -->
+        <!-- <li class="edge" style='background: url("../common/lib/static/images/ic_hide_hover.png") no-repeat center;background-size: 50px 50px;'
             title="边线开关"></li>
-        <li class="antialias" style='background: url("./static/images/ic_kjc_hover.png") no-repeat center;background-size: 50px 36px;'
-            title="抗锯齿"></li>
+        <li class="antialias" style='background: url("../common/lib/static/images/ic_kjc_hover.png") no-repeat center;background-size: 50px 50px;'
+            title="抗锯齿"></li> -->
+            <li class="effect"  style='background: url("../common/lib/static/images/ic_effect.png") no-repeat center;background-size: 50px 50px;'
+            title="效果设置">
+            <ul class="effect_box">
+                <!-- <li class="effect_item">
+                    <div class='effect_checkbox' id="shadow"></div><div>阴影</div>
+                </li>
+                <li class="effect_item">
+                    <div>阴影强度</div><div><input id="shadowIntensity" type="range" min="0" max="1" value='0.25' step='0.1'></div>
+                </li>
+                <li class="effect_item">
+                    <div>阴影方向</div><div><input id="shadowDirection" type="range" min="0" max="23" value='12' step='1'></div>
+                </li> -->
+                <li class="effect_item">
+                    <div>阳光强度</div><div><input id="sunlightIntensity" type="range" min="0.1" max="2" value='1.5' step='0.1'></div>
+                </li>
+                <!-- <li class="effect_item">
+                    <div class='effect_checkbox' id="ao"></div><div>环境光遮蔽</div>
+                </li> -->
+                <li class="effect_item">
+                    <div class='effect_checkbox checked' id="environmentmap"></div><div>环境贴图</div>
+                </li>
+                <li class="effect_item">
+                    <div class='effect_checkbox checked' id="antialias"></div><div>抗锯齿</div>
+                </li>
+                <li class="effect_item">
+                    <div class='effect_checkbox checked' id="edge"></div><div>边线</div>
+                    <div class="colorpick-content">
+                        <label for="colorpick">颜色设置</label>
+                        <input type="color" id='colorpick'></input>
+                    </div>
+                </li>
+            </ul>
+        </li>
     </ul>
     <div class="section_box_container">
         <select name="section_box" id="section_box">
@@ -50,44 +93,107 @@
             <option value="Z">Z</option>
             <option value="XYZ">XYZ</option>
         </select>
-        <div id='togglePlane' style='background: url("./static/images/ic_display.png") no-repeat center;background-size: 50px 36px;'
+        <div id='togglePlane' style='background: url("../common/lib/static/images/ic_display.png") no-repeat center;background-size: 50px 50px;'
             title="剖面显隐"></div>
     </div>
     <div class="roam_box">
         <ul>
             <!-- 开启录制, 每隔一秒添加一次相机姿态 -->
-            <li><button class="Record">录制路径漫游动画</button>&nbsp;&nbsp;&nbsp;<span>正在录制中 ...</span></li>
+            <li><div class="Record">录制路径漫游动画</div><span>正在录制中 ...</span></li>
             <!-- 关闭录制 -->
-            <li><button class="closeRecord">关闭录制</button></li>
-            <li><button class="router_file">导入路径文件</button></li>
+            <li><div class="closeRecord">关闭录制</div></li>
+            <li><div class="router_file">导入路径文件</div></li>
             <!-- autoRoamManger.addPose() -->
-            <li><button class="addPose">添加位置</button></li>
+            <li><div class="addPose">添加位置</div></li>
             <!-- autoRoamManger.playRoam(); -->
-            <li><button class="playRoam">播放路径</button></li>
+            <li><div class="playRoam">播放路径</div></li>
             <!-- autoRoamManger.stopRoam(); -->
-            <li><button class="stopRoam">停止播放</button></li>
+            <li><div class="stopRoam">停止播放</div></li>
             <!-- autoRoamManger.emptyRoutes(); -->
-            <li><button class="emptyRoutes">清空路径</button></li>
+            <li><div class="emptyRoutes">清空路径</div></li>
             <!-- console.log(JSON.stringify(autoRoamManger.cameraPoses)); -->
-            <li><button class="consoleRoam">打印路径</button></li>
-            <li>
-                <div class="hr"></div>
+            <li><div class="consoleRoam">打印路径</div></li>
+            <li class="hr">
+                <!-- <div class="hr"></div> -->
             </li>
             <!-- viewer.navigationMode = Motor.NavigationMode.ROAM; -->
-            <li><button class="first_person">开启全景漫游</button></li>
-            <li><button class="first_person_close">关闭全景漫游</button></li>
+            <li><div class="first_person">开启全景漫游</div></li>
+            <li><div class="first_person_close">关闭全景漫游</div></li>
             <!-- viewer.roamEditor.movementSpeed = 10; -->
-            <li><b>移动速度</b>&nbsp;&nbsp;&nbsp;<input class="speed" type="range" min="1" max="20" value='1' step='1'></li>
+            <li><div class='noborder'>移动速度</div><input class="speed" type="range" min="1" max="20" value='1' step='1'></li>
             <!-- viewer.roamEditor.isGravitative = false; -->
-            <li><input class="isGravitative " checked type="checkbox">&nbsp;&nbsp;&nbsp;<b>重力</b></li>
+            <li class="gravity-container"><div class='noborder'>重力</div><div class="isGravitative checked"></div></li>
         </ul>
     </div>
-    <ul class="map_serve_box">
-        <li style="background:url('./static/images/ImageryProviders/bingAerial.png')" title="Bing"></li>
-        <li style="background:url('./static/images/ImageryProviders/sentinel-2.png')" title="天地图"></li>
-        <li style="background:url('./static/images/ImageryProviders/esriWorldImagery.png')" title="ArcGIS"></li>
-        <li style="background:url('./static/images/ImageryProviders/WMTS.png')" title="WMTS"></li>
-    </ul>
+    <div class="measure_box">
+        <div class="measure_content">
+            <div class="measure_buttons">
+                <div class="button ld" title="两点测量"></div>
+                <div class="button dd" title="多点测量"></div>
+                <div class="button jd" title="角度测量"></div>
+                <!-- <div class="close_btn"></div> -->
+            </div>
+            <div class="hr"></div>
+            <div class="measure_result">
+                <div id="xlength" class="result_item">
+                    <div class="result_content">
+                        X：
+                    </div>
+                    <div class="result">
+                        
+                    </div>
+                    <div>
+                        米
+                    </div>
+                </div>
+                <div id="ylength" class="result_item">
+                    <div class="result_content">
+                        Y：
+                    </div>
+                    <div class="result">
+                        
+                    </div>
+                    <div>
+                        米
+                    </div>
+                </div>
+                <div id="zlength" class="result_item">
+                    <div class="result_content">
+                        Z：
+                    </div>
+                    <div class="result">
+                        
+                    </div>
+                    <div>
+                        米
+                    </div>
+                </div>
+                <div id="length" class="result_item">
+                    <div class="result_content">
+                        长度：
+                    </div>
+                    <div class="result">
+                        
+                    </div>
+                    <div>
+                        米
+                    </div>
+                </div>
+                <div id="angle" class="result_item">
+                    <div class="result_content">
+                        角度：
+                    </div>
+                    <div class="result">
+                        
+                    </div>
+                    <div>
+                        度
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div id="contextContainer">
         <ul id="contextmenu">
             <li class="li">构件详情</li>
@@ -102,7 +208,7 @@
     <script>
         $('.section_box_container').hide();
         // $('#infoBox').hide();
-        $('.tree_container').hide();
+        // $('.tree_container').hide();
         // $('.btns').hide();
         var isInSubScene = false,parentComponent;
         
@@ -130,620 +236,9 @@
 
         var projectId = paramObj["projectId"];
         
-        var selectedColor = Motor.Color.fromCssColorString('#03f3f7').withAlpha(0.5);
-        // 动态加载数据
-        function dynamicloadNodes(treeNode) {
-            return Motor.Project.getChildNodesFromTree(treeNode);
-        }
-
-        // 重新设置数据
-        function reSetNodes(zTreeObj) {
-            let node = zTreeObj.getNodes();
-            let nodes = zTreeObj.transformToArray(node);
-            if (nodes.length > 0) {
-                for (let i = 0; i < nodes.length; i++) {
-                    if (!nodes[i].children) {
-                        if (nodes[i].level === 3) {
-                            nodes[i].isParent = true;
-                        }
-                        nodes[i].nocheck = true;
-                        zTreeObj.updateNode(nodes[i]);
-                    }
-                }
-            }
-        }
-
-        //初始化Viewer
-        var viewer = new Motor.Viewer({
-            container: 'container',//viewer所在的div元素id
-            viewerMode: Motor.ViewerMode.BIM,//viewer的模式
-            appid:appid,
-            secret:secret,
-            access_token:access_token,
-            antialias:true
-        });
-        viewer.initialize().then(function(){
-            drawProject(projectId,true);
-            //开启框选放大
-            viewer.enableMarquee = true;
-            //框选放大
-            $('.selectd').on('click', function () {
-                //开始一次框选放大
-                viewer.marqueeEditor.startMarquee();
-                $('body').css('cursor', 'crosshair');
-                $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda_hover.png") no-repeat center', 'pointerEvents': 'none' })
-            })
-            //鼠标结束框选
-            viewer.marqueeEditor.marqueeStop.addEventListener(function() {
-                $('body').css('cursor', 'default');
-                $('.selectd').css({ 'background': 'url("./static/images/ic_kuangxuanfangda.png") no-repeat center', 'pointerEvents': 'auto' })
-            });
-
-            //高亮构件并显示信息框
-            function highlightComponent(component,multi=false){
-                //改变构件透明度
-                if(multi){
-                    selectedComponents.push(component);
-                }
-                else{
-                    selectedComponents=[component]
-                }
-                currentProject.selectComponents(selectedComponents);
-                currentSelectedComponent=component;
-            }    
-            //Motor.Color(0.1, 0.2, 0.4, 0.5);或者Motor.Color.fromBytes(255,255,255,125)
-
-            //设置点选后的回调函数
-            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
-                var obj = viewer.pick(mouse.position,currentProject);
-                if (obj instanceof Motor.Component) {
-                    var component = obj;
-                    highlightComponent(component);
-                }
-                else{
-                    currentProject.deselectAllComponents();
-                    selectedComponents=[];
-                    currentSelectedComponent=undefined;
-                }
-                $('#infoBox').hide();
-                $('#contextContainer').hide();
-            });
-
-            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_CLICK,function(mouse){
-                var obj = viewer.pick(mouse.position,currentProject);
-                if (obj instanceof Motor.Component) {
-                    var component = obj;
-                    highlightComponent(component,true);
-                }
-                else{
-                    currentProject.deselectAllComponents();
-                    selectedComponents=[];
-                    currentSelectedComponent=undefined;
-                    $('#infoBox').hide();
-                }
-                $('#contextContainer').hide();
-            },Motor.KeyboardEventModifier.CTRL);
-            //双击飞向构件
-            viewer.addMouseEventListener(Motor.MouseEventType.LEFT_DOUBLE_CLICK,function(mouse){
-                var obj = viewer.pick(mouse.position,currentProject);
-                if (obj instanceof Motor.Component) {
-                    //飞向构件
-                    viewer.flyTo(obj);
-                }
-            })
-
-            document.addEventListener("keydown",function(e){
-                if(e.keyCode===27){
-                    if(selectedComponents.length>0){
-                        currentProject.deselectAllComponents();
-                        selectedComponents=[];
-                        currentSelectedComponent=undefined;
-                    }
-                    $('#infoBox').hide();
-                    $('#contextContainer').hide();
-                }
-            });
-
-            var contextContainer = document.getElementById('contextContainer');
-            var contextmenu = document.getElementById('contextmenu');
-            var liCount=0;
-            var infoNames = {'major':'专业','floor':'楼层','main_type':'大类','sub_type':'小类'}
-            contextmenu.childNodes.forEach(function(child){
-                // console.log(child.tagName)
-                if(child.tagName==="LI"){
-                    switch(liCount){
-                        case 0:
-                            child.onclick=function(){
-                                console.log("构件详情");
-                                
-                                currentSelectedComponent.getProperties().then(data=>{
-                                    var tableStr = '';
-                                    tableStr+=`<h3 style="color:white">${data.name?data.name:data.guid}</h3>`
-                                    tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">GUID</span>
-                                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data.guid}</span>
-                                                    </div>`;
-                                    if(currentSelectedComponent.type == Motor.ProjType.TYPE_BIM){
-                                        for (var key in infoNames) {
-                                            tableStr += `<div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                                            <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${infoNames[key]}</span>
-                                                            <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${data[key]}</span>
-                                                        </div>`;
-                                        }
-                                    }
-                                    let props = data?data.props:undefined;
-                                    if(props && props.length>0){
-                                        var groups = {};
-                                        props.forEach(function(prop){
-                                            if(prop.group){
-                                                let groupIndex = undefined;
-                                                for(let key in groups){
-                                                    if(key===prop.group){
-                                                        groupIndex=key;
-                                                        break;
-                                                    }
-                                                }
-                                                if(groupIndex){
-                                                    groups[groupIndex].push({
-                                                        name:prop.name,
-                                                        value:prop.value,
-                                                        unit:prop.unit
-                                                    })
-                                                }
-                                                else{
-                                                    groups[prop.group] = [{
-                                                        name:prop.name,
-                                                        value:prop.value,
-                                                        unit:prop.unit
-                                                    }]
-                                                }
-                                            }
-                                            else{
-                                                if(groups['属性']){
-                                                    groups['属性'].push({
-                                                        name:prop.name,
-                                                        value:prop.value,
-                                                        unit:prop.unit
-                                                    })
-                                                }
-                                                else{
-                                                    groups['属性'] = [{
-                                                        name:prop.name,
-                                                        value:prop.value,
-                                                        unit:prop.unit
-                                                    }];
-                                                }
-                                            }
-                                        })
-
-                                        for(let group in groups){
-                                            let temp = '';
-                                            groups[group].forEach(item=>{
-                                                temp+=`
-                                                    <div style="display: flex;width: 100%;justify-content: space-between; blackgroud-color:black;">
-                                                        <span style="color:#bdbcbc;width:200px;border:1px solid grey;padding: 2px 2px;">${item.name}</span>
-                                                        <span style="width:200px;border:1px solid grey;padding: 2px 2px;">${item.value?item.value:""} ${item.unit?item.unit:""}</span>
-                                                    </div>
-                                                `;
-                                            })
-                                            tableStr+=`<div>
-                                                <div style="background-color:grey;">${group}</div>
-                                                ${temp}
-                                            </div>`;
-                                        }
-                                    }
-                                    
-                                    $('#infoBox').html(tableStr);
-                                    $('#infoBox').show();
-                                });
-                                // contextContainer.setAttribute('style','display:none;');
-                                $('#contextContainer').hide();
-                            }
-                            break;
-                        case 1:
-                            child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
-                                }
-                                console.log("隐藏选中构件");
-                                hiddenComponents = hiddenComponents.concat(selectedComponents);
-                                currentProject.setComponentsVisiblity(false,hiddenComponents);
-                                $('#contextContainer').hide();
-                            }
-                            break;
-                        case 2:
-                            child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
-                                }
-                                console.log("半透明选中构件");
-                                transparentComponents = transparentComponents.concat(selectedComponents);
-                                currentProject.setComponentsColor(Motor.Color.WHITE.withAlpha(0.4),transparentComponents);
-                                $('#contextContainer').hide();
-                            }
-                            break;
-                        case 3:
-                            child.onclick=function(){
-                                currentProject.reset();
-                                if(currentProject.drawEdge){
-                                    currentProject.drawEdge=false;
-                                }
-                                console.log("隔离选中构件");
-                                isolatedComponents = isolatedComponents.concat(selectedComponents);
-                                currentProject.isolateComponents(isolatedComponents);
-                                // isolateComponent = currentSelectedComponent;
-                                $('#contextContainer').hide();
-                            }
-                            break;
-                        case 4:
-                            child.onclick=function(){
-                                console.log("还原构件样式");
-                                // if(currentProject.drawEdge){
-                                //     currentProject.drawEdge=false;
-                                // }
-                                if(selectedComponents.length>0 || hiddenComponents.length>0 || transparentComponents.length>0 || isolatedComponents.length>0){
-                                    hiddenComponents=[];
-                                    transparentComponents=[];
-                                    isolatedComponents=[];
-                                    currentProject.reset();
-                                    currentProject.selectComponents(selectedComponents);
-                                }
-                                $('#contextContainer').hide();
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    liCount++;
-                }
-            })
-            viewer.addMouseEventListener(Motor.MouseEventType.RIGHT_CLICK, function (mouse) {
-                //根据屏幕坐标coords，获取点选的对象
-                if (selectedComponents.length>0) {
-                    let index=0;
-                    contextmenu.childNodes.forEach(function(child){
-                        if(child.tagName==="LI"){
-                            if(index<4){
-                                if(index===0 && selectedComponents.length>1){
-                                    child.setAttribute('class','li-disable');
-                                }
-                                else{
-                                    child.setAttribute('class','li');
-                                }
-                                index++;
-                            }
-                        }
-                    })
-                }
-                else{
-                    let index=0;
-                    contextmenu.childNodes.forEach(function(child){
-                        if(child.tagName==="LI"){
-                            if(index<4){
-                                child.setAttribute('class','li-disable');
-                                index++;
-                            }
-                        }
-                    })
-                }
-                contextContainer.setAttribute('style','display:block;top:'+mouse.position.y+'px;left:'+mouse.position.x+'px;')
-            })
-                
-            //相机复位按钮
-            $('.camera_reset').on('click', function () {
-                viewer.flyTo(currentProject);
-            })
-
-
-            //CIM BIM切换
-            $('.cim_bim').on('click', function () {
-                //切换到CIM-BIM
-                viewer.viewerMode = viewer.viewerMode == Motor.ViewerMode.CIM ? Motor.ViewerMode.BIM : Motor.ViewerMode.CIM;
-                viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
-                if (viewer.viewerMode == Motor.ViewerMode.CIM) {
-                    if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
-                        $('.section_box_container').hide();
-                        clippingPlaneEditor.destroy();
-                    }
-                }
-            })
-
-
-            //剖切
-            var clippingPlaneEditor;
-            $('.section').on('click', function () {
-                if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
-                    $('.section').css('background', 'url("./static/images/ic_pouqie.png") no-repeat center')
-                    $('.section_box_container').hide();
-                    clippingPlaneEditor.destroy();
-                } else if (viewer.viewerMode != Motor.ViewerMode.CIM && viewer.navigationMode != Motor.NavigationMode.NAV_FREE_KEY) {
-                    $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
-                    $('.section_box_container').show();
-                    // $('.section_box_container>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
-                    clippingPlaneEditor = new Motor.ClippingPlaneEditor(currentProject);
-                    planeVisibility = true;
-                    clippingPlaneEditor.addClippingPlane($('#section_box').val());
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
-                } else{
-                    var str_1 = [];
-                    if (viewer.viewerMode == Motor.ViewerMode.CIM) {
-                        // str_1.push('请切换至BIM模式操作');
-                        viewer.viewerMode = Motor.ViewerMode.BIM;
-                    }
-                    if (viewer.navigationMode == Motor.NavigationMode.NAV_FREE_KEY) {
-                        $('.roam_box').hide();
-                        viewer.navigationMode = Motor.NavigationMode.NAV_FREE_MOUSE;
-                        // str_1.push('请关闭全景漫游');
-                    }
-                    $('.section').css('background', 'url("./static/images/ic_pouqie_hover.png") no-repeat center');
-                    $('.section_box_container').show();
-                    // $('.section_box_container>li').css({ 'backgroundColor': 'rgb(2, 20, 48)' });
-                    clippingPlaneEditor = new Motor.ClippingPlaneEditor(currentProject);
-                    planeVisibility = true;
-                    clippingPlaneEditor.addClippingPlane($('#section_box').val());
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
-                    viewer.viewerMode == Motor.ViewerMode.BIM ? $('.cim_bim').css({ 'background': 'url("./static/images/ic_map.png") no-repeat center' }) : $('.cim_bim').css({ 'background': 'url("./static/images/ic_map_hover.png") no-repeat center' })
-                    // alert(str_1.join(','));
-                }
-            });
-            $('#section_box').on('change', function () {
-                // $(this).css({ 'backgroundColor': 'skyblue' }).siblings().css({ 'backgroundColor': 'rgb(2, 20, 48)' });
-                // $('.section_box').css('display', 'none');
-                clippingPlaneEditor.addClippingPlane($(this).val());
-                $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
-            })
-            var planeVisibility = true;
-            $('#togglePlane').on('click', function () {
-                planeVisibility=!planeVisibility;
-                clippingPlaneEditor.setPlaneVisibility(planeVisibility);
-                // planeVisibility?$('#togglePlane').removeClass('select'):$('#togglePlane').addClass('select');
-                if(planeVisibility){
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display_hover.png") no-repeat center' })
-                }
-                else{
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide_hover.png") no-repeat center' })
-                }
-            })
-            $('#togglePlane').hover(function(){
-                if(planeVisibility){
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display_hover.png") no-repeat center' })
-                }
-                else{
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide_hover.png") no-repeat center' })
-                }
-            },function(){
-                if(planeVisibility){
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_display.png") no-repeat center' })
-                }
-                else{
-                    $('#togglePlane').css({ 'background': 'url("./static/images/ic_hide(1).png") no-repeat center' })
-                }
-            })
-
-
-            //漫游
-            var autoRoamManger
-            $('.roam').on('click', function () {
-                if(autoRoamManger && !autoRoamManger.isDestroyed()){
-                    autoRoamManger.destroy();
-                    $('.roam').css({ 'background': 'url("./static/images/ic_manyou.png") no-repeat center' });
-                    $('.roam_box').hide();
-                }
-                else{
-                    $('.roam').css({ 'background': 'url("./static/images/ic_manyou_hover.png") no-repeat center' });
-                    $('.roam_box').show();
-                    //初始化路径漫游管理器
-                    autoRoamManger = new Motor.AutoRoamManager(viewer);//传入Motor.Viewer对象
-                }
-                
-            });
-            $('.router_file').on('click', function () {
-                //从文件中加载路径关键点
-                autoRoamManger.createRouteFromFile('./static/data/routes.json');
-                //从数组对象中读取路径关键点
-                // autoRoamManger.createRouteFromArray(array);
-            })
-            //开启录制, 每隔一秒添加一次相机姿态
-            var timer;
-
-            $('.Record').on('click', function () {
-                $('.Record>span').css('display', 'inline');
-                clearInterval(timer);
-                timer = setInterval(function(){
-                    autoRoamManger.addPose();
-                }, 1000);
-            })
-            //关闭录制
-            $('.closeRecord').on('click', function () {
-                $('.Record>span').css('display', 'none');
-                clearInterval(timer);
-            })
-            $('.addPose').on('click', function () {
-                //将当前相机位置和姿态添加到路径中
-                autoRoamManger.addPose();
-            })
-            $('.playRoam').on('click', function () {
-                //播放路径
-                autoRoamManger.playRoam();
-            })
-            $('.stopRoam').on('click', function () {
-                //停止路径
-                autoRoamManger.stopRoam();
-            })
-            $('.emptyRoutes').on('click', function () {
-                //清空路径
-                autoRoamManger.emptyRoutes();
-            })
-            $('.consoleRoam').on('click', function () {
-                //获取路径点，输出的文本就可以直接保存成路径文件
-                console.log(JSON.stringify(autoRoamManger.cameraPoses));
-            })
-            $('.first_person').on('click', function () {
-                if (clippingPlaneEditor && !clippingPlaneEditor.isDestroyed()) {
-                    $('.section').css('background', 'url("./static/images/ic_pouqie.png") no-repeat center')
-                    clippingPlaneEditor.destroy();
-                }
-                //开启第一人称漫游
-                viewer.navigationMode = Motor.NavigationMode.NAV_FREE_KEY;
-            })
-            $('.first_person_close').on('click', function () {
-                //关闭第一人称漫游
-                viewer.navigationMode = Motor.NavigationMode.NAV_FREE_MOUSE;
-            })
-            $('.speed').on('change', function () {
-                //修改漫游速度
-                viewer.roamEditor.movementSpeed = $('.speed').val();
-            })
-            $('.isGravitative').on('change', function () {
-                //开启/关闭重力
-                viewer.roamEditor.isGravitative = viewer.roamEditor.isGravitative == true ? false : true;
-            })
-
-            //切换地图服务
-            $('.map_serve').on('click', function () {
-                if ($('.map_serve_box').css('display') == 'none') {
-                    $('.map_serve').css({ 'background': 'url("./static/images/ic_map_serve_hover.png") no-repeat center' });
-                    $('.map_serve_box').css({ 'display': 'block' })
-                } else {
-                    $('.map_serve').css({ 'background': 'url("./static/images/ic_map_serve.png") no-repeat center' });
-                    $('.map_serve_box').css({ 'display': 'none' })
-                }
-
-            })
-            $('.map_serve_box').on('click', 'li', function () {
-                $('.map_serve').css({ 'background': 'url("./static/images/ic_map_serve.png") no-repeat center' });
-                $('.map_serve_box').css('display', 'none');
-                if ($(this).attr('title') == '天地图') {
-                    //切换到天地图
-                    viewer.mapCollection.removeAll();
-                    viewer.mapCollection.add(new Motor.TiandituMap({
-                        token: '2b6bbb88d28124168e36297ab20c6fa0',
-                        maximumLevel: 17
-                    }));
-                } else if ($(this).attr('title') == 'ArcGIS') {
-                    //切换到ArcGIS地图服务
-                    viewer.mapCollection.removeAll();
-                    viewer.mapCollection.add(new Motor.ArcGISMap({
-                        url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
-                    }));
-                } else if ($(this).attr('title') == 'WMTS') {
-                    //切换到WMTS地图服务
-                    viewer.mapCollection.removeAll();
-                    viewer.mapCollection.add(new Motor.WebMapTileService({
-                        url: 'http://cim.citylinker.com:13381/geoserver/gwc/service/wmts',
-                        layer: 'bigdata:darkworld',
-                        style: '',
-                        tileMatrixSetID: 'EPSG:4326',
-                        tileMatrixLabels: ['EPSG:4326:0', 'EPSG:4326:1', 'EPSG:4326:2', 'EPSG:4326:3', 'EPSG:4326:4', 'EPSG:4326:5', 'EPSG:4326:6', 'EPSG:4326:7', 'EPSG:4326:8', 'EPSG:4326:9', 'EPSG:4326:10',
-                            'EPSG:4326:11', 'EPSG:4326:12', 'EPSG:4326:13', 'EPSG:4326:14', 'EPSG:4326:15'],
-                        // minimum: 0,
-                        maximumLevel: 15
-                    }));
-                } else if ($(this).attr('title') == 'Bing') {
-                    viewer.mapCollection.removeAll();
-                    viewer.mapCollection.add(new Motor.BingMap({
-                        url: 'https://dev.virtualearth.net'
-                    }));
-                }
-            });
-
-            //边线显隐
-            $('.edge').on('click', function () {
-                currentProject.drawEdge = !currentProject.drawEdge;
-            })
-
-            //开关抗锯齿
-            $('.antialias').on('click', function () {
-                viewer.taaEnabled = !viewer.taaEnabled;
-                $('.antialias').css('background', 'url("./static/images/'+(viewer.taaEnabled?'ic_kjc_hover':'ic_kjc')+'.png") no-repeat center')
-            })
-        })
-        /**
-         * 绘制工程
-         */
-        var currentProject;
-        var optionTemplate = ["floor","main_type","sub_type","name"];
-        function drawProject(projectId,isInSubScene) {   
-            currentProject = viewer.queryProject(projectId);
-            currentProject.open({
-                drawEdge:isInSubScene
-            }).then(function () {
-                $('#loading').hide();
-                if(isInSubScene){
-                    currentProject.getTreeStructure().then(data=>{
-                        var pTree = data;
-                        if (pTree) {
-                            let zTreeObj;
-                            let setting = {
-                                data: {
-                                    key: {
-                                        checked: "isChecked"
-                                    }
-                                },
-                                view: {
-                                    fontCss: { color: "white" }
-                                },
-                                check: {
-                                    enable: true,       //设置是否显示checkbox复选框
-                                },
-                                callback: {
-                                    onCheck: function (e, id, treeNode) {
-                                        if(currentProject.drawEdge){
-                                            currentProject.drawEdge = false;
-                                        }
-                                        currentProject.setVisiblityFromTree(treeNode);
-                                        let treeObj = $.fn.zTree.getZTreeObj("treeDemo");
-                                        let nodes = treeObj.getCheckedNodes();
-                                        let designIds = [];
-                                        $.each(nodes, function (i, item) {
-                                            designIds.push(item.id);
-                                            item.checkedOld = item.checked;
-                                        })
-                                    },
-                                    onClick: function (e, id, treeNode) {
-                                        currentProject.setComponentsColorFromTree(treeNode,Motor.Color.CYAN);
-                                        $('#infobox').hide();
-                                    },
-                                    onDblClick: function (e, id, treeNode) {
-                                        if (!treeNode.children && treeNode.level === 4) {
-                                            let component = currentProject.getComponentFromTree(treeNode);
-                                            let innerHTML = '';
-                                            for (var key in component.infos) {
-                                                innerHTML += '<div title=' + component.infos[key] + '>' + key + ': ' + component.infos[key] + '</div>';
-                                            }
-                                            $('#infobox').html('<div title=' + component.guid + '>' + component.guid + '</div>' + innerHTML);
-                                            $('#infobox').show();
-                                            viewer.flyTo(component);
-                                        }
-                                        else {
-                                            $('#infobox').hide();
-                                        }
-                                    },
-                                    onExpand: function (event, treeId, treeNode) {
-                                        if (treeNode.level === 3 && (!treeNode.children||tree.children.length)) {
-                                            dynamicloadNodes(treeNode).then(function (data) {
-                                                treeNode.children = [];
-                                                zTreeObj.addNodes(treeNode, data)
-                                                reSetNodes(zTreeObj)
-                                            })
-                                        }
-                                    }
-                                },
-                            };
-                            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, pTree);
-                            zTreeObj.checkAllNodes(true);
-                            reSetNodes(zTreeObj);
-                            $('.tree_container').show();
-                        }
-                    });
-                    
-                }                    
-            });
-            
-        }
+        
     </script>
+    <script src="app.js"></script>
 </body>
 
 </html>

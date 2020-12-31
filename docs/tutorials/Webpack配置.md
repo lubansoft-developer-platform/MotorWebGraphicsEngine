@@ -17,13 +17,7 @@ const motorDist = 'motor';
 ```javascript
 plugins: [
     /**复制motorSource中的静态资源到打包后根目录的motor文件夹下**/
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'Workers'), to: path.join(motorDist, 'Workers') }]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'images'), to: path.join(motorDist, 'images') }]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'environmentMap'), to: path.join(motorDist, 'environmentMap') }]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'Assets'), to: path.join(motorDist, 'Assets') }]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'Widgets'), to: path.join(motorDist, 'Widgets')}]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'ThirdParty'), to: path.join(motorDist, 'ThirdParty') }]),
-    new CopyWebpackPlugin([{ from: path.join(motorSource, 'wasm'), to: path.join(motorDist, 'wasm') }]),
+    new CopyWebpackPlugin([{ from: motorSource, to: motorDist, ignore: '/*.js'}]),
     /**设置全局变量，存放静态资源目录路径**/
     new webpack.DefinePlugin({
         MOTOR_BASE_URL: JSON.stringify(motorDist)
