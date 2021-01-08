@@ -21,7 +21,7 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './PrimitiveType-4c1d698a', './IndexDatatype-571b3b65', './createTaskProcessorWorker', './CreatePhysicalArray-a5662e79'], function (when, Check, Cartesian3, Matrix4, RuntimeError, WebGLConstants, ComponentDatatype, PrimitiveType, IndexDatatype, createTaskProcessorWorker, CreatePhysicalArray) { 'use strict';
+define(['./when-7ef6387a', './Check-ed6a1804', './Cartesian3-18c04df5', './Matrix4-c68aaa66', './RuntimeError-5b606d78', './WebGLConstants-30fc6f5c', './ComponentDatatype-a863af81', './PrimitiveType-4c1d698a', './IndexDatatype-571b3b65', './createTaskProcessorWorker', './CreatePhysicalArray-e814d1fd'], function (when, Check, Cartesian3, Matrix4, RuntimeError, WebGLConstants, ComponentDatatype, PrimitiveType, IndexDatatype, createTaskProcessorWorker, CreatePhysicalArray) { 'use strict';
 
     var DracoType = {
         DRACO_COMPRESSION: 0,
