@@ -2,7 +2,7 @@
   "name": "webpack_motor",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --config webpack.config.js --open",
     "build": "node_modules/.bin/webpack --config webpack.config.js"

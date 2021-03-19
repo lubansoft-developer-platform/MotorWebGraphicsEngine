@@ -47,8 +47,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new CopyWebpackPlugin([{ from: motorSource, to: motorDist, ignore: '/*.js'}]),
+        new CopyWebpackPlugin([{ from: motorSource, to: motorDist, ignore: ['/*.js']}]),
         new CopyWebpackPlugin([{ from: './src/common/common.js', to: 'common' }]),
+        new CopyWebpackPlugin([{ from: './src/common/config.js', to: 'common' }]),
         new webpack.DefinePlugin({
             MOTOR_BASE_URL: JSON.stringify(motorDist)
         })

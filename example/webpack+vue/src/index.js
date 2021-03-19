@@ -9,10 +9,10 @@ new Vue({
             server:bimServer,
             appId:motorAppId,
             secret:motorSecret,
-            projectId:bimProjectId
+            projectId:cimProjectId
         }
     },
-    template:`<motor-viewer appId=${motorAppId} secret=${motorSecret} projectId=${bimProjectId} server=${bimServer} />`,
+    template:`<motor-viewer appId=${motorAppId} secret=${motorSecret} projectId=${cimProjectId} server=${bimServer} />`,
     components:{MotorViewer}
     // render:h=>h(MotorViewer,bimProjectId)
 }).$mount("#app")

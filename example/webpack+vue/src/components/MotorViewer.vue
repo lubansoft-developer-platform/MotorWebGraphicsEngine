@@ -1,7 +1,7 @@
 <template>
 <div style="width:100%;height:100%;">
     <div id="loading" v-show="projectLoading">
-        <div class="loading-image" style="background-image:url('./assets/images/ezgif.com-crop.gif');">
+        <div class="loading-image" style="background-image:url(require('./assets/images/ezgif.com-crop.gif'));">
             <div style="text-align: center;vertical-align: middle;display: table-cell;color: white;height: 100px;padding-top: 80px;margin-top: 80px;">正在努力加载中...</div>
         </div>
     </div>
