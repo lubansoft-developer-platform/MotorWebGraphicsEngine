@@ -694,7 +694,7 @@ viewer.initialize().then(function () {
             //切换到天地图
             viewer.mapCollection.removeAll();
             viewer.mapCollection.add(new Motor.TiandituMap({
-                token: '2b6bbb88d28124168e36297ab20c6fa0',
+                token: '8e694173777b9febee10a43fe4231a1b',
                 maximumLevel: 17
             }));
         } else if ($(this).attr('title') == 'ArcGIS') {
